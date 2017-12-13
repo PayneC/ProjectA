@@ -10,7 +10,7 @@ local _datas = {
         -- x, y, z, lookx, looky, lookz
         camera = {10, 10, 10, 0, 0, 0},
     },
-    [2] = {id = 2, script = 'levels/lv_test', loadingBG = nil, parameter = nil},
+    [2] = {id = 2, script = 'levels/lv_login', loadingBG = nil, parameter = nil},
     [3] = {id = 3, script = 'levels/lv_test', loadingBG = nil, parameter = nil},
     [4] = {id = 4, script = 'levels/lv_test', loadingBG = nil, parameter = nil},
 }

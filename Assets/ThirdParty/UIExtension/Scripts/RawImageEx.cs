@@ -7,7 +7,13 @@ using UnityEngine.UI;
 public class RawImageEx : RawImage
 {
     [SerializeField]
-    public string textureName { private set; get; }
+    private string _textureName;
+
+    public string textureName
+    {
+        private set { _textureName = value; }
+        get { return _textureName; }
+    }
 
     private bool _isLoading = false;
 
