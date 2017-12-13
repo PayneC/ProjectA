@@ -1,0 +1,9 @@
+local ai_base = require('entity/actor/npc_ai')
+
+local _M = {}
+
+local mt = {}
+mt.__index = ai_base
+setmetatable(_M, mt)
+
+return _M
