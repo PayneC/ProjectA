@@ -13,7 +13,7 @@ end
 
 function _M:OnLoaded()
     local function OnGameStart()
-        lvmgr.LoadLevel(cf_lv.GetDataByID(1))
+        lvmgr.LoadLevel(cf_lv.GetDataByID(1), nil, true)
     end
     self.OnGameStart = OnGameStart
     
