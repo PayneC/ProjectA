@@ -39,7 +39,7 @@ function _M:ctor(_data, _SiblingIndex)
     self.isLoading = false
     self.isLoaded = false
     
-    self.gameobject = nil
+    self.gameObject = nil
     self.transform = nil
     
     self.callback = false
@@ -50,12 +50,12 @@ function _M:SetActive(_active, _parameter)
     if _active then
         --预制体加载完成回调
         local function callback(assetEntity)
-            self.gameobject = assetEntity:GetInstantiate()
-            self.transform = self.gameobject.transform
-            goUtil.SetActive(self.gameobject, self.isActive)
+            self.gameObject = assetEntity:GetInstantiate()
+            self.transform = self.gameObject.transform
+            goUtil.SetActive(self.gameObject, self.isActive)
             
             self.isLoading = false
-            AddUIToRoot(self.gameobject, self.SiblingIndex)
+            AddUIToRoot(self.gameObject, self.SiblingIndex)
             
             self.isLoaded = true
             if self.OnLoaded then
@@ -75,13 +75,13 @@ function _M:SetActive(_active, _parameter)
         
         if not self.isActive then
             self.isActive = true
-            if not self.gameobject then
+            if not self.gameObject then
                 if not self.isLoading then
                     self.isLoading = true
                     asset.AsyncLoad(asset.EAssetType.UI, self.assetname, callback)
                 end
             else
-                goUtil.SetActive(self.gameobject, self.isActive)
+                goUtil.SetActive(self.gameObject, self.isActive)
                 if self.OnEnable then
                     if self.AnimationType then
                         self.transform:DOScale(0, 0)
@@ -94,20 +94,20 @@ function _M:SetActive(_active, _parameter)
     else
         if self.isActive then
             self.isActive = false
-            if self.gameobject then
+            if self.gameObject then
                 if self.OnDisable then
                     self:OnDisable()
                 end
-                goUtil.SetActive(self.gameobject, self.isActive)
+                goUtil.SetActive(self.gameObject, self.isActive)
             end
         end
     end
 end
 
 function _M:Destroy()
-    goUtil.Destroy(self.gameobject)
+    goUtil.Destroy(self.gameObject)
     
-    self.gameobject = nil
+    self.gameObject = nil
     self.transform = nil
     if self.OnDestroy then
         self:OnDestroy()

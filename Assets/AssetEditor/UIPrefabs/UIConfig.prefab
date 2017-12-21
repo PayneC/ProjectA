@@ -19,8 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224762390062982602}
-  - component: {fileID: 222767401599462320}
-  - component: {fileID: 114128275984855232}
   m_Layer: 5
   m_Name: UIConfig
   m_TagString: Untagged
@@ -98,45 +96,6 @@ MonoBehaviour:
 
     llll'
   _fontName: 
---- !u!114 &114128275984855232
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1200581390916216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82deac9e2c05d4141a3ec35bba6d55ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  spriteInfo:
-    atlas: {fileID: 0}
-    target: {fileID: 0}
-    atlasName: 
-    spriteName: 
-    _offset:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 0
-      height: 0
-  _isRender: 0
 --- !u!114 &114148689771927568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -188,12 +147,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1342878112829258}
---- !u!222 &222767401599462320
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1200581390916216}
 --- !u!224 &224111177214426194
 RectTransform:
   m_ObjectHideFlags: 1

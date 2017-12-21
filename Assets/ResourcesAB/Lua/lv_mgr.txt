@@ -49,7 +49,7 @@ end
 
 function _M.UnloadLevel()
     if _currentScene and _currentScene.OnExit then
-        _mainScene:OnExit()
+        _currentScene:OnExit()
     end
     _currentScene = false
     _currentSceneInfo = false

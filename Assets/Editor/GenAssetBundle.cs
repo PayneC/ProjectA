@@ -50,7 +50,7 @@ public class GenAssetBundle : EditorWindow
     // Use this for initialization
     void Awake()
     {
-        luaInPath = Application.dataPath + "/ScriptLua/";
+        luaInPath = Application.dataPath + "/Lua/";
         assetOut = Application.dataPath + "/StreamingAssets/";
         luaOutPath = Application.dataPath + "/ResourcesAB/Lua/";
     }

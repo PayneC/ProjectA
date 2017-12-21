@@ -24,6 +24,7 @@ end
 
 function Update(dt)
 	uimgr.Update(dt)
+	lvmgr.Update(dt)
 end
 
 function OnExit()

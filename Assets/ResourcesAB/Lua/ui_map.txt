@@ -1,12 +1,13 @@
 local uibase = require('uis/ui_base')
 local uimgr = require('base/ui_mgr')
 local uiconfig = require('configs/cf_ui')
+local goUtil = require('base/goutil')
 
 local _M = class(uibase)
 
 function _M:ctor()
     self.tex_map_RawImageEx = nil
-    self.btn_map = nil
+    self.btn_close = nil
 
     self.OnClose = nil
 end
@@ -18,11 +19,11 @@ function _M:OnLoaded()
     
     self.OnClose = OnClose
 
-    self.tex_map_RawImageEx = self.gameobject:GetComponentInChildren(typeof(CS.RawImageEx))
+    self.tex_map_RawImageEx = goUtil.GetComponent(self.gameObject, typeof(CS.RawImageEx), 'tex_map')
     self.tex_map_RawImageEx:SetTextureName('cangbaotu_01')
     
-    self.btn_map = self.gameobject:GetComponentInChildren(typeof(CS.ButtonEx))
-    self.btn_map.onClick:AddListener(OnClose)
+    self.btn_close = goUtil.GetComponent(self.gameObject, typeof(CS.ButtonEx), 'btn_close')
+    self.btn_close.onClick:AddListener(OnClose)
 end
 
 function _M:OnEnable()
@@ -39,7 +40,7 @@ end
 
 function _M:OnDestroy()
     if self.OnClose then
-        self.btn_map.onClick:RemoveListener(self.OnClose)
+        self.btn_close.onClick:RemoveListener(self.OnClose)
     end
 end
 
