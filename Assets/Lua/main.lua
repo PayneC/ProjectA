@@ -12,7 +12,7 @@ local a = {b = {c = 1, d = 2}, e = {3, 4, 5, 6}}
 
 function OnEnter(parameter)
 	lvmgr.Init()
-	lvmgr.LoadLevel(cf_lv.GetDataByID(2))
+	lvmgr.LoadLevel(cf_lv.GetDataByID(1))
 	
 	debug.Log(0, debug.TableToString(a))
 

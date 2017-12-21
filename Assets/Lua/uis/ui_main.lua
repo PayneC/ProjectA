@@ -13,11 +13,11 @@ end
 
 function _M:OnLoaded()
     local function OnMapClick()
-        uimgr.OpenUI(uiconfig.map)
+        uimgr.OpenUI(uiconfig.buildShop)
     end
     self.OnMapClick = OnMapClick
     
-    self.btn_map = goUtil.GetComponent(self.gameObject, typeof(CS.ButtonEx), 'btn_map')
+    self.btn_map = goUtil.GetComponent(self.gameObject, typeof(CS.ButtonEx), 'btn_jiaju')
     self.btn_map.onClick:AddListener(self.OnMapClick)
 end
 

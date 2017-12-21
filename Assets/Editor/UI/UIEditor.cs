@@ -738,13 +738,13 @@ public class UIEditor : EditorWindow
             {
                 if (_uitext.font.name.Equals("Arial"))
                 {
-                    _uitext.SetInfo("DFYuanW7");
+                    //_uitext.SetInfo("DFYuanW7");
                 }
                 else
                 {
                     _uitext.SetInfo(_uitext.font.name);
-                }
-                _uitext.font = null;
+                    _uitext.font = null;
+                }                
             }
             else
             {

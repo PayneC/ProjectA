@@ -10,4 +10,8 @@ function _M.AddAction()
     -- body
 end
 
+function _M.Gesture()
+
+end
+
 return _M

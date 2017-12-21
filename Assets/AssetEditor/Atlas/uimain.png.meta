@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6dc48fbe36c7a8449b969483e75621e2
-timeCreated: 1508916430
+timeCreated: 1513854877
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,20 @@ TextureImporter:
     21300002: zhinanzhen
     21300004: joystick
     21300006: joystick_bg
+    21300008: btn_guanbi
+    21300010: chuangkou_01
+    21300012: icon_build_01
+    21300014: bg_zhi
+    21300016: btn_build_shop
+    21300018: icon_baoxiang
+    21300020: icon_jinbi
+    21300022: icon_xin
+    21300024: icon_zuanshi
+    21300026: kuang
+    21300028: menu_jiaju
+    21300030: menu_jiaoyi
+    21300032: menu_nongmin
+    21300034: menu_yingxiong
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -69,6 +83,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -78,6 +93,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -96,11 +112,137 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: bg_zhi
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 725
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 8, y: 0, z: 33, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_build_shop
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 660
+        width: 333
+        height: 326
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_guanbi
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 660
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: chuangkou_01
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 660
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 42, z: 51, w: 72}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_baoxiang
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 918
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_build_01
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 0
+        width: 658
+        height: 657
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_jinbi
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 918
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_xin
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 918
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_zuanshi
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 916
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: joystick
       rect:
         serializedVersion: 2
-        x: 788
-        y: 0
+        x: 592
+        y: 789
         width: 64
         height: 64
       alignment: 0
@@ -113,8 +255,78 @@ TextureImporter:
       name: joystick_bg
       rect:
         serializedVersion: 2
+        x: 463
+        y: 660
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: kuang
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 658
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_jiaju
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 789
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_jiaoyi
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 789
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_nongmin
+      rect:
+        serializedVersion: 2
         x: 659
-        y: 0
+        y: 658
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: menu_yingxiong
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 787
         width: 128
         height: 128
       alignment: 0
@@ -127,8 +339,8 @@ TextureImporter:
       name: zhinanzhen
       rect:
         serializedVersion: 2
-        x: 0
-        y: 660
+        x: 1318
+        y: 0
         width: 500
         height: 500
       alignment: 0

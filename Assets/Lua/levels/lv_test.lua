@@ -19,6 +19,7 @@ local _M = class()
 
 function _M:ctor()
 	self.npcs = {}
+	self.scene = false
 end
 
 function _M:OnEnter(_config, _parameter)
@@ -27,9 +28,10 @@ function _M:OnEnter(_config, _parameter)
 	mainCamera:Init()
 	uimgr.SetDefaultUI(uiconfig.main)
 	uimgr.OpenCommonUI(uiconfig.input)
+	uimgr.OpenCommonUI(uiconfig.config)
 	
 	local function callback(assetEntity)
-		assetEntity:GetInstantiate()
+		self.scene = assetEntity:GetInstantiate()
 		local _npcs = _config.npcs
 		for i = 1, #_npcs, 1 do
 			local _cf = _npcs[i]
