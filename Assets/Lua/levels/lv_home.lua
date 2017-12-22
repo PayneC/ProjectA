@@ -34,7 +34,7 @@ function _M:OnEnter(_config, _parameter)
 		debug.LogFormat(0, tostring(self.npcs))
 		local _npc = self.npcs[1]
 		if _npc then
-			debug.LogFormat(0, '%f, %f, %f', x, y, s)
+			--debug.LogFormat(0, '%f, %f, %f', x, y, s)
 			_tmpVec3.x = x
 			_tmpVec3.y = 0
 			_tmpVec3.z = y

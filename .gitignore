@@ -7,6 +7,9 @@
 /Assets/AssetStoreTools*
 /Assets/Plugins/GitHub.meta
 /Assets/Plugins/GitHub/
+/Assets/StreamingAssets/
+/Assets/StreamingAssets.meta
+/AssetBundles/
 
 # Visual Studio 2015 cache directory
 /.vs/
