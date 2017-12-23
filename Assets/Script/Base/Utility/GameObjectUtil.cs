@@ -26,6 +26,11 @@ static public class GameObjectUtil
         Object.Destroy(_obj);
     }
 
+    static public Object Instantiate(Object _go)
+    {
+        return Object.Instantiate(_go);
+    }
+
     static public GameObject FindChild(GameObject _go, string _path)
     {
         Transform _tran = _go == null ? null : _go.transform;

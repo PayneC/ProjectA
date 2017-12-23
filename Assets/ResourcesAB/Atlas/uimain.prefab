@@ -13,54 +13,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tex2d: {fileID: 2800000, guid: 6dc48fbe36c7a8449b969483e75621e2, type: 3}
   _uvs:
-  - name: anniu_guanbi
+  - name: bg_biaoti
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
+      x: 633
       y: 0
-      width: 658
-      height: 659
+      width: 267
+      height: 105
   - name: bg_zhi
     alignment: 0
     border: {x: 8, y: 0, z: 33, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 592
-      y: 725
+      x: 452
+      y: 374
       width: 43
       height: 43
-  - name: btn_build_shop
+  - name: btn_close
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
-      y: 660
-      width: 333
-      height: 326
+      x: 901
+      y: 0
+      width: 100
+      height: 100
+  - name: btn_gongneng
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 323
+      y: 0
+      width: 309
+      height: 107
   - name: btn_guanbi
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 592
-      y: 660
+      x: 452
+      y: 309
       width: 64
       height: 64
+  - name: btn_yeqian01
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 653
+      y: 366
+      width: 118
+      height: 124
+  - name: btn_yeqian02
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 782
+      y: 237
+      width: 118
+      height: 124
   - name: chuangkou_01
     alignment: 0
     border: {x: 50, y: 42, z: 51, w: 72}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 334
-      y: 660
+      x: 323
+      y: 309
       width: 128
       height: 128
   - name: icon_baoxiang
@@ -69,38 +99,48 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 334
-      y: 918
+      x: 911
+      y: 108
       width: 96
       height: 96
-  - name: icon_build_01
+  - name: icon_build_mutong
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 659
-      y: 0
-      width: 658
-      height: 657
+      x: 323
+      y: 108
+      width: 200
+      height: 200
   - name: icon_jinbi
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 463
-      y: 918
+      x: 901
+      y: 237
       width: 96
       height: 96
+  - name: icon_mutou
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 524
+      y: 108
+      width: 128
+      height: 128
   - name: icon_xin
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 560
-      y: 918
+      x: 782
+      y: 362
       width: 96
       height: 96
   - name: icon_zuanshi
@@ -109,8 +149,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 659
-      y: 916
+      x: 879
+      y: 362
       width: 96
       height: 96
   - name: joystick
@@ -119,8 +159,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 592
-      y: 789
+      x: 323
+      y: 438
       width: 64
       height: 64
   - name: joystick_bg
@@ -129,28 +169,38 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 463
-      y: 660
+      x: 524
+      y: 237
       width: 128
       height: 128
   - name: kuang
+    alignment: 0
+    border: {x: 30, y: 30, z: 30, w: 30}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 388
+      y: 438
+      width: 64
+      height: 64
+  - name: kuang02
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 788
-      y: 658
-      width: 64
-      height: 64
+      x: 0
+      y: 0
+      width: 322
+      height: 469
   - name: menu_jiaju
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 334
-      y: 789
+      x: 524
+      y: 366
       width: 128
       height: 128
   - name: menu_jiaoyi
@@ -159,8 +209,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 463
-      y: 789
+      x: 653
+      y: 108
       width: 128
       height: 128
   - name: menu_nongmin
@@ -169,8 +219,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 659
-      y: 658
+      x: 782
+      y: 108
       width: 128
       height: 128
   - name: menu_yingxiong
@@ -179,17 +229,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 659
-      y: 787
+      x: 653
+      y: 237
       width: 128
       height: 128
-  - name: zhinanzhen
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 1318
-      y: 0
-      width: 500
-      height: 500

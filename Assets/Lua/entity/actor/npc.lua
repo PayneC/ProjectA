@@ -40,7 +40,7 @@ end
 
 function _M:SetUID(_uid)	
 	-- 设置UID并获取配置数据
-	local _config = cf_npc.GetDataByID(_uid)
+	local _asset = cf_npc.GetData(_uid, cf_npc.asset)
 	
 	local function callback(assetEntity)
 		self.gameObject = assetEntity:GetInstantiate()
@@ -51,7 +51,7 @@ function _M:SetUID(_uid)
 		self.characterController = goUtil.GetComponent(self.gameObject, typeof(CS.UnityEngine.CharacterController), nil)
 	end
 	
-	asset.AsyncLoad(asset.EAssetType.ENTITY, _config.asset, callback)
+	asset.AsyncLoad(asset.EAssetType.ENTITY, _asset, callback)
 end
 
 function _M:SetPos(_x, _y, _z)

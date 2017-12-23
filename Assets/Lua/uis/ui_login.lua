@@ -3,7 +3,6 @@ local uimgr = require('base/ui_mgr')
 local uiconfig = require('configs/cf_ui')
 local goUtil = require('base/goutil')
 local lvmgr = require('base/lv_mgr')
-local cf_lv = require('configs/cf_lv')
 
 local _M = class(uibase)
 
@@ -13,7 +12,7 @@ end
 
 function _M:OnLoaded()
     local function OnGameStart()
-        lvmgr.LoadLevel(cf_lv.GetDataByID(3), nil, true)
+        lvmgr.LoadLevel(3, nil, true)
     end
     self.OnGameStart = OnGameStart
     

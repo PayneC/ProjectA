@@ -1,14 +1,15 @@
+local cf_lv = require('configs/cf_lv')
+local cf_ui = require('configs/cf_ui')
+
 local lvmgr = require('base/lv_mgr')
-local uiconfig = require('configs/cf_ui')
 local uimgr = require('base/ui_mgr')
 
+local goUtil = require('base/goutil')
 local asset = require('base/asset')
+local input = require('base/input')
 
 local mainCamera = require('entity/camera/maincamera')
 local Vector3 = CS.UnityEngine.Vector3
-
-local input = require('base/input')
-local goUtil = require('base/goutil')
 
 local _M = class()
 
@@ -16,40 +17,26 @@ function _M:ctor()
 	self.scene = false
 end
 
-function _M:OnEnter(_config, _parameter)
+function _M:OnEnter(levelID, parameter)
 	lvmgr.SetLoading(1, 0.2, true)	
-
+	
 	mainCamera:Init()
 	mainCamera:SetLookPosition(0, 0, 0)
 	
-	uimgr.OpenCommonUI(uiconfig.input)
-	uimgr.OpenCommonUI(uiconfig.config)
+	uimgr.OpenCommonUI(cf_ui.input)
+	uimgr.OpenCommonUI(cf_ui.config)
 	
 	local function callback(assetEntity)
 		self.scene = assetEntity:GetInstantiate()
 		lvmgr.SetLoading(1, 1, true)
 	end
-
-	local function joy(x, y, s)
-		debug.LogFormat(0, tostring(self.npcs))
-		local _npc = self.npcs[1]
-		if _npc then
-			--debug.LogFormat(0, '%f, %f, %f', x, y, s)
-			_tmpVec3.x = x
-			_tmpVec3.y = 0
-			_tmpVec3.z = y
-			local _dir = goUtil.LocalToWorld(mainCamera:GetGameObject(), _tmpVec3)
-			_dir.y = 0
-			_npc:MoveBy(_dir, s)
-		end
-	end
-	input.AddJoystick(joy)
 	
-	asset.AsyncLoad(asset.EAssetType.SCENE, _config.terrain, callback)
+	local cf_parameter = cf_lv.GetData(levelID, cf_lv.parameter)
+	asset.AsyncLoad(asset.EAssetType.SCENE, cf_parameter.terrain, callback)
 end
 
 function _M:OnExit()
-	uimgr.CloseUI(uiconfig.login)
+	uimgr.CloseUI(cf_ui.login)
 end
 
-return _M
+return _M 

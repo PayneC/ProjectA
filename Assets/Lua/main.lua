@@ -1,9 +1,8 @@
-local breakSocketHandle,debugXpCall = require("debug/LuaDebug")("localhost",7003)
+local breakSocketHandle, debugXpCall = require("debug/LuaDebug")("localhost", 7003)
 
 require('base/class')
 local uimgr = require('base/ui_mgr')
 local lvmgr = require('base/lv_mgr')
-local cf_lv = require('configs/cf_lv')
 
 local debug = require('base/debug')
 local events = require('base/events')
@@ -12,10 +11,10 @@ local a = {b = {c = 1, d = 2}, e = {3, 4, 5, 6}}
 
 function OnEnter(parameter)
 	lvmgr.Init()
-	lvmgr.LoadLevel(cf_lv.GetDataByID(1))
+	lvmgr.LoadLevel(1)
 	
 	debug.Log(0, debug.TableToString(a))
-
+	
 	local function ondsss()
 		
 	end

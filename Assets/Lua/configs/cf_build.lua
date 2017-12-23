@@ -3,15 +3,17 @@ local common = require('commons/common')
 
 local _M = {
 	id = 1,
-	careers = 2,
+	itemID = 2,
 	name = 3,
-	asset = 4
+	icon = 4,
+	cost = 5,
+	countLimit = 6,
 }
 
 local _datas = {
-	[10001] = {10001, {0}, 'npc01', 'npc_blade_girl'},
-	[10002] = {10002, {0}, 'npc02', 'skeleton_grunt'},
-	[10003] = {10003, {0}, 'npc03', 'skeleton_grunt'},
+	[10001] = {10001, 10001, '木桶', 'icon_build_mutong', {100, 200, 300}, 3},
+	[10002] = {10002, 10002, '铁桶', 'icon_build_mutong', {100, 200, 300}, 3},
+	[10003] = {10003, 10003, '皮桶', 'icon_build_mutong', {100, 200, 300}, 3},
 }
 
 local _datasReadOnly = common.ReadOnly(_datas)
