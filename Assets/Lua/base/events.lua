@@ -19,6 +19,7 @@ function _M.AddListener(msg, func, obj)
 	
 	local handler = _event:CreateListener(func, obj)
 	_event:AddListener(handler)
+	return handler
 end
 
 function _M.Brocast(msg, ...)

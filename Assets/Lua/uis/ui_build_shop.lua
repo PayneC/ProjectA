@@ -36,12 +36,12 @@ local function NewItem(_ui)
 		txt_item_num_TextEx = txt_item_num_TextEx,
 	}
 	
-    local function OnClick()
-        debug.Log(0, ' OnClick')
+	function _item:OnClick()
+		debug.Log(0, ' OnClick')
 		m_build.AddBuild(_item.DID)
 	end
 	
-	_item.btn_self.onClick:AddListener(OnClick)
+	_item.btn_self.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnClick, _item))
 	
 	function _item:SetData(DID)
 		self.DID = DID	

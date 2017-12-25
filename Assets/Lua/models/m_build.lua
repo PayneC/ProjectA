@@ -13,7 +13,7 @@ end
 
 function _M.AddBuild(build)
 	table.insert(_builds, build)
-	events.Brocast(event.BuildChange, 1)
+	events.Brocast(event.BuildChange)
 end
 
 function _M.GetBuilds()
