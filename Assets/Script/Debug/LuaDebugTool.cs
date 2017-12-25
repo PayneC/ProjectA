@@ -6,8 +6,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-using XLua;
-
 //slua 请添加特性 [CustomLuaClass]
 // [CustomLuaClass]
 public class LuaValueInfo
@@ -18,10 +16,6 @@ public class LuaValueInfo
     public bool isValue;
 }
 
-
-
-
-[LuaCallCSharp]
 public class LuaDebugTool
 {
 

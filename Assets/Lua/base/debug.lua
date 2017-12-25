@@ -1,4 +1,4 @@
-local debug = CS.UnityEngine.Debug
+local debug = UnityEngine.Debug
 
 ---
 -- @function: table的内容转成字符串，递归

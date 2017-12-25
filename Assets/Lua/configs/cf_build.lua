@@ -12,7 +12,7 @@ local _M = {
 
 local _datas = {
 	[10001] = {10001, 10001, '木桶', 'icon_build_mutong', {100, 200, 300}, 3},
-	[10002] = {10002, 10002, '铁桶', 'icon_build_mutong', {100, 200, 300}, 3},
+	[10002] = {10002, 10002, '铁桶', 'icon_zuanshi', {100, 200, 300}, 3},
 	[10003] = {10003, 10003, '皮桶', 'icon_build_mutong', {100, 200, 300}, 3},
 }
 
@@ -36,7 +36,7 @@ function _M.GetDataEntire(_id)
 end
 
 function _M.GetAllDatas()
-	return _datasReadOnly
+	return _datas
 end
 
 return _M 

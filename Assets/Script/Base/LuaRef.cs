@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class LuaRef : MonoBehaviour
 {
-    public XLua.LuaTable table;
+    //public XLua.LuaTable table;
 }

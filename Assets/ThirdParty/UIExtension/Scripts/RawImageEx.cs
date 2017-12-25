@@ -100,7 +100,6 @@ public class RawImageEx : RawImage
             toFill.Clear();
     }
 #if UNITY_EDITOR
-    [XLua.BlackList]
     public static void Copy(RawImageEx det, RawImage source)
     {
         det.texture = source.texture;
@@ -112,7 +111,6 @@ public class RawImageEx : RawImage
         det.raycastTarget = source.raycastTarget;
         det.enabled = source.enabled;
     }
-    [XLua.BlackList]
     public void SetInfo(string name)
     {
         textureName = name;

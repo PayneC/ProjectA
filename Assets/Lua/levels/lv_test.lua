@@ -1,4 +1,4 @@
-local Vector3 = CS.UnityEngine.Vector3
+local Vector3 = UnityEngine.Vector3
 
 local cf_lv = require('configs/cf_lv')
 local cf_ui = require('configs/cf_ui')

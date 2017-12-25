@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using XLua;
 
 public enum EAssetType
 {
@@ -15,7 +14,6 @@ public enum EAssetType
     ATLAS = 6,
 }
 
-[CSharpCallLua]
 public delegate void DAssetsCallback(AssetEntity _entity);
 
 public class AssetEntity

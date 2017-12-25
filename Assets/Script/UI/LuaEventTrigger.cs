@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XLua;
 
 public class LuaEventTrigger : EventTrigger
 {
@@ -18,13 +17,13 @@ public class LuaEventTrigger : EventTrigger
     }
 
     private LuaEventData _luaEventData = new LuaEventData();
-    private LuaFunction _luaFunction;
+    //private LuaFunction _luaFunction;
     private int _eventTypes = 0;
 
     private void CallLuaFunction(EventTriggerType t, PointerEventData eventData)
     {
-        if (_luaFunction == null)
-            return;
+        //if (_luaFunction == null)
+        //    return;
 
         int type = 1 << (int)t;
         if ((type & _eventTypes) == 0)
@@ -51,7 +50,7 @@ public class LuaEventTrigger : EventTrigger
         _luaEventData.SetIsScrolling(eventData.IsScrolling());
         _luaEventData.camera = eventData.enterEventCamera;
 
-        _luaFunction.Call(type, _luaEventData);
+        //_luaFunction.Call(type, _luaEventData);
 
         if (_luaEventData.button >= 0 && _luaEventData.button <= 2)
         {
@@ -124,19 +123,19 @@ public class LuaEventTrigger : EventTrigger
     {
         CallLuaFunction(EventTriggerType.Scroll, eventData);
     }
-    public void SetLuaFunction(LuaFunction func, int eventTypes)
-    {
-        if (_luaFunction != null)
-            _luaFunction.Dispose();
-
-        _luaFunction = func;
-        _eventTypes = eventTypes;
-    }
+   //public void SetLuaFunction(LuaFunction func, int eventTypes)
+   //{
+   //    if (_luaFunction != null)
+   //        _luaFunction.Dispose();
+   //
+   //    _luaFunction = func;
+   //    _eventTypes = eventTypes;
+   //}
 
     void OnDestroy()
     {
-        if (_luaFunction != null)
-            _luaFunction.Dispose();
-        _luaFunction = null;
+       // if (_luaFunction != null)
+       //     _luaFunction.Dispose();
+       // _luaFunction = null;
     }
 }

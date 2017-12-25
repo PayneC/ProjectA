@@ -1,14 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XLua;
 
 public static class InputUtil
 {
-    [CSharpCallLua]
     public delegate void Joystick(float x, float y, float s);
    
-    [CSharpCallLua]
     public delegate void OnAction(int id);
 
     public static Joystick onLeftJoystick;

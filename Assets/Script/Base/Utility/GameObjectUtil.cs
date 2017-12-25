@@ -47,15 +47,15 @@ static public class GameObjectUtil
         }
     }
 
-    static public void SetLuaRef(GameObject _go, XLua.LuaTable _table)
-    {
-        LuaRef _luaRef = _go.GetComponent<LuaRef>();
-        if(_luaRef == null)
-        {
-            _luaRef = _go.AddComponent<LuaRef>();
-        }
-        _luaRef.table = _table;
-    }
+   //static public void SetLuaRef(GameObject _go, XLua.LuaTable _table)
+   //{
+   //    LuaRef _luaRef = _go.GetComponent<LuaRef>();
+   //    if(_luaRef == null)
+   //    {
+   //        _luaRef = _go.AddComponent<LuaRef>();
+   //    }
+   //    _luaRef.table = _table;
+   //}
 
     static public Component AddComponent(GameObject _go, System.Type type, string _path)
     {

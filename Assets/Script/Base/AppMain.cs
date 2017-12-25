@@ -9,6 +9,8 @@ public class AppMain : MonoBehaviour
     static private int currentState = 0;
     static private int nextState = 0;
 
+    static private LuaClient luaClient = null;
+
     static public void SetNextState(int _state)
     {
         if (_state > 0 && _state <= 2)
@@ -22,6 +24,8 @@ public class AppMain : MonoBehaviour
     void Awake()
     {
         Application.logMessageReceived += Repo.LogCallback;
+
+        luaClient = gameObject.AddComponent<LuaClient>();
     }
 
     void Start()
@@ -68,12 +72,12 @@ public class AppMain : MonoBehaviour
     void EnterGame()
     {        
         StartCoroutine(CoroutineUpdate());
-        LuaMgr.I.EnterGame();
+        luaClient.Init();
     }
 
     void ExitGame()
     {
-        LuaMgr.I.ExitGame();     
+        luaClient.Destroy();
         StopCoroutine(CoroutineUpdate());
         AssetUtil.I.ClearAssets();
     }
@@ -96,7 +100,6 @@ public class AppMain : MonoBehaviour
         else if (currentState == AppStateGame)
         {
             AssetUtil.I.Update(dt);
-            LuaMgr.I.Update(dt);
         }        
     }
 

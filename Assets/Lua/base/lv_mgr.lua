@@ -3,7 +3,7 @@
 -- 切换关卡时会自动打开Loading界面需要在新关卡进入后合适时机手动关闭
 local cf_lv = require('configs/cf_lv')
 
-local goUtil = require('base/goutil')
+local goUtil = GameObjectUtil --require('base/goutil')
 
 
 local _M = {}
@@ -50,7 +50,7 @@ end
 
 function _M.Init()
 	local go = goUtil.Find('UILoading')
-	_uiLoading = goUtil.GetComponent(go, typeof(CS.UILoading))
+	_uiLoading = goUtil.GetComponent(go, typeof(UILoading), nil)
 end
 
 function _M.Update(dt)

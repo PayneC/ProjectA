@@ -1,3 +1,3 @@
-local GameObjectUtil = CS.GameObjectUtil
+local goUtil = GameObjectUtil
 
-return GameObjectUtil
+return goUtil

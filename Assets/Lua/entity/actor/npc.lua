@@ -1,4 +1,4 @@
-local Vector3 = CS.UnityEngine.Vector3
+local Vector3 = UnityEngine.Vector3
 local cf_npc = require('configs/cf_npc')
 local asset = require('base/asset')
 local goUtil = require('base/goutil')
@@ -47,8 +47,8 @@ function _M:SetUID(_uid)
 		goUtil.SetPosition(self.gameObject, self.pos)
 		goUtil.SetEulerAngles(self.gameObject, self.dir)
 		
-		self.animation = goUtil.GetComponent(self.gameObject, typeof(CS.UnityEngine.Animation), nil)
-		self.characterController = goUtil.GetComponent(self.gameObject, typeof(CS.UnityEngine.CharacterController), nil)
+		self.animation = goUtil.GetComponent(self.gameObject, typeof(UnityEngine.Animation), nil)
+		self.characterController = goUtil.GetComponent(self.gameObject, typeof(UnityEngine.CharacterController), nil)
 	end
 	
 	asset.AsyncLoad(asset.EAssetType.ENTITY, _asset, callback)

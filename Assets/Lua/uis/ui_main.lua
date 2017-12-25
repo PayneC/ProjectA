@@ -1,6 +1,6 @@
 local uibase = require('uis/ui_base')
 local uimgr = require('base/ui_mgr')
-local uiconfig = require('configs/cf_ui')
+local cf_ui = require('configs/cf_ui')
 local goUtil = require('base/goutil')
 
 local _M = class(uibase)
@@ -13,11 +13,11 @@ end
 
 function _M:OnLoaded()
     local function OnMapClick()
-        uimgr.OpenUI(uiconfig.buildShop)
+        uimgr.OpenUI(cf_ui.buildShop)
     end
     self.OnMapClick = OnMapClick
     
-    self.btn_map = goUtil.GetComponent(self.gameObject, typeof(CS.ButtonEx), 'btn_jiaju')
+    self.btn_map = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_jiaju')
     self.btn_map.onClick:AddListener(self.OnMapClick)
 end
 

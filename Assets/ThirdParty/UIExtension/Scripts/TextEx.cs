@@ -94,7 +94,6 @@ public class TextEx : Text
     }
 
 #if UNITY_EDITOR
-    [XLua.BlackList]
     public void SetInfo(string name)
     {
         _fontName = name;

@@ -5,4 +5,7 @@ _M.ActorState = {
     Skill = 3,
 }
 
+_M.event = {
+    BuildChange = 1,
+}
 return _M

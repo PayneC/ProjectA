@@ -1,7 +1,7 @@
 local define = require('commons/define')
 local ActorState = define.ActorState
 local goUtil = require('base/goutil')
-local CollisionFlags = CS.UnityEngine.CollisionFlags
+local CollisionFlags = UnityEngine.CollisionFlags
 
 local idle = {}
 function idle.Enter(self)

@@ -9,7 +9,7 @@ local asset = require('base/asset')
 local input = require('base/input')
 
 local mainCamera = require('entity/camera/maincamera')
-local Vector3 = CS.UnityEngine.Vector3
+local Vector3 = UnityEngine.Vector3
 
 local _M = class()
 

@@ -1,8 +1,8 @@
-local assetUtil = CS.AssetUtil.I
+local assetUtil = AssetUtil.I
 
 local _M = {}
 
-_M.EAssetType = CS.EAssetType
+_M.EAssetType = EAssetType
 
 function _M.AsyncLoad(type, path, callback)
     return assetUtil:AsyncLoad(type, path, callback)

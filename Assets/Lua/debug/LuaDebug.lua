@@ -12,9 +12,9 @@ local LuaDebugTool_ = nil
 if(LuaDebugTool) then
 
 	LuaDebugTool_ = LuaDebugTool
-elseif(CS and CS.LuaDebugTool) then
+elseif(CS and LuaDebugTool) then
 	
-	LuaDebugTool_ = CS.LuaDebugTool;
+	LuaDebugTool_ = LuaDebugTool;
 
 end
 local LuaDebugTool = LuaDebugTool_

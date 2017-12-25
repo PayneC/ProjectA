@@ -1,8 +1,8 @@
 local goUtil = require('base/goutil')
 local asset = require('base/asset')
 
-local Vector2 = CS.UnityEngine.Vector2
-local Vector3 = CS.UnityEngine.Vector3
+local Vector2 = UnityEngine.Vector2
+local Vector3 = UnityEngine.Vector3
 
 local _uiRoot = false
 

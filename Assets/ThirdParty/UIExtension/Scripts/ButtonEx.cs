@@ -146,7 +146,6 @@ public class ButtonEx : Button
     }
 
 #if UNITY_EDITOR
-    [XLua.BlackList]
     public static void Copy(ButtonEx des, Button source)
     {
         des.onClick = source.onClick;
@@ -162,7 +161,6 @@ public class ButtonEx : Button
 
         des.enabled = source.enabled;
     }
-    [XLua.BlackList]
     public void SetButtonInfo(int index, string atlasName, string spriteName)
     {
         switch (index)
