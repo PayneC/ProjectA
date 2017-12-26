@@ -8,7 +8,6 @@ local goUtil = require('base/goutil')
 local asset = require('base/asset')
 local input = require('base/input')
 
-local mainCamera = require('entity/camera/maincamera')
 local Vector3 = UnityEngine.Vector3
 
 local _M = class()
@@ -18,21 +17,12 @@ function _M:ctor()
 end
 
 function _M:OnEnter(levelID, parameter)
-	lvmgr.SetLoading(1, 0.2, true)	
-	
-	mainCamera:Init()
-	mainCamera:SetLookPosition(0, 0, 0)
-	
-	uimgr.OpenCommonUI(cf_ui.input)
+	lvmgr.SetLoading(1, 0.2, true)
+
+	uimgr.SetDefaultUI(cf_ui.main)
 	uimgr.OpenCommonUI(cf_ui.config)
 	
-	local function callback(assetEntity)
-		self.scene = assetEntity:GetInstantiate()
-		lvmgr.SetLoading(1, 1, true)
-	end
-	
-	local cf_parameter = cf_lv.GetData(levelID, cf_lv.parameter)
-	asset.AsyncLoad(asset.EAssetType.SCENE, cf_parameter.terrain, callback)
+	lvmgr.SetLoading(1, 1, true)
 end
 
 function _M:OnExit()

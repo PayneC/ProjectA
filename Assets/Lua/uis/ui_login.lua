@@ -32,7 +32,7 @@ function _M:OnDestroy()
 end
 
 function _M:OnGameStart()
-	lvmgr.LoadLevel(3, nil, true)
+	lvmgr.LoadLevel(2, nil, true)
 end
 
 return _M 
