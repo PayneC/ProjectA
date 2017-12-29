@@ -1,16 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HotFixMgr : Singleton<HotFixMgr>
 {
-    public bool HasHotFix()
+    private string lastVersion;
+    public string LastVersion
     {
-        return false;
+        get { return lastVersion; }
     }
 
-    public void Update(float dt)
+    private string currenrVersion;
+    public string CurrenrVersion
     {
+        get { return currenrVersion; }
+    }
 
+    private bool isChecking = false;
+
+    private bool isDownloading = false;
+
+    public void Check(UnityAction call)
+    {
+        call();
+    }
+
+    public void Download(UnityAction call)
+    {
+        call();
     }
 }

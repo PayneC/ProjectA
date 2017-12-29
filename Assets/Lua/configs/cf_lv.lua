@@ -27,7 +27,12 @@ local _datas = {
 	}},
 }
 
+local _index = {
+	1, 2, 3
+}
+
 local _datasReadOnly = common.ReadOnly(_datas)
+local _indexReadOnly = common.ReadOnly(_index)
 
 function _M.GetData(_id, _type)
 	local _data = _M.GetDataEntire(_id)
@@ -47,7 +52,11 @@ function _M.GetDataEntire(_id)
 end
 
 function _M.GetAllDatas()
-	return _datasReadOnly
+	return _datas
+end
+
+function _M.GetAllIndex()
+	return _index
 end
 
 return _M
