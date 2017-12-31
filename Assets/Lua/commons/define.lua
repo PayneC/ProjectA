@@ -6,6 +6,6 @@ _M.ActorState = {
 }
 
 _M.event = {
-    BuildChange = 1,
+    AssetChange = 1,
 }
 return _M

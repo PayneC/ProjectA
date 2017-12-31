@@ -6,19 +6,16 @@ local goUtil = require('base/goutil')
 local _M = class(uibase)
 
 function _M:ctor()
-	self.btn_map = nil
-	
-	self.OnMapClick = nil
+	self.btn_jiaju = nil
+	self.btn_jiagong = nil
 end
 
 function _M:OnLoaded()
-	local function OnMapClick()
-		
-	end
-	self.OnMapClick = OnMapClick
+	self.btn_jiaju = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_jiaju')
+	self.btn_jiaju.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnJiaJu, self))
 	
-	self.btn_map = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_jiaju')
-	self.btn_map.onClick:AddListener(self.OnMapClick)
+	self.btn_jiagong = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_jiagong')
+	self.btn_jiagong.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnJiaGong, self))
 end
 
 function _M:OnEnable()
@@ -34,9 +31,16 @@ function _M:OnDisable()
 end
 
 function _M:OnDestroy()
-	if self.OnMapClick then
-		self.btn_map.onClick:RemoveListener(self.OnMapClick)
-	end
+	self.btn_jiaju.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnJiaJu, self))
+	self.btn_jiagong.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnJiaGong, self))
+end
+
+function _M:OnJiaJu()
+	uimgr.OpenUI(cf_ui.home)
+end
+
+function _M:OnJiaGong()
+	uimgr.OpenUI(cf_ui.workbench)
 end
 
 return _M

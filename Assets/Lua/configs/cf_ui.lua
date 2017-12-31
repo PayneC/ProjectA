@@ -3,7 +3,8 @@ local _M = {
     map = {uid = 2, script = 'uis/ui_map', assetsName = 'UIMap', depth = 30},
     input = {uid = 3, script = 'uis/ui_input', assetsName = 'UIInput', depth = 10},
     login = {uid = 4, script = 'uis/ui_login', assetsName = 'UILogin', depth = 10},
-    config = {uid = 5, script = 'uis/ui_config', assetsName = 'UIConfig', depth = 10},
+    workbench = {uid = 5, script = 'uis/ui_workbench', assetsName = 'UIWorkbench', depth = 10},
+    home = {uid = 6, script = 'uis/ui_home', assetsName = 'UIHome', depth = 10},
 }
 
 return _M

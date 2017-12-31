@@ -16,6 +16,8 @@ public class GameObjectUtilWrap
 		L.RegFunction("GetComponent", GetComponent);
 		L.RegFunction("SetActive", SetActive);
 		L.RegFunction("GetActive", GetActive);
+		L.RegFunction("SetActiveByComponent", SetActiveByComponent);
+		L.RegFunction("GetActiveByComponent", GetActiveByComponent);
 		L.RegFunction("SetParent", SetParent);
 		L.RegFunction("GetParent", GetParent);
 		L.RegFunction("SetPosition", SetPosition);
@@ -186,6 +188,40 @@ public class GameObjectUtilWrap
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.GameObject));
 			bool o = GameObjectUtil.GetActive(arg0);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetActiveByComponent(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Component arg0 = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
+			bool arg1 = LuaDLL.luaL_checkboolean(L, 2);
+			GameObjectUtil.SetActiveByComponent(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetActiveByComponent(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			UnityEngine.Component arg0 = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
+			bool o = GameObjectUtil.GetActiveByComponent(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}

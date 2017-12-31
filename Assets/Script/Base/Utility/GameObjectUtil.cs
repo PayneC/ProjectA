@@ -137,6 +137,23 @@ static public class GameObjectUtil
         return false;
     }
 
+    static public void SetActiveByComponent(Component _go, bool _active)
+    {
+        if (_go != null)
+        {
+            _go.gameObject.SetActive(_active);
+        }
+    }
+
+    static public bool GetActiveByComponent(Component _go)
+    {
+        if (_go != null)
+        {
+            return _go.gameObject.activeSelf;
+        }
+        return false;
+    }
+
     static public void SetParent(GameObject _go, GameObject _parent)
     {
         Transform _tran = _go == null ? null : _go.transform;

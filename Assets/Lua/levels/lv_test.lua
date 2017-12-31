@@ -29,7 +29,7 @@ function _M:OnEnter(levelID, parameter)
 	mainCamera:Init()
 	uimgr.SetDefaultUI(cf_ui.main)
 	uimgr.OpenCommonUI(cf_ui.input)
-	uimgr.OpenCommonUI(cf_ui.config)
+	uimgr.OpenCommonUI(cf_ui.workbench)
 	
 	local cf_parameter = cf_lv.GetData(levelID, cf_lv.parameter)
 

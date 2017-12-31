@@ -15,59 +15,26 @@ local uibase = require('uis/ui_base')
 
 local _M = class(uibase)
 
-local function NewItem(_ui)
-	local gameObject = goUtil.Instantiate(_ui.rt_item)
-	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
-	local txt_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_num')
-	
-	local _item = {
-		DID = 0,
-		gameObject = gameObject,
-		spr_icon_ImageEx = spr_icon_ImageEx,
-		txt_num_TextEx = txt_num_TextEx,
-	}
-	
-	function _item:SetData(DID)
-		self.DID = DID	
-		if self.DID then
-			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
-			self.spr_icon_ImageEx:SetSprite('uimain', cf_build.GetData(self.DID, cf_build.icon))
-		else
-			goUtil.SetActive(self.gameObject, false)
-		end
-		self:RefreshData()
-	end
-	
-	function _item:RefreshData()
-		
-	end
-	
-	goUtil.SetParent(_item.gameObject, _ui.scr_items_content)
-	
-	return _item
-end
-
 local function NewBuild(_ui)
 	local gameObject = goUtil.Instantiate(_ui.rt_build)
 	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
-	--local txt_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_name')
+	local txt_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_name')
 	local txt_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_num')
 	
 	local spr_item_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_icon')
-	--local txt_item_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_name')
+	local txt_item_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_name')
 	local txt_item_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_num')
 	
-	--local btn_self = goUtil.GetComponent(gameObject, typeof(ButtonEx), nil)
+	local btn_self = goUtil.GetComponent(gameObject, typeof(ButtonEx), nil)
 	local _item = {
 		DID = 0,
 		gameObject = gameObject,
-		--btn_self = btn_self,
+		btn_self = btn_self,
 		spr_icon_ImageEx = spr_icon_ImageEx,
-		--txt_name_TextEx = txt_name_TextEx,
+		txt_name_TextEx = txt_name_TextEx,
 		txt_num_TextEx = txt_num_TextEx,
 		spr_item_icon_ImageEx = spr_item_icon_ImageEx,
-		--txt_item_name_TextEx = txt_item_name_TextEx,
+		txt_item_name_TextEx = txt_item_name_TextEx,
 		txt_item_num_TextEx = txt_item_num_TextEx,
 	}
 	
@@ -76,9 +43,9 @@ local function NewBuild(_ui)
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
 			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
-			--self.txt_name_TextEx.text = cf_build.GetData(self.DID, cf_build.name)	
+			self.txt_name_TextEx.text = cf_build.GetData(self.DID, cf_build.name)	
 			self.spr_icon_ImageEx:SetSprite('uimain', cf_build.GetData(self.DID, cf_build.icon))
-			--self.txt_item_name_TextEx.text = cf_item.GetData(itemID, cf_item.name)	
+			self.txt_item_name_TextEx.text = cf_item.GetData(itemID, cf_item.name)	
 			self.spr_item_icon_ImageEx:SetSprite('uimain', cf_item.GetData(itemID, cf_item.icon))
 		else
 			goUtil.SetActive(self.gameObject, false)
@@ -102,10 +69,7 @@ function _M:ctor()
 end
 
 function _M:OnLoaded()
-	events.AddListener(event.BuildChange, self.OnBuildChange, self)
-	
-	self.rt_item = goUtil.FindChild(self.gameObject, 'rt_item')
-	self.scr_items_content = goUtil.FindChild(self.gameObject, 'scr_items/Viewport/Content')
+	events.AddListener(event.AssetChange, self.OnBuildChange, self)
 	
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
@@ -113,7 +77,6 @@ end
 
 function _M:OnEnable()
 	self:ShowBuilds()
-	self:ShowItems()
 end
 
 function _M:Update(dt)
@@ -126,34 +89,6 @@ end
 
 function _M:OnDestroy()
 	
-end
-
-function _M:ShowItems()
-	local items = cf_item.GetAllIndex()
-	--local builds = m_build.GetBuilds()	
-	local count = #items
-	
-	local hasNum = #self.items
-	
-	debug.LogFormat(0, 'count %d', count)
-	debug.LogFormat(0, 'hasNum %d', hasNum)
-	
-	if count > hasNum then
-		for i = hasNum, count, 1 do
-			local item = NewItem(self)
-			table.insert(self.items, item)
-		end
-	elseif count < hasNum then		
-		for i = count, hasNum, 1 do
-			local item = self.items[i]
-			item:SetData(false)
-		end
-	end
-	
-	for i = 1, count, 1 do
-		local item = self.items[i]
-		item:SetData(items[i])
-	end
 end
 
 function _M:ShowBuilds()
