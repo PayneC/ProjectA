@@ -7,6 +7,8 @@ using UnityEditor;
 using BindType = ToLuaMenu.BindType;
 using System.Reflection;
 
+using UnityEngine.UI;
+
 public static class CustomSettings
 {
     public static string saveDir = Application.dataPath + "/Source/Generate/";    
@@ -165,6 +167,7 @@ public static class CustomSettings
         _GT(typeof(RawImageEx)),
         _GT(typeof(ButtonEx)),
         _GT(typeof(TextEx)),
+        _GT(typeof(Slider)),
 
         _GT(typeof(UnityEngine.UI.Button.ButtonClickedEvent)),
     };

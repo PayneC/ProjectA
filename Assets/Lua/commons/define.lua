@@ -1,11 +1,13 @@
 local _M = {}
 _M.ActorState = {
-    IDLE = 1,
-    RUN = 2,
-    Skill = 3,
+	IDLE = 1,
+	RUN = 2,
+	Skill = 3,
 }
 
 _M.event = {
-    AssetChange = 1,
+	BuildChange = 1,
+	BuildLVChange = 2,
+	WorkbenchChange = 3,
 }
 return _M

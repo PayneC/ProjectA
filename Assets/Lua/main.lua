@@ -10,7 +10,7 @@ local debug = require('base/debug')
 local events = require('base/events')
 
 local _models = {
-	require('models/m_assets'),
+	require('models/m_build'),
 	require('models/m_item'),
 	require('models/m_player'),
 	require('models/m_workbench'),
@@ -28,6 +28,14 @@ local _controlCount = #_controls
 function Main(parameter)
 	UpdateBeat:Add(Update, self)
 	
+	local model
+	for i = 0, _modelCount, 1 do
+		model = _models[i]
+		if model and model.LoadData then
+			model.LoadData()
+		end
+	end
+	
 	lvmgr.Init()
 	lvmgr.LoadLevel(1)
 end
@@ -43,6 +51,7 @@ function Update(dt)
 	
 	uimgr.Update(dt)
 	lvmgr.Update(dt)
+	events.Update(dt)
 end
 
 function OnApplicationQuit()

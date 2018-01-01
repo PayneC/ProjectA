@@ -195,14 +195,14 @@ function _M.CloseUI(_config)
         mainUI.config = false
         mainUI.ui = false
     elseif _openType == UIActiveType.sub then
-        for i = 0, #subUIs, 1 do
+        for i = 1, #subUIs, 1 do
             if subUIs[i].config == _config then
                 table.remove(subUIs, i)
                 break
             end
         end
     elseif _openType == UIActiveType.common then
-        for i = 0, #commonUIS, 1 do
+        for i = 1, #commonUIS, 1 do
             if commonUIS[i].config == _config then
                 table.remove(commonUIS, i)
                 break

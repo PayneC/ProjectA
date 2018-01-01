@@ -1,52 +1,60 @@
 local debug = require('base/debug')
 
 local _M = {}
-local events = {}
 
-local _msgList = {}
-local _msgCount = 0
-
-local _msgListB = {}
-local _msgCountB = 0
-
-local _lockA = false
+local _events = {}
+local _waitList = {{}, 0}
+local _brocastList = {{}, 0}
 
 local function AddMessage(msg, parameter)
-	local msgEntity
-	for i = 0, _msgCount, 1 do
-		msgEntity = _msgList[i]
-		if msgEntity and msgEntity[1] == msg then
+	local _msg
+	local _msgList = _waitList[1]
+	local _count = _waitList[2]
+	
+	for i = 0, _count, 1 do
+		_msg = _msgList[i]
+		if _msg and _msg[1] == msg then
 			break
 		end
-		msgEntity = false
+		_msg = false
 	end
 	
-	if msgEntity then
-		msgEntity[2] = parameter
-	else
-		_msgCount = _msgCount + 1
-		msgEntity = _msgList[_msgCount]
-		if msgEntity then
-			msgEntity[1] = msg
-			msgEntity[2] = parameter
-		else
-			_msgList[_msgCount] = {msg, parameter}
+	if not _msg then
+		_count = _count + 1
+		_waitList[2] = _count
+		_msg = _msgList[_count]
+		if not _msg then
+			_msg = {msg, parameter}
+			_msgList[_count] = _msg
 		end
+	end
+	
+	_msg[1] = msg
+	_msg[2] = parameter
+end
+
+local function BrocastMessage(msg, parameter)
+	debug.LogFormat(0, 'BrocastMessage msg = %d, parameter', msg)
+	local _event = _events[msg]
+	if _event then
+		_event(parameter)
 	end
 end
 
 function _M.AddListener(msg, func, obj)
 	if not msg or type(msg) ~= "number" then
 		debug.LogError("msg parameter in addlistener function has to be number, " .. type(msg) .. " not right.")
+		return nil
 	end
 	if not func or type(func) ~= "function" then
 		debug.LogError("func parameter in addlistener function has to be function, " .. type(func) .. " not right")
+		return nil
 	end
 	
-	local _event = events[msg]
+	local _event = _events[msg]
 	if not _event then
 		_event = event(msg, true)
-		events[msg] = _event
+		_events[msg] = _event
 	end
 	
 	local handler = _event:CreateListener(func, obj)
@@ -54,17 +62,24 @@ function _M.AddListener(msg, func, obj)
 	return handler
 end
 
-function _M.Brocast(msg, ...)
-	local _event = events[msg]
-	if not _event then
-		debug.LogError("brocast " .. msg .. " has no event.")
-	else
-		_event(...)
+function _M.Brocast(msg, parameter)
+	if not msg or type(msg) ~= "number" then
+		debug.LogError("msg parameter in addlistener function has to be number, " .. type(msg) .. " not right.")
+		return nil
 	end
+	AddMessage(msg, parameter)
+end
+
+function _M.BrocastImmediate(msg, parameter)
+	if not msg or type(msg) ~= "number" then
+		debug.LogError("msg parameter in addlistener function has to be number, " .. type(msg) .. " not right.")
+		return nil
+	end
+	BrocastMessage(msg, parameter)
 end
 
 function _M.RemoveListener(msg, handler)
-	local _event = events[msg]
+	local _event = _events[msg]
 	if not _event then
 		debug.LogError("RemoveListener " .. msg .. " has no event.")
 	else
@@ -73,16 +88,23 @@ function _M.RemoveListener(msg, handler)
 end
 
 function _M.Update()
-	local msgEntity
-	for i = 0, _msgCount, 1 do
-		msgEntity = _msgList[i]
-		if msgEntity then
-			Brocast(msgEntity[1], msgEntity[2])
-			msgEntity[1] = false
-			msgEntity[2] = false
+	local tempList = _brocastList
+	_brocastList = _waitList
+	_waitList = tempList
+	
+	local _msg
+	local _msgList = _brocastList[1]
+	local _count = _brocastList[2]
+	
+	for i = 0, _count, 1 do
+		_msg = _msgList[i]
+		if _msg then
+			BrocastMessage(_msg[1], _msg[2])
+			_msg[1] = false
+			_msg[2] = false
 		end
 	end
-	_msgCount = 0
+	_brocastList[2] = 0
 end
 
 return _M

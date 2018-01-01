@@ -22,7 +22,7 @@ public class AppMain : LuaClient
     }
 
     new void Awake()
-    {
+    {        
         HotFixMgr.I.Check(OnDownloadLastVersion);
     }
 
