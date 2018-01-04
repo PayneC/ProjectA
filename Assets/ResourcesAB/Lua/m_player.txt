@@ -18,4 +18,8 @@ function _M.SetTaskList(_taskList)
     _M.taskList = _taskList
 end
 
+function _M.SendModify()
+	
+end
+
 return _M

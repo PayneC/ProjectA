@@ -1,17 +1,18 @@
+local Vector3 = UnityEngine.Vector3
+
+local cf_lv = require('configs/cf_lv')
+local cf_ui = require('configs/cf_ui')
+
 local lvmgr = require('base/lv_mgr')
-local uiconfig = require('configs/cf_ui')
 local uimgr = require('base/ui_mgr')
 
 local asset = require('base/asset')
-
-local mainCamera = require('entity/camera/maincamera')
-local Vector3 = CS.UnityEngine.Vector3
-
-local npc = require('entity/actor/npc')
-
 local debug = require('base/debug')
 local input = require('base/input')
 local goUtil = require('base/goutil')
+
+local mainCamera = require('entity/camera/maincamera')
+local npc = require('entity/actor/npc')
 
 local _tmpVec3 = Vector3.zero
 
@@ -22,17 +23,19 @@ function _M:ctor()
 	self.scene = false
 end
 
-function _M:OnEnter(_config, _parameter)
+function _M:OnEnter(levelID, parameter)
 	lvmgr.SetLoading(1, 0.2, false)
 	
 	mainCamera:Init()
-	uimgr.SetDefaultUI(uiconfig.main)
-	uimgr.OpenCommonUI(uiconfig.input)
-	uimgr.OpenCommonUI(uiconfig.config)
+	uimgr.SetDefaultUI(cf_ui.main)
+	uimgr.OpenCommonUI(cf_ui.input)
+	uimgr.OpenCommonUI(cf_ui.workbench)
 	
+	local cf_parameter = cf_lv.GetData(levelID, cf_lv.parameter)
+
 	local function callback(assetEntity)
 		self.scene = assetEntity:GetInstantiate()
-		local _npcs = _config.npcs
+		local _npcs = cf_parameter.npcs
 		for i = 1, #_npcs, 1 do
 			local _cf = _npcs[i]
 			local _npc = npc.new()
@@ -62,7 +65,8 @@ function _M:OnEnter(_config, _parameter)
 	
 	--mainCamera.SetPosition(Vector3(0, 15, 0))
 	--mainCamera.LookAt(Vector3.zero)
-	asset.AsyncLoad(asset.EAssetType.SCENE, _config.terrain, callback)
+
+	asset.AsyncLoad(asset.EAssetType.SCENE, cf_parameter.terrain, callback)
 end
 
 function _M:Update(dt)

@@ -2,5 +2,6 @@
 <linker>
        <assembly fullname="mscorlib">
 	       	<namespace fullname="System.Collections.Generic" preserve="all"/>
+          <namespace fullname="UnityEngine.CoreModule" preserve="all"/>
        </assembly>
 </linker>

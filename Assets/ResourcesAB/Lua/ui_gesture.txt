@@ -1,6 +1,6 @@
 local uibase = require('uis/ui_base')
 local uimgr = require('base/ui_mgr')
-local uiconfig = require('configs/cf_ui')
+local cf_ui = require('configs/cf_ui')
 
 local _M = class(uibase)
 

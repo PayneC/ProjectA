@@ -110,6 +110,7 @@ public class ImageEx : Image
     }
 
 #if UNITY_EDITOR
+    [LuaInterface.NoToLua]
     public static void Copy(ImageEx des, Image source)
     {
         des.alphaHitTestMinimumThreshold = source.alphaHitTestMinimumThreshold;
@@ -133,6 +134,8 @@ public class ImageEx : Image
 
         des.enabled = source.enabled;
     }
+
+    [LuaInterface.NoToLua]
     public void SetInfo(string atlasName, string spriteName)
     {
         spriteInfo.atlasName = atlasName;

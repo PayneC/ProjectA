@@ -7,8 +7,6 @@ public class ButtonExWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(ButtonEx), typeof(UnityEngine.UI.Button));
-		L.RegFunction("Copy", Copy);
-		L.RegFunction("SetButtonInfo", SetButtonInfo);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("disabledSpriteInfo", get_disabledSpriteInfo, set_disabledSpriteInfo);
@@ -16,42 +14,6 @@ public class ButtonExWrap
 		L.RegVar("pressedSpriteInfo", get_pressedSpriteInfo, set_pressedSpriteInfo);
 		L.RegVar("useClickAnimation", get_useClickAnimation, set_useClickAnimation);
 		L.EndClass();
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Copy(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			ButtonEx arg0 = (ButtonEx)ToLua.CheckObject<ButtonEx>(L, 1);
-			UnityEngine.UI.Button arg1 = (UnityEngine.UI.Button)ToLua.CheckObject<UnityEngine.UI.Button>(L, 2);
-			ButtonEx.Copy(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetButtonInfo(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 4);
-			ButtonEx obj = (ButtonEx)ToLua.CheckObject<ButtonEx>(L, 1);
-			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			string arg1 = ToLua.CheckString(L, 3);
-			string arg2 = ToLua.CheckString(L, 4);
-			obj.SetButtonInfo(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

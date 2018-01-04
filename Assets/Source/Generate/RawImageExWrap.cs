@@ -9,8 +9,6 @@ public class RawImageExWrap
 		L.BeginClass(typeof(RawImageEx), typeof(UnityEngine.UI.RawImage));
 		L.RegFunction("SetTextureName", SetTextureName);
 		L.RegFunction("SetTexture", SetTexture);
-		L.RegFunction("Copy", Copy);
-		L.RegFunction("SetInfo", SetInfo);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("textureName", get_textureName, null);
@@ -44,40 +42,6 @@ public class RawImageExWrap
 			RawImageEx obj = (RawImageEx)ToLua.CheckObject<RawImageEx>(L, 1);
 			UnityEngine.Texture arg0 = (UnityEngine.Texture)ToLua.CheckObject<UnityEngine.Texture>(L, 2);
 			obj.SetTexture(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Copy(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			RawImageEx arg0 = (RawImageEx)ToLua.CheckObject<RawImageEx>(L, 1);
-			UnityEngine.UI.RawImage arg1 = (UnityEngine.UI.RawImage)ToLua.CheckObject<UnityEngine.UI.RawImage>(L, 2);
-			RawImageEx.Copy(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetInfo(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			RawImageEx obj = (RawImageEx)ToLua.CheckObject<RawImageEx>(L, 1);
-			string arg0 = ToLua.CheckString(L, 2);
-			obj.SetInfo(arg0);
 			return 0;
 		}
 		catch (Exception e)

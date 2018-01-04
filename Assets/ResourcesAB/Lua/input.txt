@@ -1,4 +1,4 @@
-local input = CS.InputUtil
+local input = InputUtil
 
 local _M = {}
 

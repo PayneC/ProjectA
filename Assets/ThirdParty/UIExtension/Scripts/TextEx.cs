@@ -94,6 +94,7 @@ public class TextEx : Text
     }
 
 #if UNITY_EDITOR
+    [LuaInterface.NoToLua]
     public void SetInfo(string name)
     {
         _fontName = name;

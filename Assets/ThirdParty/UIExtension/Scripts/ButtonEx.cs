@@ -146,6 +146,7 @@ public class ButtonEx : Button
     }
 
 #if UNITY_EDITOR
+    [LuaInterface.NoToLua]
     public static void Copy(ButtonEx des, Button source)
     {
         des.onClick = source.onClick;
@@ -161,6 +162,8 @@ public class ButtonEx : Button
 
         des.enabled = source.enabled;
     }
+
+    [LuaInterface.NoToLua]
     public void SetButtonInfo(int index, string atlasName, string spriteName)
     {
         switch (index)

@@ -100,6 +100,7 @@ public class RawImageEx : RawImage
             toFill.Clear();
     }
 #if UNITY_EDITOR
+    [LuaInterface.NoToLua]
     public static void Copy(RawImageEx det, RawImage source)
     {
         det.texture = source.texture;
@@ -111,6 +112,8 @@ public class RawImageEx : RawImage
         det.raycastTarget = source.raycastTarget;
         det.enabled = source.enabled;
     }
+
+    [LuaInterface.NoToLua]
     public void SetInfo(string name)
     {
         textureName = name;

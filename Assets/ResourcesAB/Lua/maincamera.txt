@@ -1,6 +1,6 @@
-local Vector3 = CS.UnityEngine.Vector3
+local Vector3 = UnityEngine.Vector3
 local goUtil = require('base/goutil')
-local Mathf = CS.UnityEngine.Mathf
+local Mathf = UnityEngine.Mathf
 
 local _M = {}
 
@@ -94,7 +94,7 @@ end
 
 function _M:Init()
 	gameobject = goUtil.Find('Main Camera')
-	camera = goUtil.GetComponent(gameobject, typeof(CS.UnityEngine.Camera))
+	camera = goUtil.GetComponent(gameobject, typeof(UnityEngine.Camera), nil)
 	
 	yaw = cameraParameter.defaultYaw
 	distance = cameraParameter.defaultDistance

@@ -9,8 +9,6 @@ public class ImageExWrap
 		L.BeginClass(typeof(ImageEx), typeof(UnityEngine.UI.Image));
 		L.RegFunction("SetSpriteOffset", SetSpriteOffset);
 		L.RegFunction("SetSprite", SetSprite);
-		L.RegFunction("Copy", Copy);
-		L.RegFunction("SetInfo", SetInfo);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("spriteInfo", get_spriteInfo, set_spriteInfo);
@@ -45,41 +43,6 @@ public class ImageExWrap
 			string arg0 = ToLua.CheckString(L, 2);
 			string arg1 = ToLua.CheckString(L, 3);
 			obj.SetSprite(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Copy(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			ImageEx arg0 = (ImageEx)ToLua.CheckObject<ImageEx>(L, 1);
-			UnityEngine.UI.Image arg1 = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 2);
-			ImageEx.Copy(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetInfo(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 3);
-			ImageEx obj = (ImageEx)ToLua.CheckObject<ImageEx>(L, 1);
-			string arg0 = ToLua.CheckString(L, 2);
-			string arg1 = ToLua.CheckString(L, 3);
-			obj.SetInfo(arg0, arg1);
 			return 0;
 		}
 		catch (Exception e)

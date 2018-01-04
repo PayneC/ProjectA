@@ -45,6 +45,11 @@ public class GenAssetBundle : EditorWindow
         {
             CopyLuaToTxt(luaInPath, luaOutPath);
         }
+
+        if (GUILayout.Button("GenAssetBundle"))
+        {
+            BundleLuaFile(luaOutPath, assetOut);
+        }
     }
 
     // Use this for initialization
@@ -88,17 +93,36 @@ public class GenAssetBundle : EditorWindow
             FileUtil.CopyFileOrDirectory(file, destFile);
         }
 
+        files = Directory.GetFiles(Application.dataPath + "/ToLua/Lua/", "*.lua", SearchOption.AllDirectories);
+
+        for (int i = 0; i < files.Length; i++)
+        {
+            string file = files[i];
+            string destFile = Path.Combine(outPath, Path.GetFileName(file));
+            destFile = destFile.Replace(".lua", ".txt");
+
+            FileUtil.CopyFileOrDirectory(file, destFile);
+        }
+
         AssetDatabase.Refresh();
     }
 
     public static void BundleLuaFile(string inPath, string outPath)
     {
+        if(!Directory.Exists(outPath))
+        {
+            Directory.CreateDirectory(outPath);
+        }
+
         string[] files = Directory.GetFiles(inPath, "*.txt", SearchOption.AllDirectories);
+
+        string[] assetNames = new string[files.Length];
+
         for (int i = 0; i < files.Length; i++)
         {
             string _assetPath = "Assets" + files[i].Substring(Application.dataPath.Length);
             _assetPath = _assetPath.Replace("\\", "/");
-            AssetImporter _importer = AssetImporter.GetAtPath(_assetPath);
+            /*AssetImporter _importer = AssetImporter.GetAtPath(_assetPath);
             if (_importer == null)
             {
                 Debug.LogError(_assetPath);
@@ -107,9 +131,21 @@ public class GenAssetBundle : EditorWindow
             else
             {
                 _importer.assetBundleName = "lua";
-            }
+            }*/
+            assetNames[i] = _assetPath;
         }
         AssetDatabase.Refresh();
-        BuildPipeline.BuildAssetBundles(outPath, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
+
+        AssetBundleBuild[] luaBundle = new AssetBundleBuild[1];
+        luaBundle[0].assetBundleName = "lua";
+        luaBundle[0].assetNames = assetNames;
+
+        BuildPipeline.BuildAssetBundles(outPath, luaBundle, BuildAssetBundleOptions.ChunkBasedCompression, EditorUserBuildSettings.activeBuildTarget);
+        //BuildPipeline.BuildAssetBundles(outPath, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
+    }
+
+    public static void BundleAsset()
+    {
+
     }
 }

@@ -11,7 +11,6 @@ public class TextExWrap
 		L.RegFunction("SetFontName", SetFontName);
 		L.RegFunction("SetFont", SetFont);
 		L.RegFunction("Copy", Copy);
-		L.RegFunction("SetInfo", SetInfo);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("preferredHeight", get_preferredHeight, null);
@@ -80,23 +79,6 @@ public class TextExWrap
 			TextEx obj = (TextEx)ToLua.CheckObject<TextEx>(L, 1);
 			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.Copy(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetInfo(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			TextEx obj = (TextEx)ToLua.CheckObject<TextEx>(L, 1);
-			string arg0 = ToLua.CheckString(L, 2);
-			obj.SetInfo(arg0);
 			return 0;
 		}
 		catch (Exception e)
