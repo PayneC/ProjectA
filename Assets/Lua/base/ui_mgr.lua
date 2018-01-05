@@ -30,7 +30,7 @@ local function _CloseAllSubUIs()
     for i = 1, #subUIs, 1 do
         _ui = subUIs[i]
         if _ui then
-            _ui:SetActive(false)
+            _ui.ui:SetActive(false)
         end
     end
     subUIs = {}

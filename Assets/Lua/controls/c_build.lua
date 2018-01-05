@@ -1,4 +1,8 @@
+local cf_build = require('configs/cf_build')
+local cf_item = require('configs/cf_item')
+
 local m_build = require('models/m_build')
+local m_item = require('models/m_item')
 
 local debug = require('base/debug')
 local time_mgr = require('base/time_mgr')
@@ -12,6 +16,20 @@ function _M.BuildUpgrade(DID, LV)
 	if build then
 		local _lv = build.LV + LV
 		m_build.SetBuild(DID, _lv, time_mgr.GetTime())
+	end
+end
+
+function _M.Calculate()
+	local ct = time_mgr.GetTime()
+	
+	local builds = m_build.GetAllBuild()
+	local build
+	for i = 1, #builds, 1 do
+		build = builds[i]
+		if ct >= build.timePoint + build.needTime then
+			build.timePoint = build.timePoint + build.needTime
+			m_item.AddItemCount(build.itemID, 1)
+		end
 	end
 end
 

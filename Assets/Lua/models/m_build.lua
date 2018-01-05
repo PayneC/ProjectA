@@ -21,17 +21,29 @@ local function NewBuild()
 		DID = false,
 		LV = 0,
 		speed = 0,
+		needTime = 0,
 		num = 0,
 		count = 0,
+		limit = 0,
 		timePoint = 0,
+		itemID = 0,
 	}
 	
 	function _item:SetData(DID, LV, TP)
 		self.DID = DID
 		self.LV = LV
 		self.speed = LV * 60
+		
+		if self.speed > 0 then
+			self.needTime = 3600 / self.speed
+		else
+			self.needTime = 0
+		end
+		
 		self.count = LV * 30
+		self.limit = cf_build.GetData(self.DID, cf_build.itemLimit) * LV
 		self.timePoint = TP
+		self.itemID = cf_build.GetData(self.DID, cf_build.itemID)
 	end
 	
 	return _item

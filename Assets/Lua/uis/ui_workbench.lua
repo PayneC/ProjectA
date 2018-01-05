@@ -3,8 +3,12 @@ local cf_build = require('configs/cf_build')
 local cf_item = require('configs/cf_item')
 local cf_formula = require('configs/cf_formula')
 
+local m_item = require('models/m_item')
 local m_build = require('models/m_build')
 local m_workbench = require('models/m_workbench')
+
+local c_build = require('controls/c_build')
+local c_workbench = require('controls/c_workbench')
 
 local debug = require('base/debug')
 local time_mgr = require('base/time_mgr')
@@ -30,6 +34,7 @@ local function NewBuild(_ui)
 		num = 0,
 		count = 0,
 		timePoint = 0,
+		itemID = 0,
 		gameObject = gameObject,
 		spr_icon_ImageEx = spr_icon_ImageEx,
 		txt_num_TextEx = txt_num_TextEx,
@@ -57,15 +62,23 @@ local function NewBuild(_ui)
 		self.num = build.num
 		self.count = build.count
 		self.timePoint = build.timePoint
+		self.itemID = build.itemID
+		
+		local count = m_item.GetItemCount(self.itemID)
+		self.txt_num_TextEx.text = string.format('%d/%d', count, self.count)
 	end
 	
 	function _item:Update()
 		if self.speed > 0 then
 			local ct = time_mgr.GetTime()
 			local num_add, num_m = math.modf((ct - self.timePoint) / self.speed)	
-			self.sli_time_Slider.value = num_m
-			self.txt_num_TextEx.text = string.format('%d/%d', num_add + self.num, self.count)
+			self.sli_time_Slider.value = num_m		
 		end
+	end
+	
+	function _item:OnItemChange()
+		local count = m_item.GetItemCount(self.itemID)
+		self.txt_num_TextEx.text = string.format('%d/%d', count, self.count)
 	end
 	
 	goUtil.SetParent(_item.gameObject, _ui.scr_items_content)
@@ -122,11 +135,11 @@ local function NewWorkbench(_ui)
 			uimgr.OpenSubUI(cf_ui.formula, self.UID)
 		else
 			local ct = time_mgr.GetTime()
-			local st = self.timeCost - ct + self.startTime
-			if st > 0 then
-				-- 打开取消界面	
-			else
+			if ct >= self.timeCost + self.startTime then
 				-- 获取物品
+				c_workbench.FinishFormula(self.UID)
+			else
+				-- 打开取消界面	
 			end
 		end
 	end
@@ -153,24 +166,29 @@ end
 function _M:ctor()
 	self.builds = {}
 	self.workbenchs = {}
+	
+	self.txt_items_UIText = false
 end
 
 function _M:OnLoaded()
 	events.AddListener(event.BuildChange, self.OnBuildChange, self)
 	events.AddListener(event.BuildLVChange, self.OnBuildLVChange, self)
 	events.AddListener(event.WorkbenchChange, self.OnWorkbenchChange, self)
-	
+	events.AddListener(event.ItemChange, self.OnItemChange, self)
 	
 	self.rt_item = goUtil.FindChild(self.gameObject, 'rt_item')
 	self.scr_items_content = goUtil.FindChild(self.gameObject, 'scr_items/Viewport/Content')
 	
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
+	
+	self.txt_items_TextEx = goUtil.GetComponent(self.gameObject, typeof(TextEx), 'txt_items')
 end
 
 function _M:OnEnable()
 	self:ShowBuilds()
 	self:ShowWorkbenchs()
+	self:ShowItems()
 end
 
 function _M:Update(dt)
@@ -190,6 +208,8 @@ function _M:Update(dt)
 			build:Update()
 		end
 	end
+	
+	c_build.Calculate()
 end
 
 function _M:OnDisable()
@@ -256,6 +276,34 @@ end
 
 function _M:OnWorkbenchChange()
 	self:ShowWorkbenchs()
+end
+
+function _M:OnItemChange()
+	local count = #self.builds
+	local build
+	for i = 0, count, 1 do
+		build = self.builds[i]
+		if build then
+			build:OnItemChange()
+		end
+	end
+	self:ShowItems()
+end
+
+function _M:ShowItems()
+	
+	local s = ''
+	local items = m_item.GetAllItem()
+
+	local item
+	for k, v in pairs(items) do
+		item = v
+		local name = cf_item.GetData(item.DID, cf_item.name)
+		local itemCount = m_item.GetItemCount(item.DID)
+
+		s = string.format( '%s\n%s %d', s, name, itemCount)
+	end
+	self.txt_items_TextEx.text = s
 end
 
 return _M 
