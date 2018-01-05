@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LuaInterface;
 
 public class AppMain : LuaClient
 {
@@ -16,9 +17,20 @@ public class AppMain : LuaClient
         EnterGame();
     }
 
+    protected override LuaFileUtils InitLoader()
+    {
+        LuaFileLoader.CreateInstance();
+#if UNITY_EDITOR && !TEST_AB 
+        LuaFileUtils.Instance.beZip = false;
+#else
+        LuaFileUtils.Instance.beZip = true;
+# endif
+        return LuaFileUtils.Instance;
+    }
+
     protected override void LoadLuaFiles()
     {
-        base.LoadLuaFiles();
+        StartCoroutine(_LoadAssetBundle());
     }
 
     new void Awake()
@@ -61,5 +73,23 @@ public class AppMain : LuaClient
         {
             yield return AssetUtil.I.CoroutineUpdate();
         }        
+    }
+
+    private IEnumerator _LoadAssetBundle()
+    {
+        string assetName = "lua";
+        string path = string.Format("{0}/{1}", Application.streamingAssetsPath, assetName);
+
+        AssetBundle assetBundle = null;
+        AssetBundleCreateRequest _assetBundleCreateRequest;
+
+        _assetBundleCreateRequest = AssetBundle.LoadFromFileAsync(path);
+        yield return _assetBundleCreateRequest;
+
+        assetBundle = _assetBundleCreateRequest.assetBundle;
+
+        LuaFileUtils.Instance.AddSearchBundle("lua", assetBundle);
+        base.OnLoadFinished();
+        yield return null;
     }
 }
