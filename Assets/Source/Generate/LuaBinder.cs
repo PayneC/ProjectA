@@ -21,9 +21,11 @@ public static class LuaBinder
 		RawImageExWrap.Register(L);
 		ButtonExWrap.Register(L);
 		TextExWrap.Register(L);
+		TimeUtilWrap.Register(L);
 		Singleton_AssetUtilWrap.Register(L);
 		L.RegFunction("DAssetsCallback", DAssetsCallback);
 		L.BeginModule("UnityEngine");
+		UnityEngine_PlayerPrefsWrap.Register(L);
 		UnityEngine_ComponentWrap.Register(L);
 		UnityEngine_TransformWrap.Register(L);
 		UnityEngine_MaterialWrap.Register(L);

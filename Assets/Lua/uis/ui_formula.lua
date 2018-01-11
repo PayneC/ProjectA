@@ -11,6 +11,8 @@ local goUtil = require('base/goutil')
 
 local uibase = require('uis/ui_base')
 
+local Vector3 = UnityEngine.Vector3
+
 local _M = class(uibase)
 
 
@@ -83,6 +85,7 @@ local function NewFormula(_ui)
 				stuff:SetData(stuffs[i] [1], stuffs[i] [2])
 				table.insert(self.stuffs, stuff)
 				goUtil.SetParent(stuff.gameObject, self.rt_stuff)
+				goUtil.SetLocalScale(stuff.gameObject, Vector3.one)
 			end
 		end
 	end
@@ -93,7 +96,7 @@ local function NewFormula(_ui)
 	end
 	
 	goUtil.SetParent(_item.gameObject, _ui.scr_formula_content)
-	
+	goUtil.SetLocalScale(_item.gameObject, Vector3.one)
 	btn_make.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnMake, _item))
 	
 	return _item

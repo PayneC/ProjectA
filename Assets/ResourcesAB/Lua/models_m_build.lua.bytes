@@ -5,14 +5,15 @@ local cf_build = require('configs/cf_build')
 
 local debug = require('base/debug')
 local events = require('base/events')
+local prefsistence = require('base/prefsistence')
 local define = require('commons/define')
 local event = define.event
 
 local time_mgr = require('base/time_mgr')
 
-local isAssetModify = false
+local _isModify = false
 
-local _builds = false
+local _builds
 
 local _M = {}
 
@@ -28,28 +29,33 @@ local function NewBuild()
 		timePoint = 0,
 		itemID = 0,
 	}
-	
-	function _item:SetData(DID, LV, TP)
-		self.DID = DID
-		self.LV = LV
-		self.speed = LV * 60
-		
-		if self.speed > 0 then
-			self.needTime = 3600 / self.speed
-		else
-			self.needTime = 0
-		end
-		
-		self.count = LV * 30
-		self.limit = cf_build.GetData(self.DID, cf_build.itemLimit) * LV
-		self.timePoint = TP
-		self.itemID = cf_build.GetData(self.DID, cf_build.itemID)
-	end
-	
 	return _item
 end
 
+local function SetItemData(item, DID, LV, TP)
+	item.DID = DID
+	item.LV = LV
+	item.speed = LV * 60
+	
+	if item.speed > 0 then
+		item.needTime = 3600 / item.speed
+	else
+		item.needTime = 0
+	end
+	
+	item.count = LV * 30
+	item.limit = cf_build.GetData(item.DID, cf_build.itemLimit) * LV
+	item.timePoint = TP
+	item.itemID = cf_build.GetData(item.DID, cf_build.itemID)
+end
+
 function _M.LoadData(data)
+	_builds = prefsistence.GetTable('build')
+	
+	if _builds then
+		return
+	end
+	
 	local datas = cf_build.GetAllIndex()	
 	local count = #datas	
 	_builds = {}
@@ -58,12 +64,15 @@ function _M.LoadData(data)
 	for i = 1, count, 1 do
 		item = NewBuild()
 		table.insert(_builds, item)
-		item:SetData(datas[i], 1, time_mgr.GetTime())
+		SetItemData(item, datas[i], 1, time_mgr.GetTime())
 	end
 end
 
 function _M.SaveData()
-	
+	if _isModify then
+		prefsistence.SetTable('build', _builds)
+		_isModify = false
+	end
 end
 
 function _M.GetBuild(DID)
@@ -87,7 +96,8 @@ function _M.SetBuild(DID, LV, TP)
 	local asset = _M.GetBuild(DID)
 	
 	if asset and asset.LV ~= LV then
-		asset:SetData(DID, LV, TP)
+		SetItemData(asset, DID, LV, TP)
+		_isModify = true
 		events.Brocast(event.BuildLVChange)
 	end
 end

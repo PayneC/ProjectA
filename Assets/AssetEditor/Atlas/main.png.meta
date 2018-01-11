@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8fbed3781433942418785184a6b60fa1
-timeCreated: 1514811271
+timeCreated: 1515498984
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -21,6 +21,11 @@ TextureImporter:
     21300028: menu_jiaoyi
     21300030: menu_nongmin
     21300032: menu_yingxiong
+    21300034: btn_cao
+    21300036: sli_b
+    21300038: sli_g
+    21300040: sli_kuang
+    21300042: sli_r
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -135,6 +140,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 8, y: 0, z: 33, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_cao
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 491
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 7, z: 7, w: 7}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -331,6 +350,48 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sli_b
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 470
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 7, z: 7, w: 7}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sli_g
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 487
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 7, z: 7, w: 7}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: sli_r
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 470
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 7, y: 7, z: 7, w: 7}
       outline: []
       physicsShape: []
       tessellationDetail: -1

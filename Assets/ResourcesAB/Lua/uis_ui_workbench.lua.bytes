@@ -22,70 +22,6 @@ local uibase = require('uis/ui_base')
 
 local _M = class(uibase)
 
-local function NewBuild(_ui)
-	local gameObject = goUtil.Instantiate(_ui.rt_item)
-	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
-	local txt_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_num')
-	local sli_time_Slider = goUtil.GetComponent(gameObject, typeof(UnityEngine.UI.Slider), 'sli_time')
-	
-	local _item = {
-		DID = 0,
-		speed = 0,
-		num = 0,
-		count = 0,
-		timePoint = 0,
-		itemID = 0,
-		gameObject = gameObject,
-		spr_icon_ImageEx = spr_icon_ImageEx,
-		txt_num_TextEx = txt_num_TextEx,
-		sli_time_Slider = sli_time_Slider,
-	}
-	
-	function _item:SetData(DID)
-		self.DID = DID	
-		if self.DID then
-			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(itemID, cf_item.icon))
-		else
-			goUtil.SetActive(self.gameObject, false)
-		end
-		self:RefreshData()
-	end
-	
-	function _item:RefreshData()
-		local build = m_build.GetBuild(self.DID)
-		if build.speed > 0 then
-			self.speed = 3600 / build.speed
-			debug.LogFormat(0, 'RefreshData self.speed = %d', self.speed)
-		end
-		self.num = build.num
-		self.count = build.count
-		self.timePoint = build.timePoint
-		self.itemID = build.itemID
-		
-		local count = m_item.GetItemCount(self.itemID)
-		self.txt_num_TextEx.text = string.format('%d/%d', count, self.count)
-	end
-	
-	function _item:Update()
-		if self.speed > 0 then
-			local ct = time_mgr.GetTime()
-			local num_add, num_m = math.modf((ct - self.timePoint) / self.speed)	
-			self.sli_time_Slider.value = num_m		
-		end
-	end
-	
-	function _item:OnItemChange()
-		local count = m_item.GetItemCount(self.itemID)
-		self.txt_num_TextEx.text = string.format('%d/%d', count, self.count)
-	end
-	
-	goUtil.SetParent(_item.gameObject, _ui.scr_items_content)
-	
-	return _item
-end
-
 local function NewWorkbench(_ui)
 	local gameObject = goUtil.Instantiate(_ui.rt_build)
 	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
@@ -159,26 +95,20 @@ local function NewWorkbench(_ui)
 	
 	_item.btn_work.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnWork, _item))
 	goUtil.SetParent(_item.gameObject, _ui.scr_builds_content)
-	
+	goUtil.SetLocalScale(_item.gameObject, Vector3.one)
+
 	return _item
 end
 
 function _M:ctor()
-	self.builds = {}
 	self.workbenchs = {}
 	
 	self.txt_items_UIText = false
 end
 
 function _M:OnLoaded()
-	events.AddListener(event.BuildChange, self.OnBuildChange, self)
-	events.AddListener(event.BuildLVChange, self.OnBuildLVChange, self)
 	events.AddListener(event.WorkbenchChange, self.OnWorkbenchChange, self)
-	events.AddListener(event.ItemChange, self.OnItemChange, self)
-	
-	self.rt_item = goUtil.FindChild(self.gameObject, 'rt_item')
-	self.scr_items_content = goUtil.FindChild(self.gameObject, 'scr_items/Viewport/Content')
-	
+
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
 	
@@ -186,30 +116,19 @@ function _M:OnLoaded()
 end
 
 function _M:OnEnable()
-	self:ShowBuilds()
 	self:ShowWorkbenchs()
 	self:ShowItems()
 end
 
 function _M:Update(dt)
-	local count = #self.builds
 	local build
-	for i = 0, count, 1 do
-		build = self.builds[i]
-		if build then
-			build:Update()
-		end
-	end
-	
-	count = #self.workbenchs
+	local count = #self.workbenchs
 	for i = 0, count, 1 do
 		build = self.workbenchs[i]
 		if build then
 			build:Update()
 		end
 	end
-	
-	c_build.Calculate()
 end
 
 function _M:OnDisable()
@@ -218,29 +137,6 @@ end
 
 function _M:OnDestroy()
 	
-end
-
-function _M:ShowBuilds()
-	local builds = m_build.GetAllBuild()
-	local count = #builds
-	local hasNum = #self.builds
-	
-	if count > hasNum then
-		for i = hasNum + 1, count, 1 do
-			local item = NewBuild(self)
-			table.insert(self.builds, item)
-		end
-	elseif count < hasNum then		
-		for i = count + 1, hasNum, 1 do
-			local item = self.builds[i]
-			item:SetData(false)
-		end
-	end
-	
-	for i = 1, count, 1 do
-		local item = self.builds[i]
-		item:SetData(builds[i].DID)
-	end
 end
 
 function _M:ShowWorkbenchs()	
@@ -279,14 +175,6 @@ function _M:OnWorkbenchChange()
 end
 
 function _M:OnItemChange()
-	local count = #self.builds
-	local build
-	for i = 0, count, 1 do
-		build = self.builds[i]
-		if build then
-			build:OnItemChange()
-		end
-	end
 	self:ShowItems()
 end
 

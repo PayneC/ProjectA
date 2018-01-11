@@ -27,8 +27,9 @@ function _M.Calculate()
 	for i = 1, #builds, 1 do
 		build = builds[i]
 		if ct >= build.timePoint + build.needTime then
-			build.timePoint = build.timePoint + build.needTime
-			m_item.AddItemCount(build.itemID, 1)
+			local a, b = math.modf((ct - build.timePoint) / build.needTime)
+			build.timePoint = build.timePoint + build.needTime * a
+			m_item.AddItemCount(build.itemID, a)
 		end
 	end
 end

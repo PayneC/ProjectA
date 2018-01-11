@@ -1,8 +1,10 @@
 local events = require('base/events')
+local prefsistence = require('base/prefsistence')
 local define = require('commons/define')
 local event = define.event
 
-local _items = {}
+local _isModify = false
+local _items
 
 local _M = {}
 
@@ -20,6 +22,7 @@ function _M.AddItemCount(DID, count)
 	end
 	item.count = item.count + count
 	
+	_isModify = true
 	events.Brocast(event.ItemChange)
 end
 
@@ -32,6 +35,7 @@ function _M.SetItemCount(DID, count)
 	end
 	item.count = count
 	
+	_isModify = true
 	events.Brocast(event.ItemChange)
 end
 
@@ -50,6 +54,7 @@ function _M.SetItemLimit(DID, limit)
 	end
 	item.limit = limit
 	
+	_isModify = true
 	events.Brocast(event.ItemChange)
 end
 
@@ -63,6 +68,17 @@ end
 
 function _M.GetAllItem()
 	return _items
+end
+
+function _M.LoadData(data)
+	_items = prefsistence.GetTable('item') or {}
+end
+
+function _M.SaveData()
+	if _isModify then
+		prefsistence.SetTable('item', _items)
+		_isModify = false
+	end
 end
 
 return _M 

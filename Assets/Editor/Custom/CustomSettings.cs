@@ -30,9 +30,11 @@ public static class CustomSettings
         typeof(UnityEngine.GL),
         typeof(UnityEngine.Graphics),
         typeof(UnityEngine.Debug),
+        typeof(UnityEngine.PlayerPrefs),
 
         typeof(GameObjectUtil),
         typeof(InputUtil),
+        typeof(TimeUtil),
     };
 
     //附加导出委托类型(在导出委托时, customTypeList 中牵扯的委托类型都会导出， 无需写在这里)
@@ -62,6 +64,7 @@ public static class CustomSettings
         //-------------------------------------------------------------------        
                         
         _GT(typeof(Debugger)).SetNameSpace(null),          
+        _GT(typeof(UnityEngine.PlayerPrefs)),
 
 #if USING_DOTWEENING
         _GT(typeof(DG.Tweening.DOTween)),
@@ -170,6 +173,8 @@ public static class CustomSettings
         _GT(typeof(Slider)),
 
         _GT(typeof(UnityEngine.UI.Button.ButtonClickedEvent)),
+
+        _GT(typeof(TimeUtil)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

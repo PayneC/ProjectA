@@ -99,21 +99,21 @@ static internal class MyMenuOptions
 
     // Graphic elements
 
-    [MenuItem("GameObject/MyUI/UIText", false, 2000)]
+    [MenuItem("UGUIEx/TextEx", false, 2000)]
     static public void AddText(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateText(GetStandardResources());
         PlaceUIElementRoot(go, menuCommand);
     }
 
-    [MenuItem("GameObject/MyUI/UISprite", false, 2001)]
+    [MenuItem("UGUIEx/ImageEx", false, 2001)]
     static public void AddImage(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateImage(GetStandardResources());
         PlaceUIElementRoot(go, menuCommand);
     }
 
-    [MenuItem("GameObject/MyUI/UITexture", false, 2002)]
+    [MenuItem("UGUIEx/RawImageEx", false, 2002)]
     static public void AddRawImage(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateRawImage(GetStandardResources());
@@ -124,14 +124,14 @@ static internal class MyMenuOptions
 
     // Button and toggle are controls you just click on.
 
-    [MenuItem("GameObject/MyUI/UIButton", false, 2030)]
+    [MenuItem("UGUIEx/ButtonEx", false, 2030)]
     static public void AddButton(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateButton(GetStandardResources());
         PlaceUIElementRoot(go, menuCommand);
     }
 
-    [MenuItem("GameObject/MyUI/UIToggle", false, 2031)]
+    [MenuItem("UGUIEx/Toggle", false, 2031)]
     static public void AddToggle(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateToggle(GetStandardResources());
@@ -140,14 +140,14 @@ static internal class MyMenuOptions
 
     // Slider and Scrollbar modify a number
 
-    [MenuItem("GameObject/MyUI/UISlider", false, 2033)]
+    [MenuItem("UGUIEx/Slider", false, 2033)]
     static public void AddSlider(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateSlider(GetStandardResources());
         PlaceUIElementRoot(go, menuCommand);
     }
 
-    [MenuItem("GameObject/MyUI/UIScrollbar", false, 2034)]
+    [MenuItem("UGUIEx/Scrollbar", false, 2034)]
     static public void AddScrollbar(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateScrollbar(GetStandardResources());
@@ -156,14 +156,14 @@ static internal class MyMenuOptions
 
     // More advanced controls below
 
-    [MenuItem("GameObject/MyUI/UIDropdown", false, 2035)]
+    [MenuItem("UGUIEx/Dropdown", false, 2035)]
     static public void AddDropdown(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateDropdown(GetStandardResources());
         PlaceUIElementRoot(go, menuCommand);
     }
 
-    [MenuItem("GameObject/MyUI/UIInputField", false, 2036)]
+    [MenuItem("UGUIEx/InputField", false, 2036)]
     public static void AddInputField(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateInputField(GetStandardResources());
@@ -172,7 +172,7 @@ static internal class MyMenuOptions
 
     // Containers
 
-    [MenuItem("GameObject/MyUI/UICanvas", false, 2060)]
+    [MenuItem("UGUIEx/Canvas", false, 2060)]
     static public void AddCanvas(MenuCommand menuCommand)
     {
         var go = CreateNewUI();
@@ -188,7 +188,7 @@ static internal class MyMenuOptions
         Selection.activeGameObject = go;
     }
 
-    [MenuItem("GameObject/MyUI/UIPanel", false, 2061)]
+    [MenuItem("UGUIEx/Panel", false, 2061)]
     static public void AddPanel(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreatePanel(GetStandardResources());
@@ -200,7 +200,7 @@ static internal class MyMenuOptions
         rect.sizeDelta = Vector2.zero;
     }
 
-    [MenuItem("GameObject/MyUI/UIScrollView", false, 2062)]
+    [MenuItem("UGUIEx/ScrollView", false, 2062)]
     static public void AddScrollView(MenuCommand menuCommand)
     {
         GameObject go = MyDefaultControls.CreateScrollView(GetStandardResources());
@@ -225,7 +225,7 @@ static internal class MyMenuOptions
         return root;
     }
 
-    [MenuItem("GameObject/MyUI/UIEventSystem", false, 2100)]
+    [MenuItem("UGUIEx/EventSystem", false, 2100)]
     public static void CreateEventSystem(MenuCommand menuCommand)
     {
         GameObject parent = menuCommand.context as GameObject;

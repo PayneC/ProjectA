@@ -6,8 +6,8 @@ local uimgr = require('base/ui_mgr')
 local _M = class()
 
 function _M:OnEnter(levelID, parameter)
-	lvmgr.SetLoading(1, 0.2, true)	
 	uimgr.SetDefaultUI(cf_ui.login)
+	lvmgr.SetLoading(1, 1, true)	
 end
 
 function _M:OnExit()

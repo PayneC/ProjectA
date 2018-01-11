@@ -16,10 +16,18 @@ public class UILoading : MonoBehaviour
     private float _currentProgress;
 
     private string _format = "{0:p0}";
-	
+
+    private bool _isFirst = true;
+
 	// Update is called once per frame
 	void Update ()
     {
+        if (_isFirst)
+        {
+            _isFirst = false;
+            return;
+        }            
+
         if(_time > 0)
         {
             float _speed = (_progress - _currentProgress) / _time;

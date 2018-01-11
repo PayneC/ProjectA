@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PersistenceUtil : MonoBehaviour {
-
+public class PersistenceUtil : MonoBehaviour
+{
 	// Use this for initialization
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+	{
+	    
+    }
 }

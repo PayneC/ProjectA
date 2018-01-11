@@ -8,6 +8,7 @@ local lvmgr = require('base/lv_mgr')
 
 local debug = require('base/debug')
 local events = require('base/events')
+local prefsistence = require('base/prefsistence')
 
 local _models = {
 	require('models/m_build'),
@@ -25,7 +26,7 @@ local _controls = {
 
 local _controlCount = #_controls
 
-function Main(parameter)
+function Main(parameter)	
 	UpdateBeat:Add(Update, self)
 	
 	local model
@@ -49,9 +50,18 @@ function Update(dt)
 		end
 	end
 	
+	local model
+	for i = 0, _modelCount, 1 do
+		model = _models[i]
+		if model and model.SaveData then
+			model.SaveData()
+		end
+	end
+	
 	uimgr.Update(dt)
 	lvmgr.Update(dt)
 	events.Update(dt)
+	prefsistence.Update(dt)
 end
 
 function OnApplicationQuit()
