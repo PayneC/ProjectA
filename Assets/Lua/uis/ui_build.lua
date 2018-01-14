@@ -23,14 +23,14 @@ local function NewItem(_ui)
 	local gameObject = goUtil.Instantiate(_ui.rt_item)
 	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
 	local txt_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_num')
-	local sli_time_Slider = goUtil.GetComponent(gameObject, typeof(UnityEngine.UI.Slider), 'sli_time')
+	local spr_time_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_time')
 	
 	local _item = {
 		DID = 0,
 		gameObject = gameObject,
 		spr_icon_ImageEx = spr_icon_ImageEx,
 		txt_num_TextEx = txt_num_TextEx,
-		sli_time_Slider = sli_time_Slider,
+		spr_time_ImageEx = spr_time_ImageEx,
 	}
 	
 	function _item:SetData(DID)
@@ -47,7 +47,7 @@ local function NewItem(_ui)
 	function _item:RefreshData()		
 		local count = m_item.GetItemCount(self.DID)
 		local storage = m_item.GetItemStorage(self.DID)
-		self.txt_num_TextEx.text = string.format('%d/%d', count, storage)
+		self.txt_num_TextEx.text = string.format('%d', count)
 		local p = 1
 		if storage > 0 then
 			p = count / storage
@@ -56,7 +56,7 @@ local function NewItem(_ui)
 			p = 1
 		end
 		
-		self.sli_time_Slider.value = p
+		self.spr_time_ImageEx.fillAmount = p
 	end
 	
 	function _item:OnItemChange()
@@ -183,7 +183,7 @@ function _M:OnLoaded()
 	events.AddListener(eventType.BuildLVChange, self.OnBuildLVChange, self)
 	
 	self.rt_item = goUtil.FindChild(self.gameObject, 'rt_item')
-	self.scr_items_content = goUtil.FindChild(self.gameObject, 'scr_items/Viewport/Content')
+	self.scr_items_content = goUtil.FindChild(self.gameObject, 'rt_items')
 	
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
