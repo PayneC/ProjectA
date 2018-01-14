@@ -2,6 +2,7 @@ local cf_ui = require('configs/cf_ui')
 local cf_build = require('configs/cf_build')
 local cf_item = require('configs/cf_item')
 local cf_formula = require('configs/cf_formula')
+local cf_weapon = require('configs/cf_weapon')
 
 local m_item = require('models/m_item')
 local m_build = require('models/m_build')
@@ -16,7 +17,7 @@ local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
 local events = require('base/events')
 local define = require('commons/define')
-local event = define.event
+local eventType = require('commons/event_type')
 
 local uibase = require('uis/ui_base')
 
@@ -57,7 +58,7 @@ local function NewWorkbench(_ui)
 			self.timeCost = cf_formula.GetData(self.formulaID, cf_formula.timeCost)
 			local itemID = cf_formula.GetData(self.formulaID, cf_formula.itemID)
 			
-			local icon = cf_item.GetData(itemID, cf_item.icon)
+			local icon = cf_weapon.GetData(itemID, cf_weapon.icon)
 			self.spr_icon_ImageEx:SetSprite('item', icon)
 		else
 			goUtil.SetActiveByComponent(self.spr_icon_ImageEx, false)
@@ -96,7 +97,7 @@ local function NewWorkbench(_ui)
 	_item.btn_work.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnWork, _item))
 	goUtil.SetParent(_item.gameObject, _ui.scr_builds_content)
 	goUtil.SetLocalScale(_item.gameObject, Vector3.one)
-
+	
 	return _item
 end
 
@@ -107,8 +108,9 @@ function _M:ctor()
 end
 
 function _M:OnLoaded()
-	events.AddListener(event.WorkbenchChange, self.OnWorkbenchChange, self)
-
+	events.AddListener(eventType.WorkbenchChange, self.OnWorkbenchChange, self)
+	events.AddListener(eventType.ItemChange, self.OnItemChange, self)
+	
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
 	
@@ -181,16 +183,28 @@ end
 function _M:ShowItems()
 	
 	local s = ''
-	local items = m_item.GetAllItem()
-
+	local items = m_item.GetAllWeapon()
+	
+	debug.LogFormat(0, debug.TableToString(items))
+	
 	local item
+	for k, v in pairs(items) do
+		item = v
+		local name = cf_weapon.GetData(item.DID, cf_weapon.name)
+		local itemCount = m_item.GetItemCount(item.DID)
+		
+		s = string.format('%s\n%s %d', s, name, itemCount)
+	end
+	
+	items = m_item.GetAllStuff()
 	for k, v in pairs(items) do
 		item = v
 		local name = cf_item.GetData(item.DID, cf_item.name)
 		local itemCount = m_item.GetItemCount(item.DID)
-
-		s = string.format( '%s\n%s %d', s, name, itemCount)
+		
+		s = string.format('%s\n%s %d', s, name, itemCount)
 	end
+	
 	self.txt_items_TextEx.text = s
 end
 

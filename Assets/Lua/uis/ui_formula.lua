@@ -1,6 +1,7 @@
 local cf_ui = require('configs/cf_ui')
 local cf_formula = require('configs/cf_formula')
 local cf_item = require('configs/cf_item')
+local cf_weapon = require('configs/cf_weapon')
 
 local c_workbench = require('controls/c_workbench')
 
@@ -66,9 +67,9 @@ local function NewFormula(_ui)
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
 			local itemID = cf_formula.GetData(self.DID, cf_formula.itemID)	
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(itemID, cf_item.icon))
+			self.spr_icon_ImageEx:SetSprite('item', cf_weapon.GetData(itemID, cf_weapon.icon))
 			
-			self.txt_name_TextEx.text = cf_item.GetData(itemID, cf_item.name)
+			self.txt_name_TextEx.text = cf_weapon.GetData(itemID, cf_weapon.name)
 			
 			self:ShowStuffs()
 		else

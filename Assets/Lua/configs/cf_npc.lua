@@ -1,5 +1,4 @@
 local debug = require('base/debug')
-local common = require('commons/common')
 
 local _M = {
 	id = 1,
@@ -9,17 +8,15 @@ local _M = {
 }
 
 local _datas = {
-	[10001] = {10001, {0}, 'npc01', 'npc_blade_girl'},
-	[10002] = {10002, {0}, 'npc02', 'skeleton_grunt'},
-	[10003] = {10003, {0}, 'npc03', 'skeleton_grunt'},
+	
 }
 
 local _index = {
-	10001, 10002, 10003
+	
 }
 
-local _datasReadOnly = common.ReadOnly(_datas)
-local _indexReadOnly = common.ReadOnly(_index)
+local _datasReadOnly = readonly(_datas)
+local _indexReadOnly = readonly(_index)
 
 function _M.GetData(_id, _type)
 	local _data = _M.GetDataEntire(_id)

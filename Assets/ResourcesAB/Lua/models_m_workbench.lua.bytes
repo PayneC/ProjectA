@@ -1,32 +1,36 @@
 local events = require('base/events')
-local prefsistence = require('base/prefsistence')
+local prefs = require('base/prefs')
 local define = require('commons/define')
-local event = define.event
+local eventType = require('commons/event_type')
 
 local _isModify = false
-local _workbenchs
+local _workbenchs = {}
 
 local _M = {}
 
 local function NewWorkbench()
-	
+	return {UID = 0, formulaID = false, startTime = 0}
 end
 
-function _M.LoadData(data)
-	_workbenchs = prefsistence.GetTable('workbench')
-	if not _workbenchs then
-		_workbenchs = {}
-		for i = 1, 3, 1 do
-			_workbenchs[i] = {UID = i, startTime = 0, formulaID = false}
-		end
-	end
+function _M.ReadData(data)
+	_workbenchs = prefs.GetTable('_workbenchs')-- or {{UID = 1, formulaID = false, startTime = 0}, {UID = 2, formulaID = false, startTime = 0}, {UID = 3, formulaID = false, startTime = 0}}
 end
 
-function _M.SaveData()
+function _M.WriteData()
 	if _isModify then
-		prefsistence.SetTable('workbench', _workbenchs)
+		prefs.SetTable('_workbenchs', _workbenchs)
 		_isModify = false
 	end
+end
+
+function _M.AddWorkbench(UID)
+	local workbench = NewWorkbench()
+	workbench.UID = UID
+	table.insert(_workbenchs, workbench)
+	
+	_isModify = true
+	events.Brocast(eventType.WorkbenchChange)
+	return workbench
 end
 
 function _M.GetWorkbench(UID)
@@ -46,7 +50,7 @@ function _M.SetWorkbench(UID, formulaID, startTime)
 			workbench.startTime = startTime
 			
 			_isModify = true
-			events.Brocast(event.WorkbenchChange)
+			events.Brocast(eventType.WorkbenchChange)
 		end
 	end
 end

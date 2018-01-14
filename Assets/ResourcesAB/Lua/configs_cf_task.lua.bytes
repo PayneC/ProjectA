@@ -1,5 +1,4 @@
 local debug = require('base/debug')
-local common = require('commons/common')
 
 local _M = {
 }
@@ -11,8 +10,8 @@ local _index = {
 	
 }
 
-local _datasReadOnly = common.ReadOnly(_datas)
-local _indexReadOnly = common.ReadOnly(_index)
+local _datasReadOnly = readonly(_datas)
+local _indexReadOnly = readonly(_index)
 
 function _M.GetData(_id, _type)
 	local _data = _M.GetDataEntire(_id)

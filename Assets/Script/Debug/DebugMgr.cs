@@ -266,7 +266,7 @@ public class DebugMgr : MonoBehaviour
 
     private void DisplayDebugMode()
     {
-        if (DrawButton("{0}\nconsole"))
+        if (DrawButton("console"))
         {
             _isDisplayConsole = !_isDisplayConsole;
             if (_isDisplayConsole)
@@ -385,6 +385,7 @@ public class DebugMgr : MonoBehaviour
     {
         MainOpenDebug();
         MainShowAccount();
+        ClearPlayerPrefs();
     }
 
     private void RightToolbar_Main(int id)
@@ -424,6 +425,14 @@ public class DebugMgr : MonoBehaviour
         if (DrawButton("更换账号"))
         {
 
+        }
+    }
+
+    private void ClearPlayerPrefs()
+    {
+        if (DrawButton("清除账号"))
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 

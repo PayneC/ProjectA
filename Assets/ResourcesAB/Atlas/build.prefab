@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tex2d: {fileID: 2800000, guid: 0d032d251e2fe104992f39905e96f788, type: 3}
   _uvs:
-  - name: icon_build_mutong
+  - name: build_mutong
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -23,7 +23,7 @@ MonoBehaviour:
       y: 0
       width: 200
       height: 200
-  - name: icon_build_pitong
+  - name: build_pitong
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -33,7 +33,7 @@ MonoBehaviour:
       y: 0
       width: 200
       height: 200
-  - name: icon_build_tietong
+  - name: build_tietong
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -43,7 +43,7 @@ MonoBehaviour:
       y: 201
       width: 200
       height: 200
-  - name: icon_build_yaotong
+  - name: build_yaotong
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}

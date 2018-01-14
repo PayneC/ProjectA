@@ -8,6 +8,11 @@ local time_mgr = require('base/time_mgr')
 
 local _M = {}
 
+function _M.NewWorkbench()
+	local UID = #m_workbench.GetAllWorkbench() + 1
+	m_workbench.AddWorkbench(UID)
+end
+
 -- @UID:控制台ID
 -- @DID：配方ID
 function _M.MakeFormula(workbenchID, formulaID)
@@ -28,8 +33,7 @@ function _M.MakeFormula(workbenchID, formulaID)
 	for i = 1, #stuffs, 1 do
 		stuff = stuffs[i]
 		local need = stuff[2]
-		local have = m_item.GetItemCount(stuff[1])
-		m_item.SetItemCount(stuff[1], have - need)
+		m_item.CutItemCount(stuff[1], need)
 	end
 	
 	m_workbench.SetWorkbench(workbenchID, formulaID, time_mgr.GetTime())

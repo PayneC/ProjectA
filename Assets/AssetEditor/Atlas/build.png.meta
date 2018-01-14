@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0d032d251e2fe104992f39905e96f788
-timeCreated: 1514814688
+timeCreated: 1515674727
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,10 @@ TextureImporter:
     21300002: icon_build_pitong
     21300004: icon_build_tietong
     21300006: icon_build_yaotong
+    21300008: build_mutong
+    21300010: build_pitong
+    21300012: build_tietong
+    21300014: build_yaotong
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -84,7 +88,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon_build_mutong
+      name: build_mutong
       rect:
         serializedVersion: 2
         x: 0
@@ -98,7 +102,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_build_pitong
+      name: build_pitong
       rect:
         serializedVersion: 2
         x: 201
@@ -112,7 +116,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_build_tietong
+      name: build_tietong
       rect:
         serializedVersion: 2
         x: 0
@@ -126,7 +130,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_build_yaotong
+      name: build_yaotong
       rect:
         serializedVersion: 2
         x: 201
