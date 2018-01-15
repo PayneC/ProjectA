@@ -9,6 +9,7 @@ local _M = {
 	formula = {uid = 8, script = 'uis/ui_formula', assetsName = 'UIFormula', depth = 40},
 	war = {uid = 9, script = 'uis/ui_war', assetsName = 'UIWar', depth = 10},
 	char = {uid = 10, script = 'uis/ui_char', assetsName = 'UIChar', depth = 20},
+	bag = {uid = 11, script = 'uis/ui_bag', assetsName = 'UIBag', depth = 40},
 }
 
 return _M

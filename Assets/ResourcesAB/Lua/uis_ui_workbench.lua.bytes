@@ -103,23 +103,17 @@ end
 
 function _M:ctor()
 	self.workbenchs = {}
-	
-	self.txt_items_UIText = false
 end
 
 function _M:OnLoaded()
 	events.AddListener(eventType.WorkbenchChange, self.OnWorkbenchChange, self)
-	events.AddListener(eventType.ItemChange, self.OnItemChange, self)
 	
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
-	
-	self.txt_items_TextEx = goUtil.GetComponent(self.gameObject, typeof(TextEx), 'txt_items')
 end
 
 function _M:OnEnable()
 	self:ShowWorkbenchs()
-	self:ShowItems()
 end
 
 function _M:Update(dt)
@@ -164,48 +158,8 @@ function _M:ShowWorkbenchs()
 	end
 end
 
-function _M:OnBuildChange()
-	self:ShowBuilds()
-end
-
-function _M:OnBuildLVChange()
-	self:ShowBuilds()
-end
-
 function _M:OnWorkbenchChange()
 	self:ShowWorkbenchs()
-end
-
-function _M:OnItemChange()
-	self:ShowItems()
-end
-
-function _M:ShowItems()
-	
-	local s = ''
-	local items = m_item.GetAllWeapon()
-	
-	debug.LogFormat(0, debug.TableToString(items))
-	
-	local item
-	for k, v in pairs(items) do
-		item = v
-		local name = cf_weapon.GetData(item.DID, cf_weapon.name)
-		local itemCount = m_item.GetItemCount(item.DID)
-		
-		s = string.format('%s\n%s %d', s, name, itemCount)
-	end
-	
-	items = m_item.GetAllStuff()
-	for k, v in pairs(items) do
-		item = v
-		local name = cf_item.GetData(item.DID, cf_item.name)
-		local itemCount = m_item.GetItemCount(item.DID)
-		
-		s = string.format('%s\n%s %d', s, name, itemCount)
-	end
-	
-	self.txt_items_TextEx.text = s
 end
 
 return _M 

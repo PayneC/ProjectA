@@ -33,6 +33,16 @@ MonoBehaviour:
       y: 108
       width: 374
       height: 293
+  - name: 04265
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 624
+      y: 3
+      width: 88
+      height: 88
   - name: 04272
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -53,6 +63,46 @@ MonoBehaviour:
       y: 578
       width: 142
       height: 139
+  - name: 04574
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 709
+      y: 718
+      width: 112
+      height: 112
+  - name: 04579
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 408
+      y: 55
+      width: 46
+      height: 46
+  - name: 04584
+    alignment: 0
+    border: {x: 53, y: 54, z: 51, w: 53}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 709
+      y: 831
+      width: 106
+      height: 109
+  - name: 04586
+    alignment: 0
+    border: {x: 45, y: 45, z: 45, w: 45}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 531
+      y: 3
+      width: 92
+      height: 92
   - name: 04590
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -60,7 +110,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 408
-      y: 90
+      y: 25
       width: 50
       height: 14
   - name: 04591
@@ -69,8 +119,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 459
-      y: 90
+      x: 408
+      y: 40
       width: 50
       height: 14
   - name: 04777
@@ -83,16 +133,16 @@ MonoBehaviour:
       y: 3
       width: 407
       height: 104
-  - name: 05015
+  - name: 04821
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 36, y: 0, z: 36, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 709
-      y: 718
-      width: 112
-      height: 113
+      x: 513
+      y: 0
+      width: 74
+      height: 2
   - name: 05028
     alignment: 0
     border: {x: 60, y: 0, z: 59, w: 0}
@@ -100,7 +150,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 408
-      y: 68
+      y: 3
       width: 122
       height: 21
   - name: 05046
@@ -113,16 +163,6 @@ MonoBehaviour:
       y: 783
       width: 148
       height: 148
-  - name: 05421
-    alignment: 0
-    border: {x: 71, y: 32, z: 68, w: 31}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 408
-      y: 3
-      width: 140
-      height: 64
   - name: 05457
     alignment: 0
     border: {x: 274, y: 271, z: 54, w: 272}
@@ -149,8 +189,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 650
-      y: 68
+      x: 459
+      y: 25
       width: 20
       height: 20
   - name: bg_window
@@ -169,20 +209,10 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 531
-      y: 68
+      x: 480
+      y: 25
       width: 16
       height: 16
-  - name: btn_close
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 549
-      y: 3
-      width: 100
-      height: 100
   - name: btn_gongneng
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,16 +223,6 @@ MonoBehaviour:
       y: 108
       width: 309
       height: 107
-  - name: kuang
-    alignment: 0
-    border: {x: 30, y: 30, z: 30, w: 30}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 650
-      y: 3
-      width: 64
-      height: 64
   - name: kuang02
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,8 +279,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 510
-      y: 90
+      x: 497
+      y: 25
       width: 16
       height: 16
   - name: sli_g
@@ -269,8 +289,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 527
-      y: 90
+      x: 514
+      y: 25
       width: 16
       height: 16
   - name: sli_r
@@ -279,7 +299,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 650
-      y: 89
+      x: 459
+      y: 46
       width: 16
       height: 16

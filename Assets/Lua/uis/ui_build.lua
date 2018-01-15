@@ -77,7 +77,6 @@ local function NewBuild(_ui)
 	
 	local spr_item_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_icon')
 	local spr_item_p_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_p')
-	local txt_item_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_name')
 	local txt_item_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_num')
 	
 	local spr_item_icon_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'spr_item_icon')
@@ -98,7 +97,6 @@ local function NewBuild(_ui)
 		txt_lv_TextEx = txt_lv_TextEx,
 		spr_item_icon_ImageEx = spr_item_icon_ImageEx,
 		spr_item_p_ImageEx = spr_item_p_ImageEx,
-		txt_item_name_TextEx = txt_item_name_TextEx,
 		txt_item_num_TextEx = txt_item_num_TextEx,
 		spr_item_icon_ButtonEx = spr_item_icon_ButtonEx,
 		btn_uplv_ButtonEx = btn_uplv_ButtonEx,
@@ -114,15 +112,14 @@ local function NewBuild(_ui)
 			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
 			self.txt_name_TextEx.text = cf_build.GetData(self.DID, cf_build.name)	
 			self.spr_icon_ImageEx:SetSprite('build', cf_build.GetData(self.DID, cf_build.icon))
-			local name = cf_item.GetData(itemID, cf_item.name)
-			self.txt_item_name_TextEx.text = string.format('%sx%d', name, build.count)
+			
 			self.spr_item_icon_ImageEx:SetSprite('item', cf_item.GetData(itemID, cf_item.icon))
 			self.spr_item_p_ImageEx:SetSprite('item', cf_item.GetData(itemID, cf_item.icon))
 			
 			local lv = cf_build.GetData(self.DID, cf_build.LV)	
-			local speed = cf_build.GetData(self.DID, cf_build.speed)
+			--local speed = cf_build.GetData(self.DID, cf_build.speed)
 			self.txt_lv_TextEx.text = string.format('LV.%d', lv)
-			self.txt_item_num_TextEx.text = string.format('%d/小时', speed)
+			self.txt_item_num_TextEx.text = string.format('%d', build.count)
 			
 			
 			

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8fbed3781433942418785184a6b60fa1
-timeCreated: 1515937465
+timeCreated: 1516007493
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -39,6 +39,13 @@ TextureImporter:
     21300064: 04590
     21300066: 04591
     21300068: 05028
+    21300070: 04586
+    21300072: 04821
+    21300074: 04836
+    21300076: 04579
+    21300078: 04574
+    21300080: 04584
+    21300082: 04265
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -143,6 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: 04265
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 3
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: 04272
       rect:
         serializedVersion: 2
@@ -171,11 +192,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: 04574
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 718
+        width: 112
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: 04579
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 55
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: 04584
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 831
+        width: 106
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 53, y: 54, z: 51, w: 53}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: 04586
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 3
+        width: 92
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 45, y: 45, z: 45, w: 45}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: 04590
       rect:
         serializedVersion: 2
         x: 408
-        y: 90
+        y: 25
         width: 50
         height: 14
       alignment: 0
@@ -188,8 +265,8 @@ TextureImporter:
       name: 04591
       rect:
         serializedVersion: 2
-        x: 459
-        y: 90
+        x: 408
+        y: 40
         width: 50
         height: 14
       alignment: 0
@@ -213,16 +290,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: 05015
+      name: 04821
       rect:
         serializedVersion: 2
-        x: 709
-        y: 718
-        width: 112
-        height: 113
+        x: 513
+        y: 0
+        width: 74
+        height: 2
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 36, y: 0, z: 36, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -231,7 +308,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 408
-        y: 68
+        y: 3
         width: 122
         height: 21
       alignment: 0
@@ -251,20 +328,6 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 73, y: 72, z: 72, w: 72}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: 05421
-      rect:
-        serializedVersion: 2
-        x: 408
-        y: 3
-        width: 140
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 71, y: 32, z: 68, w: 31}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -300,8 +363,8 @@ TextureImporter:
       name: bg_entity
       rect:
         serializedVersion: 2
-        x: 650
-        y: 68
+        x: 459
+        y: 25
         width: 20
         height: 20
       alignment: 0
@@ -328,27 +391,13 @@ TextureImporter:
       name: btn_cao
       rect:
         serializedVersion: 2
-        x: 531
-        y: 68
+        x: 480
+        y: 25
         width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 7, y: 7, z: 7, w: 7}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: btn_close
-      rect:
-        serializedVersion: 2
-        x: 549
-        y: 3
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -363,20 +412,6 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: kuang
-      rect:
-        serializedVersion: 2
-        x: 650
-        y: 3
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 30, y: 30, z: 30, w: 30}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -454,8 +489,8 @@ TextureImporter:
       name: sli_b
       rect:
         serializedVersion: 2
-        x: 510
-        y: 90
+        x: 497
+        y: 25
         width: 16
         height: 16
       alignment: 0
@@ -468,8 +503,8 @@ TextureImporter:
       name: sli_g
       rect:
         serializedVersion: 2
-        x: 527
-        y: 90
+        x: 514
+        y: 25
         width: 16
         height: 16
       alignment: 0
@@ -482,8 +517,8 @@ TextureImporter:
       name: sli_r
       rect:
         serializedVersion: 2
-        x: 650
-        y: 89
+        x: 459
+        y: 46
         width: 16
         height: 16
       alignment: 0
