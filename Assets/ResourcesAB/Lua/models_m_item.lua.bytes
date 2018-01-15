@@ -7,6 +7,7 @@ local debug = require('base/debug')
 
 local _isModify = false
 
+local _items = {}
 local _stuffs = {}
 local _specialStuffs = {}
 local _weapons = {}
@@ -72,6 +73,13 @@ function _M.GetItem(DID, newMiss)
 				item = NewStuff()
 				item.DID = DID
 				table.insert(_specialStuffs, item)
+			end
+		elseif type2 == 100 then
+			item = FindItem(DID, _items)
+			if not item and newMiss then
+				item = NewStuff()
+				item.DID = DID
+				table.insert(_items, item)
 			end
 		end
 	elseif type1 == constant.Item_Weapon then

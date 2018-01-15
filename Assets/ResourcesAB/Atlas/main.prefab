@@ -70,7 +70,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 709
-      y: 718
+      y: 832
       width: 112
       height: 112
   - name: 04579
@@ -89,8 +89,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 709
-      y: 831
+      x: 822
+      y: 718
       width: 106
       height: 109
   - name: 04586
@@ -143,6 +143,16 @@ MonoBehaviour:
       y: 0
       width: 74
       height: 2
+  - name: 05015
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 709
+      y: 718
+      width: 112
+      height: 113
   - name: 05028
     alignment: 0
     border: {x: 60, y: 0, z: 59, w: 0}

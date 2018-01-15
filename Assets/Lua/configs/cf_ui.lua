@@ -1,6 +1,6 @@
 local _M = {
 	main = {uid = 1, script = 'uis/ui_main', assetsName = 'UIMain', depth = 5},
-	menu = {uid = 2, script = 'uis/ui_menu', assetsName = 'UIMenu', depth = 30},
+	menu = {uid = 2, script = 'uis/ui_menu', assetsName = 'UIMenu', depth = 5},
 	map = {uid = 3, script = 'uis/ui_map', assetsName = 'UIMap', depth = 30},
 	input = {uid = 4, script = 'uis/ui_input', assetsName = 'UIInput', depth = 10},
 	login = {uid = 5, script = 'uis/ui_login', assetsName = 'UILogin', depth = 10},
@@ -10,6 +10,7 @@ local _M = {
 	war = {uid = 9, script = 'uis/ui_war', assetsName = 'UIWar', depth = 10},
 	char = {uid = 10, script = 'uis/ui_char', assetsName = 'UIChar', depth = 20},
 	bag = {uid = 11, script = 'uis/ui_bag', assetsName = 'UIBag', depth = 40},
+	task = {uid = 12, script = 'uis/ui_task', assetsName = 'UITask', depth = 10},
 }
 
 return _M

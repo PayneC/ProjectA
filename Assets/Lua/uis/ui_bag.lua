@@ -36,11 +36,17 @@ local function NewItem(_ui)
 	function _item:SetData(DID)
 		self.DID = DID	
 		if self.DID then
-			goUtil.SetActive(self.gameObject, true)
 			self.spr_icon_ImageEx:SetSprite('item', cf_weapon.GetData(self.DID, cf_weapon.icon))
 			self.txt_name_TextEx.text = cf_weapon.GetData(self.DID, cf_weapon.name)
 			local count = m_item.GetItemCount(self.DID)
+			
 			self.txt_num_TextEx.text = string.format('X%d', count)
+			
+			if count > 0 then
+				goUtil.SetActive(self.gameObject, true)
+			else
+				goUtil.SetActive(self.gameObject, false)
+			end
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end

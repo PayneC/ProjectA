@@ -4,6 +4,7 @@ local _M = {
 	WorkbenchChange = 3,
 	ItemChange = 4,
 	StuffChange = 5,
+	TaskChange = 6,
 }
 
 return _M 

@@ -233,7 +233,7 @@ end
 
 function _M:ShowItems()
 	local stuffs = m_item.GetAllStuff()
-	debug.LogFormat(0, debug.TableToString(stuffs))
+	--debug.LogFormat(0, debug.TableToString(stuffs))
 	local count = #stuffs
 	local hasNum = #self.items
 	

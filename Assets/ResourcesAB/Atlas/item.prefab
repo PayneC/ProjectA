@@ -13,6 +13,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tex2d: {fileID: 2800000, guid: b509c4799521cc14d9d82c4f450f5be9, type: 3}
   _uvs:
+  - name: icon_jinbi
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 612
+      y: 182
+      width: 96
+      height: 96
+  - name: icon_xin
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 612
+      y: 279
+      width: 96
+      height: 96
+  - name: icon_zuanshi
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 612
+      y: 376
+      width: 96
+      height: 96
   - name: item_246-1
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}

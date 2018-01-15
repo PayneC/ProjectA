@@ -9,6 +9,10 @@ function _M:ctor()
 	self.btn_yingxiong = nil	
 	self.btn_jiaju = nil
 	self.btn_jiagong = nil
+	
+	self.btn_head_ButtonEx = nil
+	
+	self.btn_main_ButtonEx = nil
 end
 
 function _M:OnLoaded()
@@ -20,6 +24,12 @@ function _M:OnLoaded()
 	
 	self.btn_yingxiong = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_yingxiong')
 	self.btn_yingxiong.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnYingXiong, self))
+	
+	self.btn_head_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_head')	
+	self.btn_head_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnHead, self))
+	
+	self.btn_main_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_main')	
+	self.btn_main_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnTask, self))
 end
 
 function _M:OnEnable()
@@ -50,6 +60,14 @@ end
 
 function _M:OnYingXiong()
 	uimgr.OpenUI(cf_ui.war)
+end
+
+function _M:OnHead()
+	uimgr.OpenSubUI(cf_ui.bag)
+end
+
+function _M.OnTask()
+	uimgr.OpenUI(cf_ui.task)
 end
 
 return _M

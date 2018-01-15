@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b509c4799521cc14d9d82c4f450f5be9
-timeCreated: 1515923498
+timeCreated: 1516018737
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -40,6 +40,9 @@ TextureImporter:
     21300066: item_382-1
     21300068: item_383-1
     21300070: item_384-1
+    21300072: icon_jinbi
+    21300074: icon_xin
+    21300076: icon_zuanshi
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -115,6 +118,48 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites:
+    - serializedVersion: 2
+      name: icon_jinbi
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 182
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_xin
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 279
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_zuanshi
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 376
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
     - serializedVersion: 2
       name: item_246-1
       rect:
