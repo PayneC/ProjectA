@@ -34,11 +34,11 @@ public class PathUtil : Singleton<PathUtil>
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            platform = "IOS";
+            platform = "iOS";
         }
         else if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
         {
-            platform = "OSX";
+			platform = "StandaloneOSXUniversal";
         }
         return platform;
     }
