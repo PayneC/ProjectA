@@ -335,6 +335,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\CSVToLua.cs" />
     <Compile Include="Assets\Editor\Custom\CustomSettings.cs" />
     <Compile Include="Assets\Editor\DefaultPackerPolicySample.cs" />
     <Compile Include="Assets\Editor\FindReferenceTools.cs" />
