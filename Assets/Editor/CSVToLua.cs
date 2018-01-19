@@ -18,28 +18,29 @@ public class CSVToLua : EditorWindow
 
     void OnGUI()
     {
+        path = GUILayout.TextField(path);
+
         if (GUILayout.Button("ToLua"))
         {
-            ReadCSV("E:\\GitHub/PAConfig/csv/cf_build.csv");
+            ReadCSV(path);
         }
     }
+
+    static private string path = "E:\\GitHub/PAConfig/csv/cf_build.csv";
 
     static private string sFormat =
         @"local debug = require('base/debug')
 
 local _M = {{
-	id = 1,
-	itemID = 2,
-	stuff = 3,
-	timeCost = 4,
+{0}	
 }}
 
 local _datas = {{
-	{0}
+{1}
 }}
 
 local _index = {{
-	{1}
+    {2}
 }}
 
 local _datasReadOnly = readonly(_datas)
@@ -58,7 +59,7 @@ function _M.GetDataEntire(_id)
 	if _data then
 		return _data
 	end
-	debug.LogErrorFormat('cf_bulid not find data ' .. _id)
+	debug.LogErrorFormat('{3} not find data ' .. _id)
 	return nil
 end
 
@@ -70,16 +71,16 @@ function _M.GetAllIndex()
 	return _index
 end
 
-return _M 
-";
+return _M";
 
     void ReadCSV(string filePath)
     {
-        Encoding encoding = Encoding.ASCII;
+        Encoding encoding = Encoding.GetEncoding("gb2312");
         FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
         StreamReader sr = new StreamReader(fs, encoding);
 
+        StringBuilder sbHeader = new StringBuilder();
         StringBuilder sbAll = new StringBuilder();
         StringBuilder sb = new StringBuilder();
         StringBuilder sbIDS = new StringBuilder();
@@ -87,7 +88,7 @@ return _M
 
         string sLine = "";
         string[] sFields = null;
-        
+
         string[] sTitle = null;
         string[] sVariable = null;
         string[] sType = null;
@@ -107,35 +108,54 @@ return _M
         sLine = sr.ReadLine();
         sDescription = sLine.Split(',');
 
+        string sf = "\t{0} = {1}, -- {2}\n";
+        for (int i = 0; i < sVariable.Length; ++i)
+        {
+            sbHeader.AppendFormat(sf, sVariable[i], i, sTitle[i]);
+        }
+
         sLine = sr.ReadLine();
         while (sLine != null)
         {
+            byte[] bLine = encoding.GetBytes(sLine);
+            bLine = Encoding.Convert(encoding, Encoding.UTF8, bLine);
+            sLine = Encoding.UTF8.GetString(bLine);
+
             sFields = sLine.Split(',');
-            sbLine.Append("[");
+            sbLine.Append("\t[");
             sbLine.Append(sFields[0]);
-            sbLine.Append("] = {");            
+            sbLine.Append("] = {");
             for (int i = 0; i < sFields.Length; ++i)
             {
-                if (sType[i] == "string")
+                if (string.IsNullOrEmpty(sFields[i]))
                 {
-                    sbLine.Append("'");
-                    sbLine.Append(sFields[i]);
-                    sbLine.Append("'");
-                }
-                else if (sType[i] == "table")
-                {
-                    sbLine.Append("{");
-                    sbLine.Append(sFields[i]);
-                    sbLine.Append("}");
+                    sbLine.Append("false");
                 }
                 else
                 {
-                    sbLine.Append(sFields[i]);
+                    if (sType[i] == "string")
+                    {
+                        sbLine.Append("'");
+                        sbLine.Append(sFields[i]);
+                        sbLine.Append("'");
+                    }
+                    else if (sType[i] == "table")
+                    {
+                        string s = sFields[i].Replace("|", ", ");
+
+                        sbLine.Append("{");
+                        sbLine.Append(s);
+                        sbLine.Append("}");
+                    }
+                    else
+                    {
+                        sbLine.Append(sFields[i]);
+                    }
                 }
-            
+
                 if (i < sFields.Length - 1)
                 {
-                    sbLine.Append(",");
+                    sbLine.Append(", ");
                 }
             }
             sbLine.Append("},");
@@ -144,20 +164,27 @@ return _M
             sbLine.Clear();
 
             sbIDS.Append(sFields[0]);
-            sbIDS.Append(",");
+            sbIDS.Append(", ");
 
             sLine = sr.ReadLine();
         }
 
         fs.Close();
 
-        string outPath = Path.ChangeExtension(filePath, "lua"); 
-        FileStream wfs = new FileStream(outPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-        string all = sbAll.AppendFormat(sFormat, sb.ToString(), sbIDS.ToString()).ToString();
-        byte[] allB = System.Text.Encoding.ASCII.GetBytes(all);
-        allB = System.Text.Encoding.Convert(Encoding.ASCII, Encoding.UTF8, allB);
-        wfs.Write(allB, 0, allB.Length);
+        string outPath = Path.ChangeExtension(filePath, "lua");
+        string fileName = Path.GetFileNameWithoutExtension(filePath);
+        FileStream wfs;
+        wfs = new FileStream(outPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 
+        string all = sbAll.AppendFormat(sFormat, sbHeader.ToString(), sb.ToString(), sbIDS.ToString(), fileName).ToString();
+        byte[] allB = System.Text.Encoding.UTF8.GetBytes(all);
+        //allB = System.Text.Encoding.Convert(Encoding.ASCII, Encoding.UTF8, allB);
+
+        wfs.Position = 0;
+        wfs.SetLength(0);
+
+        wfs.Write(allB, 0, allB.Length);
+        wfs.Flush();
         sb.Clear();
         sbIDS.Clear();
         sbAll.Clear();
