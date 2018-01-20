@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 7e1db3741aadf164eafeaa034370f5b7
-timeCreated: 1515580666
+timeCreated: 1516449645
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: char_fashi
     21300002: char_zhanshi
+    21300004: icon_npc
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -103,6 +104,20 @@ TextureImporter:
         y: 257
         width: 256
         height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_npc
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 0
+        width: 211
+        height: 231
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

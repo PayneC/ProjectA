@@ -11,7 +11,7 @@ function _M:ctor()
 	self.btn_jiagong = nil
 	
 	self.btn_head_ButtonEx = nil
-	
+	self.btn_bag_ButtonEx = nil
 	self.btn_main_ButtonEx = nil
 end
 
@@ -25,8 +25,14 @@ function _M:OnLoaded()
 	self.btn_yingxiong = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_yingxiong')
 	self.btn_yingxiong.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnYingXiong, self))
 	
-	self.btn_head_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_head')	
-	self.btn_head_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnHead, self))
+	--self.btn_head_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_head')	
+	--self.btn_head_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnHead, self))
+	
+	self.btn_bag_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_bag')	
+	self.btn_bag_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnBag, self))
+	
+	self.btn_hero_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_hero')	
+	self.btn_hero_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnHero, self))
 	
 	self.btn_main_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_main')	
 	self.btn_main_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnTask, self))
@@ -63,7 +69,15 @@ function _M:OnYingXiong()
 end
 
 function _M:OnHead()
+	
+end
+
+function _M:OnBag()
 	uimgr.OpenSubUI(cf_ui.bag)
+end
+
+function _M:OnHero()
+	uimgr.OpenSubUI(cf_ui.char)
 end
 
 function _M.OnTask()

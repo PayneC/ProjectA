@@ -6,12 +6,11 @@ local goUtil = require('base/goutil')
 local _M = class(uibase)
 
 function _M:ctor()
-	self.btn_char = nil	
+	
 end
 
 function _M:OnLoaded()
-	self.btn_char = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_char')
-	self.btn_char.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnChar, self))
+	
 end
 
 function _M:OnEnable()
@@ -31,7 +30,7 @@ function _M:OnDestroy()
 end
 
 function _M:OnChar()
-    uimgr.OpenSubUI(cf_ui.char)
+	
 end
 
 return _M 

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8fbed3781433942418785184a6b60fa1
-timeCreated: 1516018746
+timeCreated: 1516451216
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -46,6 +46,20 @@ TextureImporter:
     21300078: 04574
     21300080: 04584
     21300082: 04265
+    21300084: 03816
+    21300086: btn_add
+    21300088: board_01
+    21300090: board_02
+    21300092: board_04
+    21300094: btn_jiahao
+    21300096: icon_cash
+    21300098: icon_chengjiu
+    21300100: icon_coin
+    21300102: icon_lv
+    21300104: icon_shezhi
+    21300106: btn_01
+    21300108: board_03
+    21300110: board_npc
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -122,11 +136,25 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: 03816
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 559
+        width: 118
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: 03885
       rect:
         serializedVersion: 2
-        x: 375
-        y: 578
+        x: 603
+        y: 306
         width: 204
         height: 204
       alignment: 0
@@ -139,8 +167,8 @@ TextureImporter:
       name: 04168
       rect:
         serializedVersion: 2
-        x: 0
-        y: 108
+        x: 534
+        y: 0
         width: 374
         height: 293
       alignment: 0
@@ -153,10 +181,10 @@ TextureImporter:
       name: 04265
       rect:
         serializedVersion: 2
-        x: 624
-        y: 3
-        width: 88
-        height: 88
+        x: 679
+        y: 684
+        width: 145
+        height: 145
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +195,8 @@ TextureImporter:
       name: 04272
       rect:
         serializedVersion: 2
-        x: 698
-        y: 216
+        x: 338
+        y: 306
         width: 264
         height: 252
       alignment: 0
@@ -181,8 +209,8 @@ TextureImporter:
       name: 04495
       rect:
         serializedVersion: 2
-        x: 580
-        y: 578
+        x: 679
+        y: 830
         width: 142
         height: 139
       alignment: 0
@@ -195,8 +223,8 @@ TextureImporter:
       name: 04574
       rect:
         serializedVersion: 2
-        x: 709
-        y: 832
+        x: 909
+        y: 114
         width: 112
         height: 112
       alignment: 0
@@ -209,8 +237,8 @@ TextureImporter:
       name: 04579
       rect:
         serializedVersion: 2
-        x: 408
-        y: 55
+        x: 123
+        y: 972
         width: 46
         height: 46
       alignment: 0
@@ -223,8 +251,8 @@ TextureImporter:
       name: 04584
       rect:
         serializedVersion: 2
-        x: 822
-        y: 718
+        x: 806
+        y: 559
         width: 106
         height: 109
       alignment: 0
@@ -237,10 +265,10 @@ TextureImporter:
       name: 04586
       rect:
         serializedVersion: 2
-        x: 531
-        y: 3
-        width: 92
-        height: 92
+        x: 0
+        y: 0
+        width: 533
+        height: 302
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 45, y: 45, z: 45, w: 45}
@@ -251,8 +279,8 @@ TextureImporter:
       name: 04590
       rect:
         serializedVersion: 2
-        x: 408
-        y: 25
+        x: 0
+        y: 994
         width: 50
         height: 14
       alignment: 0
@@ -265,24 +293,10 @@ TextureImporter:
       name: 04591
       rect:
         serializedVersion: 2
-        x: 408
-        y: 40
+        x: 0
+        y: 1009
         width: 50
         height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: 04777
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 3
-        width: 407
-        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -293,8 +307,8 @@ TextureImporter:
       name: 04821
       rect:
         serializedVersion: 2
-        x: 513
-        y: 0
+        x: 534
+        y: 294
         width: 74
         height: 2
       alignment: 0
@@ -307,8 +321,8 @@ TextureImporter:
       name: 05015
       rect:
         serializedVersion: 2
-        x: 709
-        y: 718
+        x: 909
+        y: 0
         width: 112
         height: 113
       alignment: 0
@@ -321,8 +335,8 @@ TextureImporter:
       name: 05028
       rect:
         serializedVersion: 2
-        x: 408
-        y: 3
+        x: 0
+        y: 972
         width: 122
         height: 21
       alignment: 0
@@ -335,8 +349,8 @@ TextureImporter:
       name: 05046
       rect:
         serializedVersion: 2
-        x: 375
-        y: 783
+        x: 519
+        y: 840
         width: 148
         height: 148
       alignment: 0
@@ -350,7 +364,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 402
+        y: 306
         width: 337
         height: 557
       alignment: 0
@@ -364,7 +378,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 303
         width: 512
         height: 2
       alignment: 0
@@ -374,44 +388,100 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: bg_entity
+      name: board_01
       rect:
         serializedVersion: 2
-        x: 459
-        y: 25
-        width: 20
-        height: 20
+        x: 519
+        y: 559
+        width: 167
+        height: 124
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 10, y: 9, z: 10, w: 9}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: bg_window
+      name: board_02
       rect:
         serializedVersion: 2
         x: 338
-        y: 402
-        width: 20
-        height: 291
+        y: 840
+        width: 180
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 9, y: 270, z: 9, w: 19}
+      border: {x: 88, y: 38, z: 88, w: 37}
       outline: []
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: btn_cao
+      name: board_03
       rect:
         serializedVersion: 2
-        x: 480
-        y: 25
-        width: 16
-        height: 16
+        x: 909
+        y: 227
+        width: 95
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 7, z: 7, w: 7}
+      border: {x: 13, y: 0, z: 14, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: board_04
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 972
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 14, y: 0, z: 14, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: board_npc
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 559
+        width: 180
+        height: 280
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_01
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 306
+        width: 181
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: btn_add
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 487
+        width: 71
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -419,8 +489,8 @@ TextureImporter:
       name: btn_gongneng
       rect:
         serializedVersion: 2
-        x: 698
-        y: 108
+        x: 0
+        y: 864
         width: 309
         height: 107
       alignment: 0
@@ -430,13 +500,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: kuang02
+      name: btn_jiahao
       rect:
         serializedVersion: 2
-        x: 375
-        y: 108
-        width: 322
-        height: 469
+        x: 947
+        y: 487
+        width: 61
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -444,13 +514,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: menu_jiaju
+      name: icon_cash
       rect:
         serializedVersion: 2
-        x: 723
-        y: 578
-        width: 128
-        height: 128
+        x: 880
+        y: 487
+        width: 66
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -458,13 +528,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: menu_jiaoyi
+      name: icon_chengjiu
       rect:
         serializedVersion: 2
-        x: 852
-        y: 578
-        width: 128
-        height: 128
+        x: 338
+        y: 921
+        width: 95
+        height: 95
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -472,13 +542,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: menu_nongmin
+      name: icon_coin
       rect:
         serializedVersion: 2
-        x: 580
-        y: 718
-        width: 128
-        height: 128
+        x: 825
+        y: 684
+        width: 90
+        height: 89
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,13 +556,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: menu_yingxiong
+      name: icon_lv
       rect:
         serializedVersion: 2
-        x: 580
-        y: 847
-        width: 128
-        height: 128
+        x: 519
+        y: 684
+        width: 159
+        height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -500,44 +570,16 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: sli_b
+      name: icon_shezhi
       rect:
         serializedVersion: 2
-        x: 497
-        y: 25
-        width: 16
-        height: 16
+        x: 913
+        y: 559
+        width: 95
+        height: 95
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 7, z: 7, w: 7}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: sli_g
-      rect:
-        serializedVersion: 2
-        x: 514
-        y: 25
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 7, z: 7, w: 7}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: sli_r
-      rect:
-        serializedVersion: 2
-        x: 459
-        y: 46
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 7, z: 7, w: 7}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1

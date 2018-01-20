@@ -33,3 +33,13 @@ MonoBehaviour:
       y: 257
       width: 256
       height: 256
+  - name: icon_npc
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 257
+      y: 0
+      width: 211
+      height: 231
