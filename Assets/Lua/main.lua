@@ -24,7 +24,6 @@ local _controls = {
 	require('controls/c_build'),
 	require('controls/c_workbench'),
 	require('controls/c_calculate'),
-	require('controls/c_player'),
 }
 
 local _controlCount = #_controls

@@ -1,25 +1,19 @@
-local _M = {
-    HP = 0,
-    maxHP = 100,
+
+local _exp = 0
+local _expMax = 0
+local _lv = 0
+
+local _M = {}
+
+function _M.SetExp(exp)
+    if exp == _exp then
+        return 
+    end
+
+    exp = _exp or 0
     
-    taskList = {},
-}
-
-function _M.GetHP()
-    return _M.HP, _M.maxHP
+    
 end
 
-function _M.SetHP(HP, maxHP)
-    _M.HP = HP
-    _M.maxHP = maxHP
-end
-
-function _M.SetTaskList(_taskList)
-    _M.taskList = _taskList
-end
-
-function _M.SendModify()
-	
-end
 
 return _M

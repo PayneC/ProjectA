@@ -1,6 +1,6 @@
 local cf_ui = require('configs/cf_ui')
-local cf_build = require('configs/cf_build')
-local cf_item = require('configs/cf_item')
+local csv_build = require('csv/csv_build')
+local csv_item = require('csv/csv_item')
 
 local m_item = require('models/m_item')
 local m_build = require('models/m_build')
@@ -12,8 +12,8 @@ local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
 local events = require('base/events')
-local define = require('commons/define')
-local eventType = require('commons/event_type')
+
+local eventType = require('misc/event_type')
 
 local uibase = require('uis/ui_base')
 
@@ -37,7 +37,7 @@ local function NewItem(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(self.DID, cf_item.icon))
+			self.spr_icon_ImageEx:SetSprite('item', csv_item.GetData(self.DID, csv_item.icon))
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
@@ -109,15 +109,15 @@ local function NewBuild(_ui)
 		if self.UID and build then
 			self.DID = build.DID
 			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
-			self.txt_name_TextEx.text = cf_build.GetData(self.DID, cf_build.name)	
-			self.spr_icon_ImageEx:SetSprite('build', cf_build.GetData(self.DID, cf_build.icon))
+			local itemID = csv_build.GetData(self.DID, csv_build.itemID)	
+			self.txt_name_TextEx.text = csv_build.GetData(self.DID, csv_build.name)	
+			self.spr_icon_ImageEx:SetSprite('build', csv_build.GetData(self.DID, csv_build.icon))
 			
-			self.spr_item_icon_ImageEx:SetSprite('item', cf_item.GetData(itemID, cf_item.icon))
-			self.spr_item_p_ImageEx:SetSprite('item', cf_item.GetData(itemID, cf_item.icon))
+			self.spr_item_icon_ImageEx:SetSprite('item', csv_item.GetData(itemID, csv_item.icon))
+			self.spr_item_p_ImageEx:SetSprite('item', csv_item.GetData(itemID, csv_item.icon))
 			
-			local lv = cf_build.GetData(self.DID, cf_build.LV)	
-			--local speed = cf_build.GetData(self.DID, cf_build.speed)
+			local lv = csv_build.GetData(self.DID, csv_build.LV)	
+			--local speed = csv_build.GetData(self.DID, csv_build.speed)
 			self.txt_lv_TextEx.text = string.format('LV.%d', lv)
 			self.txt_item_num_TextEx.text = string.format('%d', build.count)
 			

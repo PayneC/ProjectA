@@ -1,7 +1,7 @@
 local events = require('base/events')
 local prefs = require('base/prefs')
-local eventType = require('commons/event_type')
-local constant = require('commons/constant')
+local eventType = require('misc/event_type')
+local constant = require('misc/constant')
 
 local debug = require('base/debug')
 

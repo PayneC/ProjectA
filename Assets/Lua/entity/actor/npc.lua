@@ -1,5 +1,5 @@
 local Vector3 = UnityEngine.Vector3
-local cf_npc = require('configs/cf_npc')
+local csv_npc = require('csv/csv_npc')
 local asset = require('base/asset')
 local goUtil = require('base/goutil')
 local npc_state = require('entity/actor/npc_state')
@@ -40,7 +40,7 @@ end
 
 function _M:SetUID(_uid)	
 	-- 设置UID并获取配置数据
-	local _asset = cf_npc.GetData(_uid, cf_npc.asset)
+	local _asset = csv_npc.GetData(_uid, csv_npc.asset)
 	
 	local function callback(assetEntity)
 		self.gameObject = assetEntity:GetInstantiate()

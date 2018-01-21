@@ -1,5 +1,5 @@
-local cf_build = require('configs/cf_build')
-local cf_item = require('configs/cf_item')
+local csv_build = require('csv/csv_build')
+local csv_item = require('csv/csv_item')
 
 local m_build = require('models/m_build')
 local m_item = require('models/m_item')
@@ -20,8 +20,8 @@ function _M.NewBuild(DID)
 	if build then
 		build.timePoint = time_mgr.GetTime()
 		
-		local itemID = cf_build.GetData(DID, cf_build.itemID)
-		local itemStorage = cf_build.GetData(DID, cf_build.itemStorage)
+		local itemID = csv_build.GetData(DID, csv_build.itemID)
+		local itemStorage = csv_build.GetData(DID, csv_build.itemStorage)
 		
 		local storage = m_item.GetItemStorage(itemID)
 		m_item.SetItemStorage(itemID, storage + itemStorage)
@@ -34,8 +34,8 @@ function _M.BuildUpgrade(UID)
 		return
 	end
 	
-	local oldItemStorage = cf_build.GetData(build.DID, cf_build.itemStorage)
-	local newDID = cf_build.GetData(build.DID, cf_build.nextLV)
+	local oldItemStorage = csv_build.GetData(build.DID, csv_build.itemStorage)
+	local newDID = csv_build.GetData(build.DID, csv_build.nextLV)
 	if not newDID then
 		return
 	end
@@ -44,7 +44,7 @@ function _M.BuildUpgrade(UID)
 	_M.Calculate(build, ct, true)
 	
 	local p = build.p
-	local speed = cf_build.GetData(newDID, cf_build.speed)
+	local speed = csv_build.GetData(newDID, csv_build.speed)
 	local needTime = 0
 	if speed > 0 then
 		needTime = 3600 / speed
@@ -54,7 +54,7 @@ function _M.BuildUpgrade(UID)
 	m_build.SetBuildData(build, newDID, tp)
 	
 	local itemID = build.itemID
-	local itemStorage = cf_build.GetData(newDID, cf_build.itemStorage)
+	local itemStorage = csv_build.GetData(newDID, csv_build.itemStorage)
 	
 	local storage = m_item.GetItemStorage(itemID)
 	m_item.SetItemStorage(itemID, storage + itemStorage - oldItemStorage)		

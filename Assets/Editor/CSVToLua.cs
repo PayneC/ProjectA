@@ -75,7 +75,7 @@ return _M";
 
     void ReadCSV(string filePath)
     {
-        Encoding encoding = Encoding.GetEncoding("gb2312");
+        Encoding encoding = Encoding.UTF8;
         FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
         StreamReader sr = new StreamReader(fs, encoding);
@@ -111,7 +111,7 @@ return _M";
         string sf = "\t{0} = {1}, -- {2}\n";
         for (int i = 0; i < sVariable.Length; ++i)
         {
-            sbHeader.AppendFormat(sf, sVariable[i], i, sTitle[i]);
+            sbHeader.AppendFormat(sf, sVariable[i], i + 1, sTitle[i]);
         }
 
         sLine = sr.ReadLine();

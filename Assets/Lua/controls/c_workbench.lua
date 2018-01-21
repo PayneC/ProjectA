@@ -1,4 +1,4 @@
-local cf_formula = require('configs/cf_formula')
+local csv_formula = require('csv/csv_formula')
 
 local m_workbench = require('models/m_workbench')
 local m_item = require('models/m_item')
@@ -18,7 +18,7 @@ end
 function _M.MakeFormula(workbenchID, formulaID)
 	debug.LogFormat(0, 'MakeFormula(%d, %d) time_mgr.GetTime()=%f', workbenchID, formulaID, time_mgr.GetTime())
 	--check
-	local stuffs = cf_formula.GetData(formulaID, cf_formula.stuff)
+	local stuffs = csv_formula.GetData(formulaID, csv_formula.stuff)
 	local stuff
 	for i = 1, #stuffs, 1 do
 		stuff = stuffs[i]
@@ -48,9 +48,9 @@ function _M.FinishFormula(workbenchID)
 	local startTime =(workbench and workbench.startTime) or false
 	if formulaID and startTime then
 		local ct = time_mgr.GetTime()
-		local timeCost = cf_formula.GetData(formulaID, cf_formula.timeCost)
+		local timeCost = csv_formula.GetData(formulaID, csv_formula.timeCost)
 		if ct >= startTime + timeCost then
-			local itemID = cf_formula.GetData(formulaID, cf_formula.itemID)
+			local itemID = csv_formula.GetData(formulaID, csv_formula.itemID)
 			
 			m_item.AddItemCount(itemID, 1)
 			m_workbench.SetWorkbench(workbenchID, false, false)

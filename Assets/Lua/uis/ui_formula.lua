@@ -1,7 +1,7 @@
 local cf_ui = require('configs/cf_ui')
-local cf_formula = require('configs/cf_formula')
-local cf_item = require('configs/cf_item')
-local cf_weapon = require('configs/cf_weapon')
+local csv_formula = require('csv/csv_formula')
+local csv_item = require('csv/csv_item')
+local csv_weapon = require('csv/csv_weapon')
 
 local c_workbench = require('controls/c_workbench')
 
@@ -12,8 +12,8 @@ local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
 local events = require('base/events')
-local define = require('commons/define')
-local eventType = require('commons/event_type')
+
+local eventType = require('misc/event_type')
 
 local uibase = require('uis/ui_base')
 
@@ -39,7 +39,7 @@ local function NewItem(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(self.DID, cf_item.icon))
+			self.spr_icon_ImageEx:SetSprite('item', csv_item.GetData(self.DID, csv_item.icon))
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
@@ -88,7 +88,7 @@ local function NewStuff(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(self.DID, cf_item.icon))
+			self.spr_icon_ImageEx:SetSprite('item', csv_item.GetData(self.DID, csv_item.icon))
 			self.txt_num_TextEx.text = string.format('%d', num)			
 		else
 			goUtil.SetActive(self.gameObject, false)
@@ -120,10 +120,10 @@ local function NewFormula(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_formula.GetData(self.DID, cf_formula.itemID)	
-			self.spr_icon_ImageEx:SetSprite('item', cf_weapon.GetData(itemID, cf_weapon.icon))
+			local itemID = csv_formula.GetData(self.DID, csv_formula.itemID)	
+			self.spr_icon_ImageEx:SetSprite('item', csv_weapon.GetData(itemID, csv_weapon.icon))
 			
-			self.txt_name_TextEx.text = cf_weapon.GetData(itemID, cf_weapon.name)
+			self.txt_name_TextEx.text = csv_weapon.GetData(itemID, csv_weapon.name)
 			
 			self:ShowStuffs()
 		else
@@ -132,7 +132,7 @@ local function NewFormula(_ui)
 	end
 	
 	function _item:ShowStuffs()
-		local stuffs = cf_formula.GetData(self.DID, cf_formula.stuff)
+		local stuffs = csv_formula.GetData(self.DID, csv_formula.stuff)
 		debug.LogFormat(0, 'ShowStuffs stuffs count = %d', #stuffs)
 		if stuffs then
 			for i = 1, #stuffs, 1 do
@@ -200,7 +200,7 @@ function _M:OnDestroy()
 end
 
 function _M:ShowFormulas()
-	local formulas = cf_formula.GetAllIndex()
+	local formulas = csv_formula.GetAllIndex()
 	local count = #formulas
 	local hasNum = #self.formulas
 	
