@@ -6,7 +6,7 @@ public class UnityEngine_DebugWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginStaticLibs("Debug");
+		L.BeginClass(typeof(UnityEngine.Debug), typeof(System.Object));
 		L.RegFunction("DrawLine", DrawLine);
 		L.RegFunction("DrawRay", DrawRay);
 		L.RegFunction("Break", Break);
@@ -23,10 +23,36 @@ public class UnityEngine_DebugWrap
 		L.RegFunction("AssertFormat", AssertFormat);
 		L.RegFunction("LogAssertion", LogAssertion);
 		L.RegFunction("LogAssertionFormat", LogAssertionFormat);
+		L.RegFunction("New", _CreateUnityEngine_Debug);
+		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("unityLogger", get_unityLogger, null);
 		L.RegVar("developerConsoleVisible", get_developerConsoleVisible, set_developerConsoleVisible);
 		L.RegVar("isDebugBuild", get_isDebugBuild, null);
-		L.EndStaticLibs();
+		L.EndClass();
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int _CreateUnityEngine_Debug(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 0)
+			{
+				UnityEngine.Debug obj = new UnityEngine.Debug();
+				ToLua.PushSealed(L, obj);
+				return 1;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.Debug.New");
+			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

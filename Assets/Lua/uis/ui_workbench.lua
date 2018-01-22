@@ -1,8 +1,8 @@
 local cf_ui = require('configs/cf_ui')
-local csv_build = require('csv/csv_build')
-local csv_item = require('csv/csv_item')
-local csv_formula = require('csv/csv_formula')
-local csv_weapon = require('csv/csv_weapon')
+local cf_build = require('csv/cf_build')
+local cf_item = require('csv/cf_item')
+local cf_formula = require('csv/cf_formula')
+local cf_weapon = require('csv/cf_weapon')
 
 local m_item = require('models/m_item')
 local m_build = require('models/m_build')
@@ -18,6 +18,7 @@ local goUtil = require('base/goutil')
 local events = require('base/events')
 
 local eventType = require('misc/event_type')
+local common = require('misc/common')
 
 local uibase = require('uis/ui_base')
 
@@ -55,11 +56,10 @@ local function NewWorkbench(_ui)
 			goUtil.SetActiveByComponent(self.spr_icon_ImageEx, true)
 			self.txt_state_TextEx.text = ''
 			
-			self.timeCost = csv_formula.GetData(self.formulaID, csv_formula.timeCost)
-			local itemID = csv_formula.GetData(self.formulaID, csv_formula.itemID)
+			self.timeCost = cf_formula.GetData(self.formulaID, cf_formula.timeCost)
+			local itemID = cf_formula.GetData(self.formulaID, cf_formula.itemID)
 			
-			local icon = csv_weapon.GetData(itemID, csv_weapon.icon)
-			self.spr_icon_ImageEx:SetSprite('item', icon)
+			common.SetItemIcon(self.spr_icon_ImageEx, itemID)
 		else
 			goUtil.SetActiveByComponent(self.spr_icon_ImageEx, false)
 			self.txt_state_TextEx.text = '添加'

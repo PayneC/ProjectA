@@ -29,7 +29,7 @@ public static class CustomSettings
         typeof(UnityEngine.QualitySettings),
         typeof(UnityEngine.GL),
         typeof(UnityEngine.Graphics),
-        typeof(UnityEngine.Debug),
+        //typeof(UnityEngine.Debug),
         typeof(UnityEngine.PlayerPrefs),
 
         typeof(GameObjectUtil),

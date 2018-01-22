@@ -19,8 +19,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 612
-      y: 182
+      x: 611
+      y: 272
       width: 96
       height: 96
   - name: icon_xin
@@ -29,8 +29,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 612
-      y: 279
+      x: 611
+      y: 369
       width: 96
       height: 96
   - name: icon_zuanshi
@@ -39,81 +39,11 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 612
-      y: 376
+      x: 721
+      y: 184
       width: 96
       height: 96
-  - name: item_246-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 377
-      y: 0
-      width: 116
-      height: 118
-  - name: item_247-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 129
-      y: 249
-      width: 118
-      height: 120
-  - name: item_248-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 258
-      y: 239
-      width: 118
-      height: 117
-  - name: item_249-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 258
-      y: 357
-      width: 117
-      height: 117
-  - name: item_250-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 129
-      y: 370
-      width: 118
-      height: 120
-  - name: item_251-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 258
-      y: 0
-      width: 118
-      height: 119
-  - name: item_252-1
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 258
-      y: 120
-      width: 118
-      height: 118
-  - name: item_253-1
+  - name: item_0
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -123,7 +53,77 @@ MonoBehaviour:
       y: 387
       width: 120
       height: 120
-  - name: item_254-1
+  - name: item_246-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 377
+      y: 118
+      width: 116
+      height: 118
+  - name: item_247-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 370
+      width: 118
+      height: 120
+  - name: item_248-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 258
+      y: 360
+      width: 118
+      height: 117
+  - name: item_249-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 377
+      y: 0
+      width: 117
+      height: 117
+  - name: item_250-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 258
+      y: 0
+      width: 118
+      height: 120
+  - name: item_251-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 258
+      y: 121
+      width: 118
+      height: 119
+  - name: item_252-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 258
+      y: 241
+      width: 118
+      height: 118
+  - name: item_253-1
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,6 +131,16 @@ MonoBehaviour:
       serializedVersion: 2
       x: 129
       y: 129
+      width: 120
+      height: 120
+  - name: item_254-1
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 250
       width: 119
       height: 119
   - name: item_378-1
@@ -139,7 +149,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 730
+      x: 845
       y: 0
       width: 115
       height: 89
@@ -149,8 +159,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 846
-      y: 0
+      x: 611
+      y: 94
       width: 115
       height: 89
   - name: item_380-1
@@ -159,8 +169,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 612
-      y: 92
+      x: 727
+      y: 94
       width: 115
       height: 89
   - name: item_381-1
@@ -169,8 +179,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 728
-      y: 92
+      x: 843
+      y: 94
       width: 114
       height: 89
   - name: item_382-1
@@ -179,7 +189,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 612
+      x: 727
       y: 0
       width: 117
       height: 91
@@ -189,8 +199,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 843
-      y: 92
+      x: 611
+      y: 184
       width: 109
       height: 87
   - name: item_384-1
@@ -199,8 +209,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 494
-      y: 337
+      x: 611
+      y: 0
       width: 115
       height: 93
   - name: item_440-1
@@ -209,8 +219,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 494
-      y: 0
+      x: 377
+      y: 237
       width: 117
       height: 114
   - name: item_441-1
@@ -219,8 +229,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 494
-      y: 115
+      x: 377
+      y: 352
       width: 117
       height: 114
   - name: item_442-1
@@ -229,8 +239,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 377
-      y: 119
+      x: 495
+      y: 0
       width: 115
       height: 113
   - name: item_443-1
@@ -239,8 +249,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 377
-      y: 347
+      x: 495
+      y: 228
       width: 111
       height: 117
   - name: item_444-1
@@ -249,8 +259,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 494
-      y: 230
+      x: 495
+      y: 346
       width: 113
       height: 106
   - name: item_445-1
@@ -259,8 +269,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 377
-      y: 233
+      x: 495
+      y: 114
       width: 115
       height: 113
   - name: item_mutou

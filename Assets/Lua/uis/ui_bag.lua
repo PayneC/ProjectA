@@ -1,7 +1,9 @@
 local cf_ui = require('configs/cf_ui')
-local csv_formula = require('csv/csv_formula')
-local csv_item = require('csv/csv_item')
-local csv_weapon = require('csv/csv_weapon')
+local uibase = require('uis/ui_base')
+
+local cf_formula = require('csv/cf_formula')
+local cf_item = require('csv/cf_item')
+local cf_weapon = require('csv/cf_weapon')
 
 local c_workbench = require('controls/c_workbench')
 
@@ -12,7 +14,8 @@ local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
 
-local uibase = require('uis/ui_base')
+local eventType = require('misc/event_type')
+local common = require('misc/common')
 
 local Vector3 = UnityEngine.Vector3
 
@@ -36,10 +39,10 @@ local function NewItem(_ui)
 	function _item:SetData(DID)
 		self.DID = DID	
 		if self.DID then
-			self.spr_icon_ImageEx:SetSprite('item', csv_weapon.GetData(self.DID, csv_weapon.icon))
-			self.txt_name_TextEx.text = csv_weapon.GetData(self.DID, csv_weapon.name)
-			local count = m_item.GetItemCount(self.DID)
+			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)		
+			common.SetItemName(self.txt_name_TextEx, self.DID)
 			
+			local count = m_item.GetItemCount(self.DID)			
 			self.txt_num_TextEx.text = string.format('X%d', count)
 			
 			if count > 0 then

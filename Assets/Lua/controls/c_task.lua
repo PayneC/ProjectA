@@ -1,4 +1,4 @@
-local csv_weapon = require('csv/csv_weapon')
+local cf_weapon = require('csv/cf_weapon')
 
 local m_task = require('models/m_task')
 local m_item = require('models/m_item')
@@ -8,7 +8,7 @@ local time_mgr = require('base/time_mgr')
 local _M = {}
 
 local function RandomTask(task, cd)
-	local weapons = csv_weapon.GetAllIndex()
+	local weapons = cf_weapon.GetAllIndex()
 	local index = math.random(#weapons)
 	
 	task.NPCID = 0

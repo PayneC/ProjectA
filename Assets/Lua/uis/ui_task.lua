@@ -1,6 +1,6 @@
 local cf_ui = require('configs/cf_ui')
-local csv_weapon = require('csv/csv_weapon')
-local csv_item = require('csv/csv_item')
+local cf_weapon = require('csv/cf_weapon')
+local cf_item = require('csv/cf_item')
 
 local m_item = require('models/m_item')
 local m_task = require('models/m_task')
@@ -14,6 +14,7 @@ local goUtil = require('base/goutil')
 local events = require('base/events')
 
 local eventType = require('misc/event_type')
+local common = require('misc/common')
 
 local uibase = require('uis/ui_base')
 
@@ -35,7 +36,7 @@ local function NewItem(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', csv_item.GetData(self.DID, csv_item.icon))
+			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
 			self.txt_num_TextEx.text = string.format('%d', count)
 		else
 			goUtil.SetActive(self.gameObject, false)
@@ -83,10 +84,8 @@ local function NewBuild(_ui)
 			self.tp = task.timePoint
 			self.NPCID = task.NPCID
 			
-			self.itemID = task.itemID
-			
-			--self.spr_icon_ImageEx:SetSprite('build', csv_build.GetData(self.DID, csv_build.icon))
-			self.spr_item_icon_ImageEx:SetSprite('item', csv_weapon.GetData(self.itemID, csv_weapon.icon))
+			self.itemID = task.itemID			
+			common.SetItemIcon(self.spr_item_icon_ImageEx, self.itemID)				
 			
 			self:ShowReward(task.rewards)
 		else

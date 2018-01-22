@@ -1,7 +1,7 @@
 -- 记录资源建筑相关的数据
 -- 资源的状态 未解锁 解锁
 -- 资源的属性 等级
-local csv_build = require('csv/csv_build')
+local cf_build = require('csv/cf_build')
 
 local debug = require('base/debug')
 local events = require('base/events')
@@ -33,10 +33,10 @@ function _M.SetBuildData(build, DID, time, count)
 	if DID then
 		build.DID = DID
 		
-		build.itemID = csv_build.GetData(build.DID, csv_build.itemID)
-		build.itemCapacity = csv_build.GetData(build.DID, csv_build.itemCapacity)
+		build.itemID = cf_build.GetData(build.DID, cf_build.itemID)
+		build.itemCapacity = cf_build.GetData(build.DID, cf_build.itemCapacity)
 		
-		local speed = csv_build.GetData(build.DID, csv_build.speed)
+		local speed = cf_build.GetData(build.DID, cf_build.speed)
 		if speed > 0 then
 			build.needTime = 3600 / speed
 		else

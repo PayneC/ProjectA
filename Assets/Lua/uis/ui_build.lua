@@ -1,6 +1,6 @@
 local cf_ui = require('configs/cf_ui')
-local csv_build = require('csv/csv_build')
-local csv_item = require('csv/csv_item')
+local cf_build = require('csv/cf_build')
+local cf_item = require('csv/cf_item')
 
 local m_item = require('models/m_item')
 local m_build = require('models/m_build')
@@ -14,6 +14,7 @@ local goUtil = require('base/goutil')
 local events = require('base/events')
 
 local eventType = require('misc/event_type')
+local common = require('misc/common')
 
 local uibase = require('uis/ui_base')
 
@@ -37,7 +38,7 @@ local function NewItem(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', csv_item.GetData(self.DID, csv_item.icon))
+			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)			
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
@@ -109,15 +110,15 @@ local function NewBuild(_ui)
 		if self.UID and build then
 			self.DID = build.DID
 			goUtil.SetActive(self.gameObject, true)
-			local itemID = csv_build.GetData(self.DID, csv_build.itemID)	
-			self.txt_name_TextEx.text = csv_build.GetData(self.DID, csv_build.name)	
-			self.spr_icon_ImageEx:SetSprite('build', csv_build.GetData(self.DID, csv_build.icon))
+			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
 			
-			self.spr_item_icon_ImageEx:SetSprite('item', csv_item.GetData(itemID, csv_item.icon))
-			self.spr_item_p_ImageEx:SetSprite('item', csv_item.GetData(itemID, csv_item.icon))
+			common.SetItemName(self.txt_name_TextEx, self.DID)
+			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
 			
-			local lv = csv_build.GetData(self.DID, csv_build.LV)	
-			--local speed = csv_build.GetData(self.DID, csv_build.speed)
+			common.SetItemIcon(self.spr_item_icon_ImageEx, itemID)
+			common.SetItemIcon(self.spr_item_p_ImageEx, itemID)
+			
+			local lv = cf_build.GetData(self.DID, cf_build.LV)			
 			self.txt_lv_TextEx.text = string.format('LV.%d', lv)
 			self.txt_item_num_TextEx.text = string.format('%d', build.count)
 			
