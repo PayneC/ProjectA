@@ -1,7 +1,14 @@
 local uibase = require('uis/ui_base')
-local uimgr = require('base/ui_mgr')
+
 local cf_ui = require('configs/cf_ui')
+
+local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
+local events = require('base/events')
+
+local eventType = require('misc/event_type')
+
+local m_player = require('models/m_player')
 
 local _M = class(uibase)
 
@@ -13,6 +20,10 @@ function _M:ctor()
 	self.btn_head_ButtonEx = nil
 	self.btn_bag_ButtonEx = nil
 	self.btn_main_ButtonEx = nil
+	
+	self.txt_gold_TextEx = nil
+	self.txt_zs_TextEx = nil
+	self.txt_lv_TextEx = nil
 end
 
 function _M:OnLoaded()
@@ -27,7 +38,6 @@ function _M:OnLoaded()
 	
 	--self.btn_head_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_head')	
 	--self.btn_head_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnHead, self))
-	
 	self.btn_bag_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_bag')	
 	self.btn_bag_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnBag, self))
 	
@@ -36,10 +46,21 @@ function _M:OnLoaded()
 	
 	self.btn_main_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_main')	
 	self.btn_main_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnTask, self))
+	
+	self.txt_gold_TextEx = goUtil.GetComponent(self.gameObject, typeof(TextEx), 'txt_gold')	
+	self.txt_zs_TextEx = goUtil.GetComponent(self.gameObject, typeof(TextEx), 'txt_zs')	
+	self.txt_lv_TextEx = goUtil.GetComponent(self.gameObject, typeof(TextEx), 'txt_lv')	
 end
 
 function _M:OnEnable()
+	events.AddListener(eventType.GoldChange, self.OnGoldChange, self)
+	events.AddListener(eventType.DiamondChange, self.OnDiamondChange, self)
+	events.AddListener(eventType.EXPChange, self.OnEXPChange, self)
+	events.AddListener(eventType.LVChange, self.OnLVChange, self)
 	
+	self.txt_gold_TextEx.text = string.format('%s', m_player.GetGold())
+	self.txt_zs_TextEx.text = string.format('%s', m_player.GetDiamond())
+	self.txt_lv_TextEx.text = string.format('%s', m_player.GetLv())
 end
 
 function _M:Update(dt)
@@ -47,13 +68,19 @@ function _M:Update(dt)
 end
 
 function _M:OnDisable()
-	
+	events.RemoveListener(eventType.GoldChange, self.OnGoldChange, self)
+	events.RemoveListener(eventType.DiamondChange, self.OnDiamondChange, self)
+	events.RemoveListener(eventType.EXPChange, self.OnEXPChange, self)
+	events.RemoveListener(eventType.LVChange, self.OnLVChange, self)
 end
 
 function _M:OnDestroy()
 	self.btn_jiaju.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnJiaJu, self))
 	self.btn_jiagong.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnJiaGong, self))
 	self.btn_yingxiong.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnYingXiong, self))
+	self.btn_bag_ButtonEx.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnBag, self))
+	self.btn_hero_ButtonEx.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnHero, self))
+	self.btn_main_ButtonEx.onClick:RemoveListener(UnityEngine.Events.UnityAction(self.OnTask, self))
 end
 
 function _M:OnJiaJu()
@@ -80,8 +107,24 @@ function _M:OnHero()
 	uimgr.OpenSubUI(cf_ui.char)
 end
 
-function _M.OnTask()
+function _M:OnTask()
 	uimgr.OpenUI(cf_ui.task)
+end
+
+function _M:OnGoldChange()
+	self.txt_gold_TextEx.text = string.format('%s', m_player.GetGold())
+end
+
+function _M:OnDiamondChange()
+	self.txt_zs_TextEx.text = string.format('%s', m_player.GetDiamond())
+end
+
+function _M:OnEXPChange()
+	--self.txt_gold_TextEx.text = string.format('%s', m_player.GetGold())
+end
+
+function _M:OnLVChange()
+	self.txt_lv_TextEx.text = string.format('%s', m_player.GetLv())
 end
 
 return _M

@@ -90,7 +90,13 @@ local function NewStuff(_ui)
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
 			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
-			self.txt_num_TextEx.text = string.format('%d', num)			
+			
+			local has = common.GetItemCount(self.DID)
+			if has >= num then
+				self.txt_num_TextEx.text = string.format('%d', num)		
+			else
+				self.txt_num_TextEx.text = string.format('<color=red>%d</color>', num)		
+			end
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
@@ -123,9 +129,6 @@ local function NewFormula(_ui)
 			goUtil.SetActive(self.gameObject, true)
 			local itemID = cf_formula.GetData(self.DID, cf_formula.itemID)
 			
-			if not cf_item.GetDataEntire(itemID) then
-				debug.LogErrorFormat('ui_formula formula %d not find item %d', self.DID, itemID)
-			end
 			common.SetItemIcon(self.spr_icon_ImageEx, itemID)			
 			common.SetItemName(self.txt_name_TextEx, itemID)			
 			
