@@ -3,7 +3,7 @@
 -- 资源的属性 等级
 local cf_build = require('csv/cf_build')
 
-local debug = require('base/debug')
+
 local events = require('base/events')
 local eventType = require('misc/event_type')
 local prefs = require('base/prefs')

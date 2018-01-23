@@ -5,6 +5,8 @@ local m_item = require('models/m_item')
 
 local time_mgr = require('base/time_mgr')
 
+local common = require('misc/common')
+
 local _M = {}
 
 local function RandomTask(task, cd)
@@ -26,14 +28,14 @@ end
 
 function _M.FinishTask(UID)
 	local task = m_task.GetTask(UID)
-	local count = m_item.GetItemCount(task.itemID)
+	local count = common.GetItemCount(task.itemID)
 	if count > 0 then
-		m_item.CutItemCount(task.itemID, 1)
+		common.CutItemCount(task.itemID, 1)
 		local reward
 		for i = 1, #task.rewards, 1 do
 			reward = task.rewards[i]
 			if reward then
-				m_item.AddItemCount(reward[1], reward[2])
+				common.AddItemCount(reward[1], reward[2])
 			end
 		end
 		RandomTask(task, 5)

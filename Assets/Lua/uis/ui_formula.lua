@@ -7,7 +7,7 @@ local c_workbench = require('controls/c_workbench')
 
 local m_item = require('models/m_item')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
@@ -48,8 +48,8 @@ local function NewItem(_ui)
 	end
 	
 	function _item:RefreshData()		
-		local count = m_item.GetItemCount(self.DID)
-		local storage = m_item.GetItemStorage(self.DID)
+		local count = m_item.GetStuffCount(self.DID)
+		local storage = m_item.GetStuffStorage(self.DID)
 		self.txt_num_TextEx.text = string.format('%d', count)
 		local p = 1
 		if storage > 0 then
@@ -122,6 +122,10 @@ local function NewFormula(_ui)
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
 			local itemID = cf_formula.GetData(self.DID, cf_formula.itemID)
+			
+			if not cf_item.GetDataEntire(itemID) then
+				debug.LogErrorFormat('ui_formula formula %d not find item %d', self.DID, itemID)
+			end
 			common.SetItemIcon(self.spr_icon_ImageEx, itemID)			
 			common.SetItemName(self.txt_name_TextEx, itemID)			
 			

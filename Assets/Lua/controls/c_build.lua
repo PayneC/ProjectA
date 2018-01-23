@@ -4,7 +4,7 @@ local cf_item = require('csv/cf_item')
 local m_build = require('models/m_build')
 local m_item = require('models/m_item')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local prefs = require('base/prefs')
 
@@ -23,8 +23,8 @@ function _M.NewBuild(DID)
 		local itemID = cf_build.GetData(DID, cf_build.itemID)
 		local itemStorage = cf_build.GetData(DID, cf_build.itemStorage)
 		
-		local storage = m_item.GetItemStorage(itemID)
-		m_item.SetItemStorage(itemID, storage + itemStorage)
+		local storage = m_item.GetStuffStorage(itemID)
+		m_item.SetStuffStorage(itemID, storage + itemStorage)
 	end
 end
 
@@ -56,8 +56,8 @@ function _M.BuildUpgrade(UID)
 	local itemID = build.itemID
 	local itemStorage = cf_build.GetData(newDID, cf_build.itemStorage)
 	
-	local storage = m_item.GetItemStorage(itemID)
-	m_item.SetItemStorage(itemID, storage + itemStorage - oldItemStorage)		
+	local storage = m_item.GetStuffStorage(itemID)
+	m_item.SetStuffStorage(itemID, storage + itemStorage - oldItemStorage)		
 end
 
 function _M.CollectStuff(UID)
@@ -68,8 +68,8 @@ function _M.CollectStuff(UID)
 	
 	_M.Calculate(build, time_mgr.GetTime(), true)
 	
-	local storage = m_item.GetItemStorage(build.itemID)
-	local count = m_item.GetItemCount(build.itemID)
+	local storage = m_item.GetStuffStorage(build.itemID)
+	local count = m_item.GetStuffCount(build.itemID)
 	
 	local add = build.count
 	if add > storage - count then
@@ -80,9 +80,7 @@ function _M.CollectStuff(UID)
 		add = 0
 	end
 	
-	debug.LogFormat(0, 'CollectStuff build.itemID = %d, storage = %d, count = %d, add = %d, build.count = %d', build.itemID, storage, count, add, build.count)
-	
-	m_item.AddItemCount(build.itemID, add)
+	m_item.AddStuffCount(build.itemID, add)
 	m_build.SetBuildData(build, false, false, build.count - add)
 end
 

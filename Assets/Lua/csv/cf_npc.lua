@@ -1,4 +1,4 @@
-local debug = require('base/debug')
+
 
 local _M = {
 	id = 1,

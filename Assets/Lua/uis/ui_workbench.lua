@@ -11,7 +11,7 @@ local m_workbench = require('models/m_workbench')
 local c_build = require('controls/c_build')
 local c_workbench = require('controls/c_workbench')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')

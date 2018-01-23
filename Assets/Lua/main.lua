@@ -1,12 +1,13 @@
 local breakSocketHandle, debugXpCall = require("debug/LuaDebug")("localhost", 7003)
 
+debug = require('base/debug')
 require('base/class')
 require "event"
 
 local uimgr = require('base/ui_mgr')
 local lvmgr = require('base/lv_mgr')
 
-local debug = require('base/debug')
+
 local events = require('base/events')
 local prefs = require('base/prefs')
 

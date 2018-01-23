@@ -7,7 +7,7 @@ local m_task = require('models/m_task')
 
 local c_task = require('controls/c_task')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')

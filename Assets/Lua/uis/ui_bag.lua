@@ -9,7 +9,7 @@ local c_workbench = require('controls/c_workbench')
 
 local m_item = require('models/m_item')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
@@ -42,7 +42,7 @@ local function NewItem(_ui)
 			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)		
 			common.SetItemName(self.txt_name_TextEx, self.DID)
 			
-			local count = m_item.GetItemCount(self.DID)			
+			local count = common.GetItemCount(self.DID)			
 			self.txt_num_TextEx.text = string.format('X%d', count)
 			
 			if count > 0 then

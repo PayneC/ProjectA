@@ -7,7 +7,7 @@ local m_build = require('models/m_build')
 
 local c_build = require('controls/c_build')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
@@ -46,8 +46,8 @@ local function NewItem(_ui)
 	end
 	
 	function _item:RefreshData()		
-		local count = m_item.GetItemCount(self.DID)
-		local storage = m_item.GetItemStorage(self.DID)
+		local count = m_item.GetStuffCount(self.DID)
+		local storage = m_item.GetStuffStorage(self.DID)
 		self.txt_num_TextEx.text = string.format('%d', count)
 		local p = 1
 		if storage > 0 then

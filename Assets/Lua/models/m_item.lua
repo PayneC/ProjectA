@@ -3,31 +3,16 @@ local prefs = require('base/prefs')
 local eventType = require('misc/event_type')
 local constant = require('misc/constant')
 
-local debug = require('base/debug')
-
 local _isModify = false
 
-local _items = {}
 local _stuffs = {}
-local _specialStuffs = {}
 local _weapons = {}
 local _weaponCount = 0
 local _weaponStorage = 0
 
 local _M = {}
 
-local function NewStuff()
-	local item = {DID = 0, count = 0, storage = 0}
-	return item
-end
-
-local function NewWeapon()
-	local item = {DID = 0, count = 0}
-	return item
-end
-
-local function FindItem(DID, list)
-	--debug.LogFormat(0, 'FindItem DID = %d, list = %s', DID, debug.TableToString(list or {}))
+local function _Find(DID, list)
 	if list and DID then
 		local item
 		for i = 1, #list, 1 do
@@ -40,7 +25,7 @@ local function FindItem(DID, list)
 	return nil
 end
 
-function _M.SetItemData(item, count, storage)
+local function _SetStuff(item, count, storage)
 	if count then
 		item.count = count
 	end
@@ -53,105 +38,128 @@ function _M.SetItemData(item, count, storage)
 	events.Brocast(eventType.ItemChange)
 end
 
-function _M.GetItem(DID, newMiss)
-	local type2 = math.modf(DID / 100000)
-	local type1 = math.modf(type2 / 100)
-	
-	--debug.LogFormat(0, 'type1 = %d, ytpe2 = %d', type1, type2)
-	local item
-	if type1 == constant.Item_Stuff then
-		if type2 == constant.Stuff_Normal then
-			item = FindItem(DID, _stuffs)
-			if not item and newMiss then
-				item = NewStuff()
-				item.DID = DID
-				table.insert(_stuffs, item)
-			end
-		elseif type2 == constant.Stuff_Special then
-			item = FindItem(DID, _specialStuffs)
-			if not item and newMiss then
-				item = NewStuff()
-				item.DID = DID
-				table.insert(_specialStuffs, item)
-			end
-		elseif type2 == 100 then
-			item = FindItem(DID, _items)
-			if not item and newMiss then
-				item = NewStuff()
-				item.DID = DID
-				table.insert(_items, item)
-			end
-		end
-	elseif type1 == constant.Item_Weapon then
-		item = FindItem(DID, _weapons)
-		if not item and newMiss then
-			item = NewWeapon()
-			item.DID = DID
-			table.insert(_weapons, item)
-		end
+local function _FindOrCreateStuff(DID)
+	local item = _Find(DID, _stuffs)
+	if not item then
+		item = {DID = DID, count = 0, storage = 0}
+		table.insert(_stuffs, item)
 	end
-	return item, type1, type2
+	return item
 end
 
-function _M.AddItemCount(DID, count)
-	local item = _M.GetItem(DID, true)
+function _M.FindStuff(DID)
+	return _Find(DID, _stuffs)
+end
+
+function _M.AddStuffCount(DID, count)
+	if count <= 0 then
+		return
+	end
 	
+	local item = _FindOrCreateStuff(DID)
 	local newCount = item.count + count
-	
-	if type == 1 then
-	elseif type == 2 then
-		_weaponCount = _weaponCount + count
-	end
-	
-	_M.SetItemData(item, newCount)
+	_SetStuff(item, newCount, false)
 end
 
-function _M.CutItemCount(DID, count)
-	local item, type1 = _M.GetItem(DID, true)
-	local cutCount = count
-	if item.count < count then
-		cutCount = item.count
+function _M.CutStuffCount(DID, count)
+	if count <= 0 then
+		return
 	end
 	
-	local newCount = item.count - cutCount
-	
-	if type1 == 1 then
-		
-	elseif type1 == 2 then
-		--还没有加判断
-		_weaponCount = _weaponCount - cutCount
+	local item = _M.FindStuff(DID)
+	if item then
+		local newCount = item.count - count
+		if newCount < 0 then
+			newCount = 0
+		end
+		_SetStuff(item, newCount, false)		
 	end
-	
-	_M.SetItemData(item, newCount)
 end
 
-function _M.GetItemCount(DID)
-	local item = _M.GetItem(DID, false)
+function _M.GetStuffCount(DID)
+	local item = _M.FindStuff(DID)
 	return item and item.count or 0
 end
 
-function _M.SetItemStorage(DID, storage)
-	--debug.LogFormat(0, 'SetItemStorage(%d, %d)', DID, storage)
-	local item, type1, type2 = _M.GetItem(DID, true)
-	if item then
-		_M.SetItemData(item, false, storage)
-	else
-		debug.LogErrorFormat('SetItemStorage Not Find Item %d type1 = %d type2 = %d', DID, type1, type2)
-	end
+function _M.SetStuffStorage(DID, storage)	
+	local item = _FindOrCreateStuff(DID)
+	_SetStuff(item, false, storage)
 end
 
-function _M.GetItemStorage(DID)
-	--debug.LogFormat(0, 'GetItemStorage(%d)', DID)
-	local item = _M.GetItem(DID, false)
+function _M.GetStuffStorage(DID)
+	local item = _M.FindStuff(DID)
 	return item and item.storage or 0
+end
+
+local function _SetWeapon(item, count)
+	if item.count == count then
+		return
+	end
+	
+	_weaponCount = _weaponCount + count - item.count
+	item.count = count
+	
+	_isModify = true
+	events.Brocast(eventType.ItemChange)
+end
+
+local function _FindOrCreateWeapon(DID)
+	local item = _Find(DID, _stuffs)
+	if not item then
+		item = {DID = DID, count = 0, storage = 0}
+		table.insert(_stuffs, item)
+	end
+	return item
+end
+
+function _M.FindWeapon(DID)
+	return _Find(DID, _stuffs)
+end
+
+function _M.AddWeaponCount(DID, count)
+	if count <= 0 then
+		return
+	end
+	
+	local item = _FindOrCreateWeapon(DID)
+	_SetWeapon(item, item.count + count)
+end
+
+function _M.CutWeaponCount(DID, count)
+	if count <= 0 then
+		return
+	end
+	
+	local item = _M.FindWeapon(DID)
+	if not item then
+		return	
+	end
+	
+	local cutCount = count
+	if cutCount > item.count then
+		cutCount = item.count
+	end
+	
+	_SetWeapon(item, item.count + cutCount)	
+end
+
+function _M.GetWeaponCount(DID)
+	local item = _M.FindWeapon(DID)
+	return item and item.count or 0
 end
 
 function _M.SetBagStorage(storage)
 	_weaponStorage = storage or 0
+	_isModify = true
+	events.Brocast(eventType.ItemChange)
 end
 
-function _M.GetBagStorage(storage)
+function _M.GetBagStorage()
 	return _weaponStorage
+end
+
+function _M.GetBagCount()
+	return _weaponCount
 end
 
 function _M.GetAllWeapon()
@@ -162,23 +170,17 @@ function _M.GetAllStuff()
 	return _stuffs
 end
 
-function _M.GetAllSpecialStuff()
-	return _specialStuffs
-end
-
 function _M.ReadData()
 	_stuffs = prefs.GetTable('_stuffs') or {}
 	_weapons = prefs.GetTable('_weapons') or {}
-	_specialStuffs = prefs.GetTable('_specialStuffs') or {}
 	_weaponCount = prefs.GetTable('_weaponCount') or 0
-	_weaponStorage = prefs.GetTable('_weaponStorage') or {}
+	_weaponStorage = prefs.GetTable('_weaponStorage') or 0
 end
 
 function _M.WriteData()
 	if _isModify then
 		prefs.SetTable('_stuffs', _stuffs)
-		prefs.SetTable('_weapons', _weapons)
-		prefs.SetTable('_specialStuffs', _specialStuffs)
+		prefs.SetTable('_weapons', _weapons)		
 		prefs.SetTable('_weaponCount', _weaponCount)
 		prefs.SetTable('_weaponStorage', _weaponStorage)
 		_isModify = false
