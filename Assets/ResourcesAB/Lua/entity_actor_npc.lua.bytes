@@ -1,5 +1,5 @@
 local Vector3 = UnityEngine.Vector3
-local cf_npc = require('configs/cf_npc')
+local cf_npc = require('csv/cf_npc')
 local asset = require('base/asset')
 local goUtil = require('base/goutil')
 local npc_state = require('entity/actor/npc_state')

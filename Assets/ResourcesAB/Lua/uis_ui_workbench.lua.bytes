@@ -1,8 +1,8 @@
 local cf_ui = require('configs/cf_ui')
-local cf_build = require('configs/cf_build')
-local cf_item = require('configs/cf_item')
-local cf_formula = require('configs/cf_formula')
-local cf_weapon = require('configs/cf_weapon')
+local cf_build = require('csv/cf_build')
+local cf_item = require('csv/cf_item')
+local cf_formula = require('csv/cf_formula')
+local cf_weapon = require('csv/cf_weapon')
 
 local m_item = require('models/m_item')
 local m_build = require('models/m_build')
@@ -11,13 +11,14 @@ local m_workbench = require('models/m_workbench')
 local c_build = require('controls/c_build')
 local c_workbench = require('controls/c_workbench')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
 local events = require('base/events')
-local define = require('commons/define')
-local eventType = require('commons/event_type')
+
+local eventType = require('misc/event_type')
+local common = require('misc/common')
 
 local uibase = require('uis/ui_base')
 
@@ -58,8 +59,7 @@ local function NewWorkbench(_ui)
 			self.timeCost = cf_formula.GetData(self.formulaID, cf_formula.timeCost)
 			local itemID = cf_formula.GetData(self.formulaID, cf_formula.itemID)
 			
-			local icon = cf_weapon.GetData(itemID, cf_weapon.icon)
-			self.spr_icon_ImageEx:SetSprite('item', icon)
+			common.SetItemIcon(self.spr_icon_ImageEx, itemID)
 		else
 			goUtil.SetActiveByComponent(self.spr_icon_ImageEx, false)
 			self.txt_state_TextEx.text = '添加'

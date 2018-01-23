@@ -68,10 +68,10 @@ function _M:Update(dt)
 end
 
 function _M:OnDisable()
-	events.RemoveListener(eventType.GoldChange, self.OnGoldChange, self)
-	events.RemoveListener(eventType.DiamondChange, self.OnDiamondChange, self)
-	events.RemoveListener(eventType.EXPChange, self.OnEXPChange, self)
-	events.RemoveListener(eventType.LVChange, self.OnLVChange, self)
+	--events.RemoveListener(eventType.GoldChange, self.OnGoldChange, self)
+	--events.RemoveListener(eventType.DiamondChange, self.OnDiamondChange, self)
+	--events.RemoveListener(eventType.EXPChange, self.OnEXPChange, self)
+	--events.RemoveListener(eventType.LVChange, self.OnLVChange, self)
 end
 
 function _M:OnDestroy()
