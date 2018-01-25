@@ -31,4 +31,8 @@ function _M.Update()
 	end
 end
 
+function _M.Clear()
+	PlayerPrefs.DeleteAll()
+end
+
 return _M 

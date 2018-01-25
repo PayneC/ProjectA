@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIGrid : MonoBehaviour
@@ -31,6 +31,8 @@ public class UIGrid : MonoBehaviour
     private List<UIGridElement> _elements = new List<UIGridElement>();
     private Queue<UIGridElement> _excess = new Queue<UIGridElement>();
     private Queue<int> _lack = new Queue<int>();
+
+    private UnityAction<GameObject> onAddElement;
 
     public void Awake()
     {
@@ -255,6 +257,9 @@ public class UIGrid : MonoBehaviour
                         _ge.transform.SetParent(_scrollRect.content);
                         _ge.transform.localScale = Vector3.one;
                         _ge.gameObject.SetActive(true);
+                        _ge.index = -1;
+                        if (null != onAddElement)
+                            onAddElement(_ge.gameObject);
                     }
                 }
             }
@@ -329,5 +334,16 @@ public class UIGrid : MonoBehaviour
             _scrollRect.horizontalNormalizedPosition = pos;
             OnValueChanged(_scrollRect.normalizedPosition);
         }
+    }
+
+    public void AddNewElementListener(UnityAction<GameObject> func)
+    {
+        onAddElement += func;
+    }
+
+    public void RemoveNewElementListener(UnityAction<GameObject> func)
+    {
+        if (null != onAddElement)
+            onAddElement -= func;
     }
 }

@@ -11,6 +11,8 @@ local _M = {
 	char = {uid = 10, script = 'uis/ui_char', assetsName = 'UIChar', depth = 20},
 	bag = {uid = 11, script = 'uis/ui_bag', assetsName = 'UIBag', depth = 40},
 	task = {uid = 12, script = 'uis/ui_task', assetsName = 'UITask', depth = 10},
+	trade = {uid = 13, script = 'uis/ui_trade', assetsName = 'UITrade', depth = 10},
+	trade_item = {uid = 14, script = 'uis/ui_trade_item', assetsName = 'UITradeItem', depth = 40},
 }
 
 return _M

@@ -5,8 +5,8 @@ local _M = {
 	ItemChange = 4,			--物品更改
 	StuffChange = 5,		--材料更改
 	TaskChange = 6,			--任务更改
-	GoldChange = 7,			--金币更改
-	DiamondChange = 8,		--钻石更改
+	CoinChange = 7,			--金币更改
+	CashChange = 8,		--钻石更改
 	EXPChange = 9,			--经验更改
 	LVChange = 10,			--等级更改
 }

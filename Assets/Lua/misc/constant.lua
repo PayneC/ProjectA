@@ -1,6 +1,6 @@
 local _M = {
-	Item_Diamond = 10000001, --钻石
-	Item_Glod = 10000002, --金币
+	Item_Cash = 10000001, --钻石
+	Item_Coin = 10000002, --金币
 	Item_EXP = 10000003, --经验
 	
 	Item = 1, --物品

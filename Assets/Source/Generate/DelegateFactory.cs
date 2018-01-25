@@ -19,6 +19,7 @@ public class DelegateFactory
 		dict.Clear();
 		dict.Add(typeof(System.Action), factory.System_Action);
 		dict.Add(typeof(UnityEngine.Events.UnityAction), factory.UnityEngine_Events_UnityAction);
+		dict.Add(typeof(UnityEngine.Events.UnityAction<UnityEngine.GameObject>), factory.UnityEngine_Events_UnityAction_UnityEngine_GameObject);
 		dict.Add(typeof(System.Predicate<int>), factory.System_Predicate_int);
 		dict.Add(typeof(System.Action<int>), factory.System_Action_int);
 		dict.Add(typeof(System.Comparison<int>), factory.System_Comparison_int);
@@ -37,6 +38,7 @@ public class DelegateFactory
 
 		DelegateTraits<System.Action>.Init(factory.System_Action);
 		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
+		DelegateTraits<UnityEngine.Events.UnityAction<UnityEngine.GameObject>>.Init(factory.UnityEngine_Events_UnityAction_UnityEngine_GameObject);
 		DelegateTraits<System.Predicate<int>>.Init(factory.System_Predicate_int);
 		DelegateTraits<System.Action<int>>.Init(factory.System_Action_int);
 		DelegateTraits<System.Comparison<int>>.Init(factory.System_Comparison_int);
@@ -55,6 +57,7 @@ public class DelegateFactory
 
 		TypeTraits<System.Action>.Init(factory.Check_System_Action);
 		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
+		TypeTraits<UnityEngine.Events.UnityAction<UnityEngine.GameObject>>.Init(factory.Check_UnityEngine_Events_UnityAction_UnityEngine_GameObject);
 		TypeTraits<System.Predicate<int>>.Init(factory.Check_System_Predicate_int);
 		TypeTraits<System.Action<int>>.Init(factory.Check_System_Action_int);
 		TypeTraits<System.Comparison<int>>.Init(factory.Check_System_Comparison_int);
@@ -73,6 +76,7 @@ public class DelegateFactory
 
 		StackTraits<System.Action>.Push = factory.Push_System_Action;
 		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
+		StackTraits<UnityEngine.Events.UnityAction<UnityEngine.GameObject>>.Push = factory.Push_UnityEngine_Events_UnityAction_UnityEngine_GameObject;
 		StackTraits<System.Predicate<int>>.Push = factory.Push_System_Predicate_int;
 		StackTraits<System.Action<int>>.Push = factory.Push_System_Action_int;
 		StackTraits<System.Comparison<int>>.Push = factory.Push_System_Comparison_int;
@@ -301,6 +305,63 @@ public class DelegateFactory
 	}
 
 	void Push_UnityEngine_Events_UnityAction(IntPtr L, UnityEngine.Events.UnityAction o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event : LuaDelegate
+	{
+		public UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event(LuaFunction func) : base(func) { }
+		public UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(UnityEngine.GameObject param0)
+		{
+			func.BeginPCall();
+			func.PushSealed(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(UnityEngine.GameObject param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PushSealed(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public UnityEngine.Events.UnityAction<UnityEngine.GameObject> UnityEngine_Events_UnityAction_UnityEngine_GameObject(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			UnityEngine.Events.UnityAction<UnityEngine.GameObject> fn = delegate(UnityEngine.GameObject param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event target = new UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event(func);
+			UnityEngine.Events.UnityAction<UnityEngine.GameObject> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event target = new UnityEngine_Events_UnityAction_UnityEngine_GameObject_Event(func, self);
+			UnityEngine.Events.UnityAction<UnityEngine.GameObject> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_UnityEngine_Events_UnityAction_UnityEngine_GameObject(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Events.UnityAction<UnityEngine.GameObject>), L, pos);
+	}
+
+	void Push_UnityEngine_Events_UnityAction_UnityEngine_GameObject(IntPtr L, UnityEngine.Events.UnityAction<UnityEngine.GameObject> o)
 	{
 		ToLua.Push(L, o);
 	}

@@ -16,6 +16,7 @@ function _M:ctor()
 	self.btn_yingxiong = nil	
 	self.btn_jiaju = nil
 	self.btn_jiagong = nil
+	self.btn_jiaoyi = nil
 	
 	self.btn_head_ButtonEx = nil
 	self.btn_bag_ButtonEx = nil
@@ -36,6 +37,9 @@ function _M:OnLoaded()
 	self.btn_yingxiong = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_yingxiong')
 	self.btn_yingxiong.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnYingXiong, self))
 	
+	self.btn_jiaoyi = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_jiaoyi')
+	self.btn_jiaoyi.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnJiaoYi, self))
+
 	--self.btn_head_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_head')	
 	--self.btn_head_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnHead, self))
 	self.btn_bag_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'btn_bag')	
@@ -53,13 +57,13 @@ function _M:OnLoaded()
 end
 
 function _M:OnEnable()
-	events.AddListener(eventType.GoldChange, self.OnGoldChange, self)
-	events.AddListener(eventType.DiamondChange, self.OnDiamondChange, self)
+	events.AddListener(eventType.CoinChange, self.OnCoinChange, self)
+	events.AddListener(eventType.CashChange, self.OnCashChange, self)
 	events.AddListener(eventType.EXPChange, self.OnEXPChange, self)
 	events.AddListener(eventType.LVChange, self.OnLVChange, self)
 	
-	self.txt_gold_TextEx.text = string.format('%s', m_player.GetGold())
-	self.txt_zs_TextEx.text = string.format('%s', m_player.GetDiamond())
+	self.txt_gold_TextEx.text = string.format('%s', m_player.GetCoin())
+	self.txt_zs_TextEx.text = string.format('%s', m_player.GetCash())
 	self.txt_lv_TextEx.text = string.format('%s', m_player.GetLv())
 end
 
@@ -68,8 +72,8 @@ function _M:Update(dt)
 end
 
 function _M:OnDisable()
-	--events.RemoveListener(eventType.GoldChange, self.OnGoldChange, self)
-	--events.RemoveListener(eventType.DiamondChange, self.OnDiamondChange, self)
+	--events.RemoveListener(eventType.CoinChange, self.OnCoinChange, self)
+	--events.RemoveListener(eventType.CashChange, self.OnCashChange, self)
 	--events.RemoveListener(eventType.EXPChange, self.OnEXPChange, self)
 	--events.RemoveListener(eventType.LVChange, self.OnLVChange, self)
 end
@@ -95,6 +99,10 @@ function _M:OnYingXiong()
 	uimgr.OpenUI(cf_ui.war)
 end
 
+function _M:OnJiaoYi()
+	uimgr.OpenUI(cf_ui.trade)
+end
+
 function _M:OnHead()
 	
 end
@@ -111,16 +119,16 @@ function _M:OnTask()
 	uimgr.OpenUI(cf_ui.task)
 end
 
-function _M:OnGoldChange()
-	self.txt_gold_TextEx.text = string.format('%s', m_player.GetGold())
+function _M:OnCoinChange()
+	self.txt_gold_TextEx.text = string.format('%s', m_player.GetCoin())
 end
 
-function _M:OnDiamondChange()
-	self.txt_zs_TextEx.text = string.format('%s', m_player.GetDiamond())
+function _M:OnCashChange()
+	self.txt_zs_TextEx.text = string.format('%s', m_player.GetCash())
 end
 
 function _M:OnEXPChange()
-	--self.txt_gold_TextEx.text = string.format('%s', m_player.GetGold())
+	--self.txt_gold_TextEx.text = string.format('%s', m_player.GetCoin())
 end
 
 function _M:OnLVChange()

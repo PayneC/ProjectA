@@ -1,171 +1,70 @@
-local cf_ui = require('configs/cf_ui')
-local cf_build = require('csv/cf_build')
+local cf_weapon = require('csv/cf_weapon')
 local cf_item = require('csv/cf_item')
+local cf_ui = require('configs/cf_ui')
 
-local m_item = require('models/m_item')
-local m_build = require('models/m_build')
+local m_trade = require('models/m_trade')
 
-local c_build = require('controls/c_build')
-
-
-local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
-local events = require('base/events')
 
-local eventType = require('misc/event_type')
 local common = require('misc/common')
 
 local uibase = require('uis/ui_base')
 
 local _M = class(uibase)
 
-local function NewItem(_ui)
-	local gameObject = goUtil.Instantiate(_ui.rt_item)
-	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
-	local txt_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_num')
-	local spr_time_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_time')
-	
+local function NewItem(go)
 	local _item = {
-		DID = 0,
-		gameObject = gameObject,
-		spr_icon_ImageEx = spr_icon_ImageEx,
-		txt_num_TextEx = txt_num_TextEx,
-		spr_time_ImageEx = spr_time_ImageEx,
+		gameObject = go,
+		spr_bg_ButtonEx = false,
+		UIGridElement = false,
+		spr_icon_ImageEx = false,
+		txt_name_TextEx = false,
+		txt_bag_TextEx = false,
+		txt_trade_TextEx = false,
+		txt_gold_TextEx = false,
+		txt_cash_TextEx = false,
+		
+		UID = 0,
 	}
 	
-	function _item:SetData(DID)
-		self.DID = DID	
-		if self.DID then
-			goUtil.SetActive(self.gameObject, true)
-			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)			
-		else
-			goUtil.SetActive(self.gameObject, false)
-		end
+	_item.spr_bg_ButtonEx = goUtil.GetComponent(_item.gameObject, typeof(ButtonEx), 'spr_bg')
+	_item.UIGridElement = goUtil.GetComponent(_item.gameObject, typeof(UIGridElement), nil)
+	_item.spr_icon_ImageEx = goUtil.GetComponent(_item.gameObject, typeof(ImageEx), 'spr_icon')
+	_item.txt_name_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_name')
+	_item.txt_bag_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_bag')
+	_item.txt_trade_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_trade')
+	_item.txt_gold_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_gold')
+	_item.txt_cash_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_cash')
+	
+	function _item:OnIndexChange()
 		self:RefreshData()
 	end
 	
 	function _item:RefreshData()		
-		local count = m_item.GetStuffCount(self.DID)
-		local storage = m_item.GetStuffStorage(self.DID)
-		self.txt_num_TextEx.text = string.format('%d', count)
-		local p = 1
-		if storage > 0 then
-			p = count / storage
-		end
-		if p > 1 then
-			p = 1
-		end
-		
-		self.spr_time_ImageEx.fillAmount = p
-	end
-	
-	function _item:OnItemChange()
-		self:RefreshData()
-	end
-	
-	goUtil.SetParent(_item.gameObject, _ui.scr_items_content)
-	goUtil.SetLocalScale(_item.gameObject, Vector3.one)
-	
-	return _item
-end
-
-local function NewBuild(_ui)
-	local gameObject = goUtil.Instantiate(_ui.rt_build)
-	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
-	local txt_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_name')
-	local txt_lv_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_lv')
-	
-	local spr_item_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_icon')
-	local spr_item_p_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_p')
-	local txt_item_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_num')
-	
-	local spr_item_icon_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'spr_item_icon')
-	local btn_uplv_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'btn_uplv')
-	local txt_uplv_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_uplv')
-	
-	local _item = {
-		UID = 0,
-		DID = 0,
-		tp = 0,
-		needTime = 0,
-		count = 0,
-		itemCapacity = 0,
-		
-		gameObject = gameObject,
-		spr_icon_ImageEx = spr_icon_ImageEx,
-		txt_name_TextEx = txt_name_TextEx,
-		txt_lv_TextEx = txt_lv_TextEx,
-		spr_item_icon_ImageEx = spr_item_icon_ImageEx,
-		spr_item_p_ImageEx = spr_item_p_ImageEx,
-		txt_item_num_TextEx = txt_item_num_TextEx,
-		spr_item_icon_ButtonEx = spr_item_icon_ButtonEx,
-		btn_uplv_ButtonEx = btn_uplv_ButtonEx,
-		txt_uplv_TextEx = txt_uplv_TextEx,
-	}
-	
-	function _item:SetData(UID)
-		self.UID = UID	
-		local build = m_build.GetBuild(self.UID)
-		if self.UID and build then
-			self.DID = build.DID
-			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
+		local index = self.UIGridElement:GetIndex() + 1
+		local sell = m_trade.GetSellByIndex(index)
+		if sell then
+			self.UID = sell.UID
+			common.SetItemIcon(self.spr_icon_ImageEx, sell.DID)
+			common.SetItemName(self.txt_name_TextEx, sell.DID)
 			
-			common.SetItemName(self.txt_name_TextEx, self.DID)
-			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
+			self.txt_gold_TextEx.text = string.format('%d', sell.coin)
+			self.txt_cash_TextEx.text = string.format('%d', sell.cash)
 			
-			common.SetItemIcon(self.spr_item_icon_ImageEx, itemID)
-			common.SetItemIcon(self.spr_item_p_ImageEx, itemID)
+			local has = common.GetItemCount(sell.DID)
+			self.txt_bag_TextEx.text = string.format('%d', has)
 			
-			local lv = cf_build.GetData(self.DID, cf_build.LV)			
-			self.txt_lv_TextEx.text = string.format('LV.%d', lv)
-			self.txt_item_num_TextEx.text = string.format('%d', build.count)
-			
-			
-			
-			self.tp = build.timePoint
-			self.needTime = build.needTime
-			
-			self.count = build.count
-			self.itemCapacity = build.itemCapacity
-			
-			if self.count >= self.itemCapacity then
-				self.spr_item_p_ImageEx.fillAmount = 1
-			else
-				self.spr_item_p_ImageEx.fillAmount = build.p
-				
-			end
-		else
-			goUtil.SetActive(self.gameObject, false)
+			self.txt_trade_TextEx.text = '∞'
 		end
 	end
 	
 	function _item:OnClick()
-		debug.Log(0, ' OnClick')
-		c_build.BuildUpgrade(self.UID)
+		uimgr.OpenSubUI(cf_ui.trade_item, self.UID)
 	end
 	
-	function _item:OnCollect()
-		c_build.CollectStuff(self.UID)
-	end
-	
-	function _item:Update(ct)
-		if self.count >= self.itemCapacity then
-			return
-		end
-		local p = 1
-		if self.needTime > 0 then
-			p =(self.needTime + self.tp - ct) / self.needTime
-		end
-		self.spr_item_p_ImageEx.fillAmount = 1 - p
-	end
-	
-	_item.spr_item_icon_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnCollect, _item))
-	
-	_item.btn_uplv_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnClick, _item))
-	goUtil.SetParent(_item.gameObject, _ui.scr_builds_content)
-	goUtil.SetLocalScale(_item.gameObject, Vector3.one)
+	_item.spr_bg_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnClick, _item))
+	_item.UIGridElement:AddIndexChangeListener(UnityEngine.Events.UnityAction(_item.OnIndexChange, _item))
 	
 	return _item
 end
@@ -177,20 +76,17 @@ function _M:ctor()
 end
 
 function _M:OnLoaded()		
-	self.scr_items_UIGrid = goUtil.GetComponent(self.gameObject, typeof(UIGrid), 'rt_items')
+	self.scr_items_UIGrid = goUtil.GetComponent(self.gameObject, typeof(UIGrid), 'scr_items')
+	self.scr_items_UIGrid:AddNewElementListener(UnityEngine.Events.UnityAction_GameObject(self.OnAddNewElement, self))
 end
 
 function _M:OnEnable()
-	self:ShowBuilds()
-	self:ShowItems()
+	self.scr_items_UIGrid:SetElementCount(m_trade.GetSellCount())
+	self.scr_items_UIGrid:ApplySetting()
 end
 
 function _M:Update(dt)
-	c_build.CalculateAll()
-	local ct = time_mgr.GetTime()
-	for i = 1, #self.builds, 1 do
-		self.builds[i]:Update(ct)
-	end
+	
 end
 
 function _M:OnDisable()
@@ -201,64 +97,21 @@ function _M:OnDestroy()
 	
 end
 
-function _M:ShowBuilds()
-	local builds = m_build.GetAllBuild()
-	local count = #builds
-	local hasNum = #self.builds
-	
-	if count > hasNum then
-		for i = hasNum + 1, count, 1 do
-			local item = NewBuild(self)
-			table.insert(self.builds, item)
-		end
-	elseif count < hasNum then		
-		for i = count + 1, hasNum, 1 do
-			local item = self.builds[i]
-			item:SetData(false)
-		end
-	end
-	
-	for i = 1, count, 1 do
-		local item = self.builds[i]
-		item:SetData(builds[i].UID)
-	end
-end
-
-
-function _M:ShowItems()
-	local stuffs = m_item.GetAllStuff()
-	--debug.LogFormat(0, debug.TableToString(stuffs))
-	local count = #stuffs
-	local hasNum = #self.items
-	
-	if count > hasNum then
-		for i = hasNum + 1, count, 1 do
-			local item = NewItem(self)
-			table.insert(self.items, item)
-		end
-	elseif count < hasNum then		
-		for i = count + 1, hasNum, 1 do
-			local item = self.items[i]
-			item:SetData(false)
-		end
-	end
-	
-	for i = 1, count, 1 do
-		local item = self.items[i]
-		item:SetData(stuffs[i].DID)
-	end
-end
-
 function _M:OnBuildChange()
-	self:ShowBuilds()
+	
 end
 
 function _M:OnBuildLVChange()
-	self:ShowBuilds()
+	
 end
 
 function _M:OnItemChange()
-	self:ShowItems()
+	
+end
+
+function _M:OnAddNewElement(go)
+	local item = NewItem(go)
+	table.insert(self.items, item)
 end
 
 return _M 
