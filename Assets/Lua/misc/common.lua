@@ -96,8 +96,8 @@ function _M.GetItemCount(itemID)
 			end
 		elseif type2 == constant.Item_Stuff then
 			return m_item.GetStuffCount(itemID)
-		elseif type1 == constant.Item_Weapon then
-			return m_item.CutWeaponCount(itemID)
+		elseif type2 == constant.Item_Weapon then
+			return m_item.GetWeaponCount(itemID)
 		end
 	end
 	return 0
@@ -124,7 +124,7 @@ function _M.AddItemCount(itemID, count)
 		elseif type2 == constant.Item_Stuff then
 			m_item.AddStuffCount(itemID, realCount)
 			
-		elseif type1 == constant.Item_Weapon then
+		elseif type2 == constant.Item_Weapon then
 			m_item.AddWeaponCount(itemID, realCount)
 			
 		end
@@ -152,7 +152,7 @@ function _M.CutItemCount(itemID, count)
 		elseif type2 == constant.Item_Stuff then			
 			m_item.CutStuffCount(itemID, realCount)
 			
-		elseif type1 == constant.Item_Weapon then
+		elseif type2 == constant.Item_Weapon then
 			m_item.CutWeaponCount(itemID, realCount)
 			
 		end

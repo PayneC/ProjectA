@@ -83,22 +83,28 @@ local function NewStuff(_ui)
 	txt_num_TextEx = txt_num_TextEx,
 	
 	DID = 0,
+	num = 0,
 	}
 	
 	function _item:SetData(DID, num)
-		self.DID = DID	
+		self.DID = DID
+		self.num = num	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
 			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
 			
-			local has = common.GetItemCount(self.DID)
-			if has >= num then
-				self.txt_num_TextEx.text = string.format('%d', num)		
-			else
-				self.txt_num_TextEx.text = string.format('<color=red>%d</color>', num)		
-			end
+			self:Refresh()
 		else
 			goUtil.SetActive(self.gameObject, false)
+		end
+	end
+
+	function _item:Refresh()
+		local has = common.GetItemCount(self.DID)
+		if has >= self.num  then
+			self.txt_num_TextEx.text = string.format('%d', self.num )		
+		else
+			self.txt_num_TextEx.text = string.format('<color=red>%d</color>', self.num )		
 		end
 	end
 	
@@ -151,6 +157,12 @@ local function NewFormula(_ui)
 			end
 		end
 	end
+
+	function _item:Refresh()
+		for i = 1, #self.stuffs, 1 do
+			self.stuffs[i]:Refresh()
+		end
+	end
 	
 	function _item:OnMake()
 		c_workbench.MakeFormula(_ui.workbenchID, self.DID)
@@ -192,6 +204,7 @@ end
 function _M:OnEnable(workbenchID)
 	self.workbenchID = workbenchID
 	self:ShowItems()
+	self:RefreshFormula()
 end
 
 function _M:Update(dt)
@@ -253,6 +266,12 @@ function _M:ShowItems()
 	for i = 1, count, 1 do
 		local item = self.items[i]
 		item:SetData(stuffs[i].DID)
+	end
+end
+
+function _M:RefreshFormula()
+	for i = 1, #self.formulas, 1 do
+		self.formulas[i]:Refresh()
 	end
 end
 

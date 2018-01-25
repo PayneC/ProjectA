@@ -1,19 +1,20 @@
 local cf_ui = require('configs/cf_ui')
-local cf_formula = require('configs/cf_formula')
-local cf_item = require('configs/cf_item')
-local cf_weapon = require('configs/cf_weapon')
+local cf_formula = require('csv/cf_formula')
+local cf_item = require('csv/cf_item')
+local cf_weapon = require('csv/cf_weapon')
 
 local c_workbench = require('controls/c_workbench')
 
 local m_item = require('models/m_item')
 
-local debug = require('base/debug')
+
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
 local goUtil = require('base/goutil')
 local events = require('base/events')
-local define = require('commons/define')
-local eventType = require('commons/event_type')
+
+local eventType = require('misc/event_type')
+local common = require('misc/common')
 
 local uibase = require('uis/ui_base')
 
@@ -39,7 +40,7 @@ local function NewItem(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(self.DID, cf_item.icon))
+			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)			
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
@@ -47,8 +48,8 @@ local function NewItem(_ui)
 	end
 	
 	function _item:RefreshData()		
-		local count = m_item.GetItemCount(self.DID)
-		local storage = m_item.GetItemStorage(self.DID)
+		local count = m_item.GetStuffCount(self.DID)
+		local storage = m_item.GetStuffStorage(self.DID)
 		self.txt_num_TextEx.text = string.format('%d', count)
 		local p = 1
 		if storage > 0 then
@@ -82,16 +83,28 @@ local function NewStuff(_ui)
 	txt_num_TextEx = txt_num_TextEx,
 	
 	DID = 0,
+	num = 0,
 	}
 	
 	function _item:SetData(DID, num)
-		self.DID = DID	
+		self.DID = DID
+		self.num = num	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			self.spr_icon_ImageEx:SetSprite('item', cf_item.GetData(self.DID, cf_item.icon))
-			self.txt_num_TextEx.text = string.format('%d', num)			
+			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
+			
+			self:Refresh()
 		else
 			goUtil.SetActive(self.gameObject, false)
+		end
+	end
+
+	function _item:Refresh()
+		local has = common.GetItemCount(self.DID)
+		if has >= self.num  then
+			self.txt_num_TextEx.text = string.format('%d', self.num )		
+		else
+			self.txt_num_TextEx.text = string.format('<color=red>%d</color>', self.num )		
 		end
 	end
 	
@@ -120,10 +133,10 @@ local function NewFormula(_ui)
 		self.DID = DID	
 		if self.DID then
 			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_formula.GetData(self.DID, cf_formula.itemID)	
-			self.spr_icon_ImageEx:SetSprite('item', cf_weapon.GetData(itemID, cf_weapon.icon))
+			local itemID = cf_formula.GetData(self.DID, cf_formula.itemID)
 			
-			self.txt_name_TextEx.text = cf_weapon.GetData(itemID, cf_weapon.name)
+			common.SetItemIcon(self.spr_icon_ImageEx, itemID)			
+			common.SetItemName(self.txt_name_TextEx, itemID)			
 			
 			self:ShowStuffs()
 		else
@@ -142,6 +155,12 @@ local function NewFormula(_ui)
 				goUtil.SetParent(stuff.gameObject, self.rt_stuff)
 				goUtil.SetLocalScale(stuff.gameObject, Vector3.one)
 			end
+		end
+	end
+
+	function _item:Refresh()
+		for i = 1, #self.stuffs, 1 do
+			self.stuffs[i]:Refresh()
 		end
 	end
 	
@@ -185,6 +204,7 @@ end
 function _M:OnEnable(workbenchID)
 	self.workbenchID = workbenchID
 	self:ShowItems()
+	self:RefreshFormula()
 end
 
 function _M:Update(dt)
@@ -246,6 +266,12 @@ function _M:ShowItems()
 	for i = 1, count, 1 do
 		local item = self.items[i]
 		item:SetData(stuffs[i].DID)
+	end
+end
+
+function _M:RefreshFormula()
+	for i = 1, #self.formulas, 1 do
+		self.formulas[i]:Refresh()
 	end
 end
 

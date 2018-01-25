@@ -1,4 +1,4 @@
-local define = require('commons/define')
+
 local ActorState = define.ActorState
 local goUtil = require('base/goutil')
 local CollisionFlags = UnityEngine.CollisionFlags

@@ -2,7 +2,7 @@
 -- 除标记为Common 的 UI以外其他UI只能同时打开一个主要UI
 -- 可打开多个附加UI
 -- 附加UI会在主UI关闭同时被关闭
-local debug = require('base/debug')
+
 
 local UIActiveType =
     {

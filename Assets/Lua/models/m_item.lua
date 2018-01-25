@@ -104,16 +104,16 @@ local function _SetWeapon(item, count)
 end
 
 local function _FindOrCreateWeapon(DID)
-	local item = _Find(DID, _stuffs)
+	local item = _Find(DID, _weapons)
 	if not item then
-		item = {DID = DID, count = 0, storage = 0}
-		table.insert(_stuffs, item)
+		item = {DID = DID, count = 0}
+		table.insert(_weapons, item)
 	end
 	return item
 end
 
 function _M.FindWeapon(DID)
-	return _Find(DID, _stuffs)
+	return _Find(DID, _weapons)
 end
 
 function _M.AddWeaponCount(DID, count)

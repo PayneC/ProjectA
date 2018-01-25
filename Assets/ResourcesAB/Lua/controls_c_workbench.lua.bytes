@@ -1,10 +1,11 @@
-local cf_formula = require('configs/cf_formula')
+local cf_formula = require('csv/cf_formula')
 
 local m_workbench = require('models/m_workbench')
 local m_item = require('models/m_item')
 
-local debug = require('base/debug')
 local time_mgr = require('base/time_mgr')
+
+local common = require('misc/common')
 
 local _M = {}
 
@@ -23,7 +24,7 @@ function _M.MakeFormula(workbenchID, formulaID)
 	for i = 1, #stuffs, 1 do
 		stuff = stuffs[i]
 		local need = stuff[2]
-		local have = m_item.GetItemCount(stuff[1])
+		local have = common.GetItemCount(stuff[1])
 		if need > have then
 			debug.LogFormat(0, 'MakeFormula 物品 %d 不够', stuff[1])
 			return false
@@ -33,7 +34,7 @@ function _M.MakeFormula(workbenchID, formulaID)
 	for i = 1, #stuffs, 1 do
 		stuff = stuffs[i]
 		local need = stuff[2]
-		m_item.CutItemCount(stuff[1], need)
+		common.CutItemCount(stuff[1], need)
 	end
 	
 	m_workbench.SetWorkbench(workbenchID, formulaID, time_mgr.GetTime())
@@ -52,7 +53,7 @@ function _M.FinishFormula(workbenchID)
 		if ct >= startTime + timeCost then
 			local itemID = cf_formula.GetData(formulaID, cf_formula.itemID)
 			
-			m_item.AddItemCount(itemID, 1)
+			common.AddItemCount(itemID, 1)
 			m_workbench.SetWorkbench(workbenchID, false, false)
 		else
 			-- 没完成

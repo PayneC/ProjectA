@@ -1,7 +1,7 @@
 local events = require('base/events')
 local prefs = require('base/prefs')
-local define = require('commons/define')
-local eventType = require('commons/event_type')
+
+local eventType = require('misc/event_type')
 
 local _isModify = false
 local _workbenchs = {}

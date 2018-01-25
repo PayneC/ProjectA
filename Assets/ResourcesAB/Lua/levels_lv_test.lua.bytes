@@ -7,7 +7,7 @@ local lvmgr = require('base/lv_mgr')
 local uimgr = require('base/ui_mgr')
 
 local asset = require('base/asset')
-local debug = require('base/debug')
+
 local input = require('base/input')
 local goUtil = require('base/goutil')
 
