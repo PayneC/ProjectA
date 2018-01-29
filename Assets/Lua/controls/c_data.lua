@@ -8,6 +8,7 @@ local _models = {
 	require('models/m_player'),
 	require('models/m_workbench'),
 	require('models/m_task'),
+	require('models/m_formula'),
 }
 
 local _modelCount = #_models
@@ -37,6 +38,7 @@ local function NewData()
 	local c_workbench = require('controls/c_workbench')
 	local c_task = require('controls/c_task')
 	local cf_init = require('configs/cf_init')
+	local m_formula = require('models/m_formula')
 	for i = 1, #cf_init.unlockBuilds, 1 do
 		c_build.NewBuild(cf_init.unlockBuilds[i])
 	end
@@ -47,6 +49,10 @@ local function NewData()
 	
 	for i = 1, cf_init.taskCount, 1 do
 		c_task.NewTask()
+	end
+	
+	for i = 1, #cf_init.formulas, 1 do
+		m_formula.AddFormula(cf_init.formulas[i])
 	end
 	
 	local cf_lv = require('csv/cf_lv')

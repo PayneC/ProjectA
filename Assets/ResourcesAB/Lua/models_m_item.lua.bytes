@@ -35,7 +35,7 @@ local function _SetStuff(item, count, storage)
 	end
 	
 	_isModify = true
-	events.Brocast(eventType.ItemChange)
+	events.Brocast(eventType.ItemChange, item.DID)
 end
 
 local function _FindOrCreateStuff(DID)
@@ -100,7 +100,7 @@ local function _SetWeapon(item, count)
 	item.count = count
 	
 	_isModify = true
-	events.Brocast(eventType.ItemChange)
+	events.Brocast(eventType.ItemChange, item.DID)
 end
 
 local function _FindOrCreateWeapon(DID)
@@ -151,7 +151,7 @@ end
 function _M.SetBagStorage(storage)
 	_weaponStorage = storage or 0
 	_isModify = true
-	events.Brocast(eventType.ItemChange)
+	events.Brocast(eventType.ItemChange, item.DID)
 end
 
 function _M.GetBagStorage()

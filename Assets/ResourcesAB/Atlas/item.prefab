@@ -19,8 +19,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 922
-      y: 269
+      x: 346
+      y: 605
       width: 66
       height: 62
   - name: icon_coin
@@ -29,8 +29,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 934
+      x: 238
+      y: 929
       width: 90
       height: 89
   - name: icon_lv
@@ -59,8 +59,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 704
-      y: 269
+      x: 433
+      y: 380
       width: 105
       height: 73
   - name: item_1419-1
@@ -69,8 +69,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 809
-      y: 156
+      x: 455
+      y: 270
       width: 108
       height: 108
   - name: item_1420-1
@@ -79,8 +79,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 614
+      x: 238
+      y: 387
       width: 101
       height: 118
   - name: item_1421-1
@@ -89,8 +89,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 355
-      y: 363
+      x: 346
+      y: 380
       width: 86
       height: 116
   - name: item_1422-1
@@ -99,8 +99,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 355
-      y: 480
+      x: 935
+      y: 156
       width: 85
       height: 113
   - name: item_1423-1
@@ -109,8 +109,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 700
-      y: 156
+      x: 346
+      y: 270
       width: 108
       height: 109
   - name: item_1424-1
@@ -119,8 +119,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 355
-      y: 594
+      x: 346
+      y: 497
       width: 75
       height: 107
   - name: item_1425-1
@@ -129,8 +129,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 733
+      x: 238
+      y: 728
       width: 102
       height: 103
   - name: item_1426-1
@@ -139,8 +139,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 442
-      y: 363
+      x: 913
+      y: 270
       width: 93
       height: 104
   - name: item_1427-1
@@ -149,8 +149,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 593
-      y: 156
+      x: 238
+      y: 506
       width: 106
       height: 112
   - name: item_1428-1
@@ -159,8 +159,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 918
-      y: 156
+      x: 238
+      y: 619
       width: 101
       height: 108
   - name: item_246-1
@@ -169,8 +169,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
-      y: 873
+      x: 121
+      y: 156
       width: 116
       height: 118
   - name: item_294-1
@@ -180,7 +180,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 517
+      y: 638
       width: 118
       height: 117
   - name: item_305-1
@@ -190,7 +190,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 121
-      y: 270
+      y: 275
       width: 115
       height: 117
   - name: item_306-1
@@ -200,7 +200,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 396
+      y: 517
       width: 116
       height: 120
   - name: item_316-1
@@ -210,7 +210,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 156
+      y: 277
       width: 120
       height: 119
   - name: item_358-1
@@ -220,7 +220,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 121
-      y: 388
+      y: 393
       width: 114
       height: 118
   - name: item_359-1
@@ -229,8 +229,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 497
+      x: 238
+      y: 270
       width: 107
       height: 116
   - name: item_360-1
@@ -250,7 +250,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 755
+      y: 876
       width: 117
       height: 117
   - name: item_362-1
@@ -259,7 +259,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 478
+      x: 820
       y: 156
       width: 114
       height: 110
@@ -269,8 +269,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 472
-      y: 269
+      x: 681
+      y: 270
       width: 115
       height: 89
   - name: item_380-1
@@ -279,8 +279,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 588
-      y: 269
+      x: 797
+      y: 270
       width: 115
       height: 89
   - name: item_386-1
@@ -289,8 +289,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 355
-      y: 269
+      x: 564
+      y: 270
       width: 116
       height: 93
   - name: item_387-1
@@ -299,7 +299,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 358
+      x: 475
       y: 156
       width: 119
       height: 107
@@ -309,7 +309,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 121
+      x: 238
       y: 156
       width: 120
       height: 113
@@ -319,8 +319,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 269
+      x: 595
+      y: 156
       width: 112
       height: 113
   - name: item_448-1
@@ -329,8 +329,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 383
+      x: 708
+      y: 156
       width: 111
       height: 113
   - name: item_449-1
@@ -340,7 +340,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 635
+      y: 756
       width: 116
       height: 119
   - name: item_451-1
@@ -350,7 +350,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 121
-      y: 743
+      y: 748
       width: 114
       height: 116
   - name: item_454-1
@@ -360,7 +360,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 276
+      y: 397
       width: 119
       height: 119
   - name: item_547-1
@@ -369,7 +369,7 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
+      x: 359
       y: 156
       width: 115
       height: 112
@@ -380,7 +380,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 121
-      y: 860
+      y: 865
       width: 112
       height: 118
   - name: item_553-1
@@ -390,7 +390,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 121
-      y: 626
+      y: 631
       width: 114
       height: 116
   - name: item_555-1
@@ -400,7 +400,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 121
-      y: 507
+      y: 512
       width: 113
       height: 118
   - name: item_559-1
@@ -419,8 +419,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 810
-      y: 269
+      x: 539
+      y: 380
       width: 111
       height: 61
   - name: item_871-1
@@ -429,41 +429,11 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 242
-      y: 837
+      x: 238
+      y: 832
       width: 105
       height: 96
   - name: item_mutou
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 418
-      y: 0
-      width: 128
-      height: 128
-  - name: item_pi
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 289
-      y: 0
-      width: 128
-      height: 128
-  - name: item_tie
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 160
-      y: 0
-      width: 128
-      height: 128
-  - name: item_yao
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -473,3 +443,43 @@ MonoBehaviour:
       y: 0
       width: 128
       height: 128
+  - name: item_pi
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 418
+      y: 0
+      width: 128
+      height: 128
+  - name: item_tie
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 289
+      y: 0
+      width: 128
+      height: 128
+  - name: item_yao
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 160
+      y: 0
+      width: 128
+      height: 128
+  - name: sj
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 156
+      width: 120
+      height: 120

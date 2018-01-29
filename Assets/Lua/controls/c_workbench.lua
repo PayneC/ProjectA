@@ -2,6 +2,7 @@ local cf_formula = require('csv/cf_formula')
 
 local m_workbench = require('models/m_workbench')
 local m_item = require('models/m_item')
+local m_formula = require('models/m_formula')
 
 local time_mgr = require('base/time_mgr')
 
@@ -48,16 +49,43 @@ function _M.FinishFormula(workbenchID)
 	local formulaID =(workbench and workbench.formulaID) or false
 	local startTime =(workbench and workbench.startTime) or false
 	if formulaID and startTime then
-		local ct = time_mgr.GetTime()
-		local timeCost = cf_formula.GetData(formulaID, cf_formula.timeCost)
-		if ct >= startTime + timeCost then
-			local itemID = cf_formula.GetData(formulaID, cf_formula.itemID)
+		
+		local formula = m_formula.FindFormula(formulaID)
+		if formula then
+			local ct = time_mgr.GetTime()
+			local timeCost = formula.timeCost or 0
 			
-			common.AddItemCount(itemID, 1)
-			m_workbench.SetWorkbench(workbenchID, false, false)
-		else
-			-- 没完成
-		end	
+			if ct >= startTime + timeCost then
+				common.AddItemCount(formula.itemID, 1)
+				m_workbench.SetWorkbench(workbenchID, false, false)
+				
+				formula.makeNum = formula.makeNum + 1
+				if formula.makeNum == formula.nextNum then
+					local rewards = cf_formula.GetData(formula.DID, cf_formula.reward)
+					if rewards then
+						--获取当前的生产次数达成奖励
+						local reward = rewards[formula.rewardIndex]
+						if reward then
+							local funcID = reward[2] or 0
+							local ItemID = reward[3] or 0
+							local count = reward[4] or 0
+							--To do
+						end
+						--获取下个奖励需要生产的次数
+						formula.rewardIndex = formula.rewardIndex + 1
+						local reward = rewards[formula.rewardIndex]
+						if reward then
+							formula.nextNum = reward[1] or 0
+						end
+					end
+				end
+				
+				m_formula.SetDirtyFlag(formulaID)
+			else
+				-- 没完成
+			end	
+		end
+		
 	end
 end
 

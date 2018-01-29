@@ -13,6 +13,7 @@ local _M = {
 	task = {uid = 12, script = 'uis/ui_task', assetsName = 'UITask', depth = 10},
 	trade = {uid = 13, script = 'uis/ui_trade', assetsName = 'UITrade', depth = 10},
 	trade_item = {uid = 14, script = 'uis/ui_trade_item', assetsName = 'UITradeItem', depth = 40},
+	formula_lack = {uid = 15, script = 'uis/ui_formula_lack', assetsName = 'UIFormulaLack', depth = 60},
 }
 
 return _M

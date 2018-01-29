@@ -42,6 +42,16 @@ function _M.GetWorkbench(UID)
 	end
 end
 
+function _M.GetEmptyBench()
+	for i = 1, #_workbenchs, 1 do
+		local workbench = _workbenchs[i]
+		if workbench and not workbench.formulaID then
+			return workbench.UID
+		end
+	end
+	return false
+end
+
 function _M.SetWorkbench(UID, formulaID, startTime)
 	for i = 1, #_workbenchs, 1 do
 		local workbench = _workbenchs[i]

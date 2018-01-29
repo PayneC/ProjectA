@@ -2,6 +2,7 @@ local _M = {
 	Item_Cash = 10000001, --钻石
 	Item_Coin = 10000002, --金币
 	Item_EXP = 10000003, --经验
+	Item_Time = 10000004, --时间
 	
 	Item = 1, --物品
 	Formula = 2, --配方
@@ -22,12 +23,17 @@ local _M = {
 	Char_Hero = 51, --物品类型 英雄
 	Char_Worker = 52, --物品类型 工匠
 	
---Weapon_Sword = 201, --武器类型 剑
---Weapon_Stick = 202, --武器类型 棍
---Weapon_Bow = 203, --武器类型 弓
---Formula_Sword = 301, --配方类型 剑
---Formula_Stick = 302, --配方类型 棍
---Formula_Bow = 303, --配方类型 弓
+	--Weapon_Sword = 201, --武器类型 剑
+	--Weapon_Stick = 202, --武器类型 棍
+	--Weapon_Bow = 203, --武器类型 弓
+	--Formula_Sword = 301, --配方类型 剑
+	--Formula_Stick = 302, --配方类型 棍
+	--Formula_Bow = 303, --配方类型 弓
+	Func_Formula_CutTimeCost = 1, --减少生产时间
+	Func_Formula_AddPrice = 2, --售价增加
+	Func_Formula_CutStuff = 3, --材料减少
+	Func_Formula_AddItem = 4, --物品奖励
+	Func_Formula_ChangeItem = 5, --变更产物
 }
 
 return _M 

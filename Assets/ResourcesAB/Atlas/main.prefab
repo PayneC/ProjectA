@@ -13,16 +13,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tex2d: {fileID: 2800000, guid: 8fbed3781433942418785184a6b60fa1, type: 3}
   _uvs:
+  - name: sj
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 521
+      y: 933
+      width: 120
+      height: 120
   - name: 03816
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 687
-      y: 559
+      x: 702
+      y: 852
       width: 118
       height: 116
+  - name: 03841
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 907
+      y: 786
+      width: 60
+      height: 60
+  - name: 03857
+    alignment: 0
+    border: {x: 98, y: 0, z: 98, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 375
+      y: 769
+      width: 202
+      height: 80
   - name: 03885
     alignment: 0
     border: {x: 101, y: 101, z: 101, w: 101}
@@ -30,17 +60,27 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 603
-      y: 306
+      y: 303
       width: 204
       height: 204
+  - name: 03951
+    alignment: 0
+    border: {x: 152, y: 0, z: 57, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 181
+      y: 852
+      width: 212
+      height: 97
   - name: 04168
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 534
-      y: 0
+      x: 0
+      y: 558
       width: 374
       height: 293
   - name: 04265
@@ -49,8 +89,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 679
-      y: 684
+      x: 872
+      y: 149
       width: 145
       height: 145
   - name: 04272
@@ -60,7 +100,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 338
-      y: 306
+      y: 303
       width: 264
       height: 252
   - name: 04495
@@ -69,28 +109,18 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 679
-      y: 830
+      x: 181
+      y: 950
       width: 142
       height: 139
-  - name: 04574
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    rect:
-      serializedVersion: 2
-      x: 909
-      y: 114
-      width: 112
-      height: 112
   - name: 04579
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 123
-      y: 972
+      x: 726
+      y: 508
       width: 46
       height: 46
   - name: 04584
@@ -99,8 +129,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 806
-      y: 559
+      x: 821
+      y: 852
       width: 106
       height: 109
   - name: 04586
@@ -109,28 +139,28 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
+      x: 338
       y: 0
       width: 533
       height: 302
   - name: 04590
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 24, y: 0, z: 24, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
-      y: 994
+      x: 654
+      y: 530
       width: 50
       height: 14
   - name: 04591
     alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 24, y: 0, z: 24, w: 0}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
-      y: 1009
+      x: 603
+      y: 530
       width: 50
       height: 14
   - name: 04821
@@ -139,8 +169,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 534
-      y: 294
+      x: 872
+      y: 295
       width: 74
       height: 2
   - name: 05015
@@ -149,8 +179,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 909
-      y: 0
+      x: 702
+      y: 969
       width: 112
       height: 113
   - name: 05028
@@ -159,18 +189,28 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
-      y: 972
+      x: 603
+      y: 508
       width: 122
       height: 21
+  - name: 05042
+    alignment: 0
+    border: {x: 308, y: 0, z: 314, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 375
+      y: 558
+      width: 626
+      height: 102
   - name: 05046
     alignment: 0
     border: {x: 73, y: 72, z: 72, w: 72}
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 519
-      y: 840
+      x: 872
+      y: 0
       width: 148
       height: 148
   - name: 05457
@@ -180,7 +220,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 306
+      y: 0
       width: 337
       height: 557
   - name: 06397
@@ -190,7 +230,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 0
-      y: 303
+      y: 1133
       width: 512
       height: 2
   - name: board_01
@@ -199,8 +239,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 519
-      y: 559
+      x: 845
+      y: 661
       width: 167
       height: 124
   - name: board_02
@@ -209,8 +249,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 338
-      y: 840
+      x: 521
+      y: 852
       width: 180
       height: 80
   - name: board_03
@@ -219,8 +259,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 909
-      y: 227
+      x: 808
+      y: 484
       width: 95
       height: 61
   - name: board_04
@@ -229,8 +269,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 170
-      y: 972
+      x: 773
+      y: 508
       width: 29
       height: 48
   - name: board_npc
@@ -239,8 +279,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 338
-      y: 559
+      x: 0
+      y: 852
       width: 180
       height: 280
   - name: btn_01
@@ -250,7 +290,7 @@ MonoBehaviour:
     rect:
       serializedVersion: 2
       x: 808
-      y: 306
+      y: 303
       width: 181
       height: 180
   - name: btn_add
@@ -259,8 +299,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 808
-      y: 487
+      x: 904
+      y: 484
       width: 71
       height: 71
   - name: btn_gongneng
@@ -269,8 +309,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 0
-      y: 864
+      x: 375
+      y: 661
       width: 309
       height: 107
   - name: btn_jiahao
@@ -279,8 +319,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 947
-      y: 487
+      x: 845
+      y: 786
       width: 61
       height: 61
   - name: icon_cash
@@ -289,8 +329,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 880
-      y: 487
+      x: 578
+      y: 769
       width: 66
       height: 62
   - name: icon_chengjiu
@@ -299,8 +339,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 338
-      y: 921
+      x: 928
+      y: 852
       width: 95
       height: 95
   - name: icon_coin
@@ -309,8 +349,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 825
-      y: 684
+      x: 917
+      y: 962
       width: 90
       height: 89
   - name: icon_lv
@@ -319,8 +359,8 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 519
-      y: 684
+      x: 685
+      y: 661
       width: 159
       height: 155
   - name: icon_shezhi
@@ -329,7 +369,27 @@ MonoBehaviour:
     pivot: {x: 0.5, y: 0.5}
     rect:
       serializedVersion: 2
-      x: 913
-      y: 559
+      x: 821
+      y: 962
       width: 95
       height: 95
+  - name: jy
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 394
+      y: 852
+      width: 126
+      height: 126
+  - name: xz
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    rect:
+      serializedVersion: 2
+      x: 394
+      y: 979
+      width: 126
+      height: 126

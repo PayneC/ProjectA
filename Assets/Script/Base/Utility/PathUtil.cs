@@ -12,13 +12,14 @@ public class PathUtil : Singleton<PathUtil>
 #else
         if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
         {
-            return Application.streamingAssetsPath + "/";
+            return Application.persistentDataPath + "/";
         }
         else
         {
             return Application.streamingAssetsPath + "/";
         }
 #endif
+        //Application.persistentDataPath
     }
 
     public string GetRuntimePlatform()

@@ -6,9 +6,11 @@ local _M = {
 	StuffChange = 5,		--材料更改
 	TaskChange = 6,			--任务更改
 	CoinChange = 7,			--金币更改
-	CashChange = 8,		--钻石更改
+	CashChange = 8,			--钻石更改
 	EXPChange = 9,			--经验更改
 	LVChange = 10,			--等级更改
+	FormulaAdd = 11,		--增加配方
+	FormulaChange = 12,		--配方更改
 }
 
 return _M 

@@ -23,6 +23,24 @@ function _M.GetItemType(itemID)
 	return type1, type2, type3
 end
 
+function _M.GetItemPrice(itemID)
+	local type1, type2, type3 = _M.GetItemType(itemID)
+	
+	local coin, cash
+	
+	if type1 == constant.Item then
+		if type2 == constant.Item_Special or type2 == constant.Item_Stuff then
+			coin = cf_item.GetData(itemID, cf_item.coin)
+			cash = cf_item.GetData(itemID, cf_item.cash)
+		elseif type2 == constant.Item_Weapon then
+			coin = cf_weapon.GetData(itemID, cf_weapon.coin)
+			cash = cf_weapon.GetData(itemID, cf_weapon.cash)
+		end
+	end
+	
+	return coin, cash
+end
+
 function _M.GetItemIcon(itemID)	
 	local type1, type2, type3 = _M.GetItemType(itemID)
 	
@@ -40,6 +58,11 @@ function _M.GetItemIcon(itemID)
 	elseif type1 == constant.Build then
 		atlas = 'build'
 		icon = cf_build.GetData(itemID, cf_build.icon)		
+	elseif type1 == constant.Formula then
+		local DID = cf_formula.GetData(itemID, cf_formula.itemID)
+		local a, i = _M.GetItemIcon(DID)
+		atlas = a
+		icon = i
 	end
 	
 	if not icon then
@@ -169,6 +192,52 @@ function _M.CutItemCount(itemID, count)
 	end
 end
 
+function _M.CheckCosts(costs, returnLack)
+	if not costs then
+		return true
+	end
+	
+	local cost, itemID, count
+	for i = 1, #costs, 1 do
+		cost = costs[i]
+		itemID = cost and cost[1] or false
+		count = cost and cost[2] or 0
+		
+		if itemID and _M.GetItemCount(itemID) < count then
+			return false
+		end
+	end
+	
+	return true
+end
+
+function _M.GetCostsLack()
+	if not costs then
+		return nil
+	end
+	
+	local lack
+	local cost, itemID, count
+	for i = 1, #costs, 1 do
+		cost = costs[i]
+		itemID = cost and cost[1] or false
+		count = cost and cost[2] or 0
+		
+		if itemID then
+			local has = _M.GetItemCount(itemID)
+			if has < count then
+				if not lack then
+					lack = {}
+				end
+				
+				table.insert(lack, {itemID, count - has})
+			end
+		end
+	end
+	
+	return lack
+end
+
 function _M.LvUp()
 	m_player.SetLv(m_player.GetLv() + 1)
 	local exp = cf_lv.GetData(m_player.GetLv(), cf_lv.exp)
@@ -181,6 +250,20 @@ function _M.LvUp()
 		if reward then
 			_M.AddItemCount(reward[1], reward[2])
 		end
+	end
+end
+
+function _M.CashBuy(DID, count)
+	local coin, cash = _M.GetItemPrice(DID)
+	local has = _M.GetItemCount(constant.Item_Cash)
+	cash = cash or 0
+	if cash * count > has then
+		return
+	end
+	
+	_M.AddItemCount(DID, count)
+	if cash * count > 0 then
+		_M.CutItemCount(constant.Item_Cash, cash * count)
 	end
 end
 
