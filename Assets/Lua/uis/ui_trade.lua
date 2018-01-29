@@ -97,14 +97,6 @@ function _M:OnDestroy()
 	
 end
 
-function _M:OnBuildChange()
-	
-end
-
-function _M:OnBuildLVChange()
-	
-end
-
 function _M:OnItemChange()
 	
 end

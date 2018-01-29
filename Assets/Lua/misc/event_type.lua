@@ -1,6 +1,6 @@
 local _M = {
-	BuildChange = 1, 		--建筑更改
-	BuildLVChange = 2,		--建筑等级更改
+	BuildAdd = 1, 		--建筑更改
+	BuildChange = 2,		--建筑等级更改
 	WorkbenchChange = 3,	--工作台更改
 	ItemChange = 4,			--物品更改
 	StuffChange = 5,		--材料更改

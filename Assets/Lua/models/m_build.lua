@@ -53,7 +53,7 @@ function _M.SetBuildData(build, DID, time, count)
 	end
 	
 	_isModify = true
-	events.Brocast(eventType.BuildLVChange)
+	events.Brocast(eventType.BuildChange, build.UID)
 end
 
 function _M.GetBuild(UID)
@@ -85,11 +85,20 @@ function _M.AddBuild(UID, DID, time)
 	table.insert(_builds, build)
 	build.UID = UID
 	_M.SetBuildData(build, DID, time)
+	events.Brocast(eventType.BuildAdd)
 	return build
 end
 
 function _M.GetAllBuild()
 	return _builds
+end
+
+function _M.GetBuildCount()
+	return _builds and #_builds or 0
+end
+
+function _M.GetBuildByIndex(index)
+	return _builds and _builds[index]
 end
 
 function _M.ReadData()
