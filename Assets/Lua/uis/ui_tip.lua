@@ -22,6 +22,7 @@ local function NewTip(_ui)
 		gameObject = gameObject,
 		spr_icon_ImageEx = false,
 		txt_count_TextEx = false,
+		txt_name_TextEx = false,
 		
 		isActive = false,
 		high = 0,
@@ -29,11 +30,13 @@ local function NewTip(_ui)
 	
 	_tip.spr_icon_ImageEx = goUtil.GetComponent(_tip.gameObject, typeof(ImageEx), 'spr_icon')
 	_tip.txt_count_TextEx = goUtil.GetComponent(_tip.gameObject, typeof(TextEx), 'txt_count')
+	_tip.txt_name_TextEx = goUtil.GetComponent(_tip.gameObject, typeof(TextEx), 'txt_name')
 	
 	function _tip:SetData(tip)
 		common.SetItemIcon(self.spr_icon_ImageEx, tip[1])
 		local name = common.GetItemName(tip[1])
-		self.txt_count_TextEx.text = string.format('%s +%d', name, tip[2])
+		self.txt_name_TextEx.text = string.format('%s', name)
+		self.txt_count_TextEx.text = string.format('+%d', tip[2])
 	end
 	
 	goUtil.SetParent(_tip.gameObject, _ui.rt_tips)
