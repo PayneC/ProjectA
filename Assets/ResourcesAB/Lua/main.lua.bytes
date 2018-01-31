@@ -6,7 +6,7 @@ require "event"
 
 local uimgr = require('base/ui_mgr')
 local lvmgr = require('base/lv_mgr')
-
+local time_mgr = require('base/time_mgr')
 
 local events = require('base/events')
 local prefs = require('base/prefs')
@@ -38,7 +38,8 @@ function Main(parameter)
 	lvmgr.LoadLevel(1)
 end
 
-function Update(dt)
+function Update()
+	local dt = time_mgr.GetUnscaledDeltaTime()
 	UpdateControl()
 	
 	uimgr.Update(dt)

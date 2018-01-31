@@ -70,59 +70,77 @@ local function NewItem(_ui)
 	return _item
 end
 
-local function NewBuild(_ui)
-	local gameObject = goUtil.Instantiate(_ui.rt_build)
-	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
-	local txt_name_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_name')
-	local txt_lv_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_lv')
-	
-	local spr_item_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_icon')
-	local spr_item_p_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_p')
-	local txt_item_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_item_num')
-	
-	local spr_item_icon_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'spr_item_icon')
-	local btn_uplv_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'btn_uplv')
-	local txt_uplv_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_uplv')
-	
+local function NewBuild(go)	
 	local _item = {
+		gameObject = go,
+		UIGridElement = false,
+		btn_build_bg_ButtonEx = false,
+		btn_item_bg_ButtonEx = false,
+		btn_get_ButtonEx = false,
+		
+		spr_build_ImageEx = false,
+		spr_item_ImageEx = false,
+		spr_item_p_ImageEx = false,
+		
+		txt_name_TextEx = false,
+		txt_lv_TextEx = false,
+		txt_num_TextEx = false,
+		
 		UID = 0,
 		DID = 0,
+		itemID = 0,
 		tp = 0,
 		needTime = 0,
 		count = 0,
 		itemCapacity = 0,
-		
-		gameObject = gameObject,
-		spr_icon_ImageEx = spr_icon_ImageEx,
-		txt_name_TextEx = txt_name_TextEx,
-		txt_lv_TextEx = txt_lv_TextEx,
-		spr_item_icon_ImageEx = spr_item_icon_ImageEx,
-		spr_item_p_ImageEx = spr_item_p_ImageEx,
-		txt_item_num_TextEx = txt_item_num_TextEx,
-		spr_item_icon_ButtonEx = spr_item_icon_ButtonEx,
-		btn_uplv_ButtonEx = btn_uplv_ButtonEx,
-		txt_uplv_TextEx = txt_uplv_TextEx,
 	}
 	
-	function _item:SetData(UID)
-		self.UID = UID	
-		local build = m_build.GetBuild(self.UID)
-		if self.UID and build then
-			self.DID = build.DID
+	_item.UIGridElement = goUtil.GetComponent(_item.gameObject, typeof(UIGridElement), nil)
+	
+	_item.btn_build_bg_ButtonEx = goUtil.GetComponent(_item.gameObject, typeof(ButtonEx), 'btn_build_bg')
+	_item.btn_item_bg_ButtonEx = goUtil.GetComponent(_item.gameObject, typeof(ButtonEx), 'btn_item_bg')
+	_item.btn_get_ButtonEx = goUtil.GetComponent(_item.gameObject, typeof(ButtonEx), 'btn_get')
+	
+	_item.spr_build_ImageEx = goUtil.GetComponent(_item.gameObject, typeof(ImageEx), 'spr_build')
+	_item.spr_item_ImageEx = goUtil.GetComponent(_item.gameObject, typeof(ImageEx), 'spr_item')
+	_item.spr_item_p_ImageEx = goUtil.GetComponent(_item.gameObject, typeof(ImageEx), 'spr_item_p')
+	
+	_item.txt_name_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_name')
+	_item.txt_lv_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_lv')
+	_item.txt_num_TextEx = goUtil.GetComponent(_item.gameObject, typeof(TextEx), 'txt_num')
+	
+	function _item:OnIndexChange()
+		self:SetData()
+	end
+	
+	function _item:OnGet()
+		c_build.CollectStuff(self.UID)
+		--c_build.BuildUpgrade(self.UID)
+	end
+	
+	function _item:OnBuildBg()
+		uimgr.OpenSubUI(cf_ui.build_info, self.UID)
+	end
+	
+	function _item:OnItemBg()
+		
+	end
+	
+	function _item:OnBuildChange(UID)
+		if self.UID == UID then
+			self:SetData()
+		end
+	end
+	
+	function _item:SetData()
+		local index = _item.UIGridElement:GetIndex() + 1
+		local build = m_build.GetBuildByIndex(index)
+		
+		if build then
 			goUtil.SetActive(self.gameObject, true)
-			local itemID = cf_build.GetData(self.DID, cf_build.itemID)	
-			
-			common.SetItemName(self.txt_name_TextEx, self.DID)
-			common.SetItemIcon(self.spr_icon_ImageEx, self.DID)
-			
-			common.SetItemIcon(self.spr_item_icon_ImageEx, itemID)
-			common.SetItemIcon(self.spr_item_p_ImageEx, itemID)
-			
-			local lv = cf_build.GetData(self.DID, cf_build.LV)			
-			self.txt_lv_TextEx.text = string.format('LV.%d', lv)
-			self.txt_item_num_TextEx.text = string.format('%d', build.count)
-			
-			
+			self.UID = build.UID			
+			self.DID = build.DID
+			self.itemID = cf_build.GetData(self.DID, cf_build.itemID)	
 			
 			self.tp = build.timePoint
 			self.needTime = build.needTime
@@ -130,42 +148,39 @@ local function NewBuild(_ui)
 			self.count = build.count
 			self.itemCapacity = build.itemCapacity
 			
-			if self.count >= self.itemCapacity then
-				self.spr_item_p_ImageEx.fillAmount = 1
-			else
-				self.spr_item_p_ImageEx.fillAmount = build.p
-				
+			local lv = cf_build.GetData(self.DID, cf_build.LV)
+			local p = 1
+			if self.count < self.itemCapacity then
+				p = build.p
 			end
+			
+			common.SetItemName(self.txt_name_TextEx, self.DID)
+			common.SetItemIcon(self.spr_build_ImageEx, self.DID)
+			common.SetItemIcon(self.spr_item_ImageEx, self.itemID)
+			
+			self.txt_lv_TextEx.text = string.format('等级 %d', lv)
+			self.txt_num_TextEx.text = string.format('%d/%d', self.count, self.itemCapacity)
+			self.spr_item_p_ImageEx.fillAmount = p
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
 	end
 	
-	function _item:OnClick()
-		debug.Log(0, ' OnClick')
-		c_build.BuildUpgrade(self.UID)
-	end
-	
-	function _item:OnCollect()
-		c_build.CollectStuff(self.UID)
-	end
-	
 	function _item:Update(ct)
-		if self.count >= self.itemCapacity then
-			return
+		if self.count < self.itemCapacity then
+			local p = 1
+			if self.needTime > 0 then
+				p =(self.needTime + self.tp - ct) / self.needTime
+			end
+			self.spr_item_p_ImageEx.fillAmount = 1 - p
 		end
-		local p = 1
-		if self.needTime > 0 then
-			p =(self.needTime + self.tp - ct) / self.needTime
-		end
-		self.spr_item_p_ImageEx.fillAmount = 1 - p
 	end
 	
-	_item.spr_item_icon_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnCollect, _item))
+	_item.btn_build_bg_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnBuildBg, _item))
+	_item.btn_item_bg_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnItemBg, _item))
+	_item.btn_get_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnGet, _item))
 	
-	_item.btn_uplv_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_item.OnClick, _item))
-	goUtil.SetParent(_item.gameObject, _ui.scr_builds_content)
-	goUtil.SetLocalScale(_item.gameObject, Vector3.one)
+	_item.UIGridElement:AddIndexChangeListener(UnityEngine.Events.UnityAction(_item.OnIndexChange, _item))
 	
 	return _item
 end
@@ -173,18 +188,24 @@ end
 function _M:ctor()
 	self.builds = {}
 	self.items = {}
+	
+	self.scr_builds_UIGrid = false
+	
+	self.rt_item = false
+	self.scr_items_content = false
 end
 
 function _M:OnLoaded()
-	events.AddListener(eventType.ItemChange, self.OnItemChange, self)
-	events.AddListener(eventType.BuildChange, self.OnBuildChange, self)
-	events.AddListener(eventType.BuildLVChange, self.OnBuildLVChange, self)
+	self.scr_builds_UIGrid = goUtil.GetComponent(self.gameObject, typeof(UIGrid), 'scr_builds')
 	
 	self.rt_item = goUtil.FindChild(self.gameObject, 'rt_item')
 	self.scr_items_content = goUtil.FindChild(self.gameObject, 'rt_items')
 	
-	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
-	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
+	self.scr_builds_UIGrid:AddNewElementListener(UnityEngine.Events.UnityAction_GameObject(self.OnAddNewElement, self))	
+	
+	events.AddListener(eventType.ItemChange, self.OnItemChange, self)
+	events.AddListener(eventType.BuildAdd, self.OnBuildAdd, self)
+	events.AddListener(eventType.BuildChange, self.OnBuildChange, self)
 end
 
 function _M:OnEnable()
@@ -208,29 +229,16 @@ function _M:OnDestroy()
 	
 end
 
-function _M:ShowBuilds()
-	local builds = m_build.GetAllBuild()
-	local count = #builds
-	local hasNum = #self.builds
-	
-	if count > hasNum then
-		for i = hasNum + 1, count, 1 do
-			local item = NewBuild(self)
-			table.insert(self.builds, item)
-		end
-	elseif count < hasNum then		
-		for i = count + 1, hasNum, 1 do
-			local item = self.builds[i]
-			item:SetData(false)
-		end
-	end
-	
-	for i = 1, count, 1 do
-		local item = self.builds[i]
-		item:SetData(builds[i].UID)
-	end
+function _M:OnAddNewElement(go)
+	local build = NewBuild(go)
+	table.insert(self.builds, build)
 end
 
+function _M:ShowBuilds()
+	local count = m_build.GetBuildCount()
+	self.scr_builds_UIGrid:SetElementCount(count)
+	self.scr_builds_UIGrid:ApplySetting()
+end
 
 function _M:ShowItems()
 	local stuffs = m_item.GetAllStuff()
@@ -256,12 +264,14 @@ function _M:ShowItems()
 	end
 end
 
-function _M:OnBuildChange()
+function _M:OnBuildAdd()
 	self:ShowBuilds()
 end
 
-function _M:OnBuildLVChange()
-	self:ShowBuilds()
+function _M:OnBuildChange(UID)
+	for i = 1, #self.builds, 1 do
+		self.builds[i]:OnBuildChange(UID)
+	end
 end
 
 function _M:OnItemChange()

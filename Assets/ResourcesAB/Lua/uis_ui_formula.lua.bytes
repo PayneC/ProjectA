@@ -108,7 +108,7 @@ local function NewFormula(go, _ui)
 	
 	function _formula:OnItemChange(DID)
 		if DID == self.itemID then
-			local bag = common.GetItemCount(itemID)
+			local bag = common.GetItemCount(self.itemID)
 			self.txt_bag_TextEx.text = string.format('%d', bag)
 		end
 		for i = 1, #self.stuffs, 1 do
@@ -159,9 +159,12 @@ local function NewFormula(go, _ui)
 			
 			local rewards = cf_formula.GetData(self.DID, cf_formula.reward)
 			local reward = rewards and rewards[formula.rewardIndex]
-			debug.LogFormat(0, debug.TableToString(reward))
+			
 			self:SetReward(reward)
 		end
+		
+		local bag = common.GetItemCount(self.itemID)
+		self.txt_bag_TextEx.text = string.format('%d', bag)
 		
 		self:SetStuffsData()
 	end

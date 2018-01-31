@@ -8,6 +8,9 @@ local m_item = require('models/m_item')
 local time_mgr = require('base/time_mgr')
 local prefs = require('base/prefs')
 
+local common = require('misc/common')
+local constant = require('misc/constant')
+
 local _M = {}
 
 local _isModify = false
@@ -28,7 +31,7 @@ function _M.NewBuild(DID)
 	end
 end
 
-function _M.BuildUpgrade(UID)
+function _M.BuildUpgrade(UID, useCash)
 	local build = m_build.GetBuild(UID)
 	if not build then
 		return
@@ -39,6 +42,33 @@ function _M.BuildUpgrade(UID)
 	if not newDID then
 		return
 	end
+	
+	local costs = cf_build.GetData(newDID, cf_build.unlockCost)
+	if useCash then
+		local cash = 0
+		for i = 1, #costs, 1 do
+			local cost = costs[i]
+			if cost then
+				cash = cash +(common.GetItemCash(cost[1], cost[2]) or 0)
+			end
+		end
+		if not common.CheckCosts(constant.Item_Cash, cash) then
+			return
+		end
+		
+		common.CutItemCount(constant.Item_Cash, cash)
+	else
+		if not common.CheckCosts(costs) then
+			return
+		end
+		
+		for i = 1, #costs, 1 do
+			local cost = costs[i]
+			if cost then
+				common.CutItemCount(cost[1], cost[2])
+			end
+		end
+	end	
 	
 	local ct = time_mgr.GetTime()
 	_M.Calculate(build, ct, true)

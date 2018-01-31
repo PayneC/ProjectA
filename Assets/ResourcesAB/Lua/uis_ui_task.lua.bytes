@@ -48,15 +48,18 @@ end
 
 local function NewBuild(_ui)
 	local gameObject = goUtil.Instantiate(_ui.rt_build)
-	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
+	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'rt_content/spr_icon')
 	
-	local spr_item_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_item_icon')
-	local rt_rewards = goUtil.FindChild(gameObject, 'rt_rewards')
+	local spr_item_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'rt_content/spr_item_icon')
+	local rt_rewards = goUtil.FindChild(gameObject, 'rt_content/rt_rewards')
 	
-	local spr_item_icon_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'spr_item_icon')
-	local btn_uplv_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'btn_uplv')
-	local btn_close_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'btn_close')
-	local txt_uplv_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_uplv')
+	local spr_item_icon_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'rt_content/spr_item_icon')
+	local btn_uplv_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'rt_content/btn_uplv')
+	local btn_close_ButtonEx = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'rt_content/btn_close')
+	local txt_uplv_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'rt_content/txt_uplv')
+	local rt_content = goUtil.FindChild(gameObject, 'rt_content')
+	local txt_time_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_time')
+	local txt_num_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'rt_content/txt_num')
 	
 	local _item = {
 		UID = 0,
@@ -75,6 +78,9 @@ local function NewBuild(_ui)
 		btn_uplv_ButtonEx = btn_uplv_ButtonEx,
 		btn_close_ButtonEx = btn_close_ButtonEx,
 		txt_uplv_TextEx = txt_uplv_TextEx,
+		rt_content = rt_content,
+		txt_time_TextEx = txt_time_TextEx,
+		txt_num_TextEx = txt_num_TextEx,
 	}
 	
 	function _item:SetData(task)		
@@ -88,6 +94,16 @@ local function NewBuild(_ui)
 			common.SetItemIcon(self.spr_item_icon_ImageEx, self.itemID)				
 			
 			self:ShowReward(task.rewards)
+			goUtil.SetActive(self.gameObject, true)
+			
+			local count = common.GetItemCount(self.itemID)
+			if count > 0 then
+				self.btn_uplv_ButtonEx.Interactable = true
+				self.txt_num_TextEx.text = string.format('%d/%d', count, 1)
+			else
+				self.btn_uplv_ButtonEx.interactable = false
+				self.txt_num_TextEx.text = string.format('<color=red>%d</color>/%d', count, 1)
+			end
 		else
 			goUtil.SetActive(self.gameObject, false)
 		end
@@ -127,10 +143,15 @@ local function NewBuild(_ui)
 	end
 	
 	function _item:Update(ct)
-		local active =(ct - self.tp) >= self.CD
+		local st = ct - self.tp
+		local active = st >= self.CD
 		if active ~= self.isActive then
 			self.isActive = active
-			goUtil.SetActive(self.gameObject, self.isActive)
+			goUtil.SetActive(self.rt_content, self.isActive)
+			goUtil.SetActiveByComponent(self.txt_time_TextEx, not self.isActive)
+		end
+		if not self.isActive then
+			self.txt_time_TextEx.text = string.format('后面的客人\n%d秒后到达', self.CD - st)
 		end
 	end
 	
