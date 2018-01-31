@@ -15,4 +15,8 @@ function _M.GetTime()
 	return _startTimeStamp + ct - _startTime
 end
 
+function _M.GetUnscaledDeltaTime()
+	return time.unscaledDeltaTime
+end
+
 return _M 

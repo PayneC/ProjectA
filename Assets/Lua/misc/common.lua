@@ -6,6 +6,7 @@ local cf_lv = require('csv/cf_lv')
 
 local m_item = require('models/m_item')
 local m_player = require('models/m_player')
+local m_tip = require('models/m_tip')
 
 local constant = require('misc/constant')
 
@@ -162,6 +163,8 @@ function _M.AddItemCount(itemID, count)
 			
 		end
 	end
+	
+	m_tip.PushEntity(itemID, realCount)
 end
 
 function _M.CutItemCount(itemID, count)

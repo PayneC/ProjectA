@@ -18,6 +18,7 @@ end
 
 function _M:OnEnter(levelID, parameter)
 	uimgr.OpenCommonUI(cf_ui.menu)
+	uimgr.OpenCommonUI(cf_ui.tip)
 	uimgr.SetDefaultUI(cf_ui.workbench)
 	
 	lvmgr.SetLoading(1, 1, true)
