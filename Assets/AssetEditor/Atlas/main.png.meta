@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8fbed3781433942418785184a6b60fa1
-timeCreated: 1517032590
+timeCreated: 1517381684
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -67,6 +67,8 @@ TextureImporter:
     21300120: 05042
     21300122: 03841
     21300124: sj
+    21300126: bg
+    21300128: dao
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -143,25 +145,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sj
+      name: 03816
       rect:
         serializedVersion: 2
         x: 521
         y: 933
-        width: 120
-        height: 120
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: 03816
-      rect:
-        serializedVersion: 2
-        x: 702
-        y: 852
         width: 118
         height: 116
       alignment: 0
@@ -174,8 +162,8 @@ TextureImporter:
       name: 03841
       rect:
         serializedVersion: 2
-        x: 907
-        y: 786
+        x: 324
+        y: 950
         width: 60
         height: 60
       alignment: 0
@@ -300,8 +288,8 @@ TextureImporter:
       name: 04584
       rect:
         serializedVersion: 2
-        x: 821
-        y: 852
+        x: 702
+        y: 966
         width: 106
         height: 109
       alignment: 0
@@ -371,7 +359,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 702
-        y: 969
+        y: 852
         width: 112
         height: 113
       alignment: 0
@@ -451,6 +439,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
+      name: bg
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 149
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
       name: board_01
       rect:
         serializedVersion: 2
@@ -488,7 +490,7 @@ TextureImporter:
         height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 0, z: 14, w: 0}
+      border: {x: 47, y: 30, z: 47, w: 30}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -516,7 +518,7 @@ TextureImporter:
         height: 280
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 89, y: 140, z: 89, w: 138}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -530,7 +532,7 @@ TextureImporter:
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 86, y: 85, z: 85, w: 87}
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -566,7 +568,7 @@ TextureImporter:
       name: btn_jiahao
       rect:
         serializedVersion: 2
-        x: 845
+        x: 912
         y: 786
         width: 61
         height: 61
@@ -577,11 +579,25 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: icon_cash
+      name: dao
       rect:
         serializedVersion: 2
         x: 578
         y: 769
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: icon_cash
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 786
         width: 66
         height: 62
       alignment: 0
@@ -594,7 +610,7 @@ TextureImporter:
       name: icon_chengjiu
       rect:
         serializedVersion: 2
-        x: 928
+        x: 815
         y: 852
         width: 95
         height: 95
@@ -608,8 +624,8 @@ TextureImporter:
       name: icon_coin
       rect:
         serializedVersion: 2
-        x: 917
-        y: 962
+        x: 815
+        y: 948
         width: 90
         height: 89
       alignment: 0
@@ -636,8 +652,8 @@ TextureImporter:
       name: icon_shezhi
       rect:
         serializedVersion: 2
-        x: 821
-        y: 962
+        x: 911
+        y: 852
         width: 95
         height: 95
       alignment: 0

@@ -119,7 +119,7 @@ local function NewBuild(go)
 	end
 	
 	function _item:OnBuildBg()
-		
+		uimgr.OpenSubUI(cf_ui.build_info, self.UID)
 	end
 	
 	function _item:OnItemBg()

@@ -267,4 +267,28 @@ function _M.CashBuy(DID, count)
 	end
 end
 
+function _M.GetItemCash(itemID, count)
+	local type1, type2, type3 = _M.GetItemType(itemID)
+	
+	local cash = 0
+	
+	if type1 == constant.Item then
+		if type2 == constant.Item_Special then
+			if itemID == constant.Item_Cash then
+				cash = count
+			elseif itemID == constant.Item_Coin then
+				cash = count * 0.1
+			elseif itemID == constant.Item_EXP then
+				cash = 0
+			end			
+		elseif type2 == constant.Item_Stuff then			
+			cash = 0
+		elseif type2 == constant.Item_Weapon then
+			cash = cf_weapon.GetData(itemID, cf_weapon.priceZS)
+		end
+	end
+	
+	return cash
+end
+
 return _M 
