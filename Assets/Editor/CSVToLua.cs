@@ -8,6 +8,12 @@ using UnityEditor;
 
 public class CSVToLua : EditorWindow
 {
+    class FileState
+    {
+        public string path;
+        public bool isSel = false;
+    }
+
     [MenuItem("Tools/CSVToLua", priority = 2050)]
     static void ShowWindow()
     {
@@ -15,18 +21,6 @@ public class CSVToLua : EditorWindow
         window.titleContent = new GUIContent("CSVToLua");
         window.Show();
     }
-
-    void OnGUI()
-    {
-        path = GUILayout.TextField(path);
-
-        if (GUILayout.Button("ToLua"))
-        {
-            ReadCSV(path);
-        }
-    }
-
-    static private string path = "E:\\GitHub/PAConfig/csv/cf_build.csv";
 
     static private string sFormat =
         @"local debug = require('base/debug')
@@ -73,12 +67,81 @@ end
 
 return _M";
 
-    void ReadCSV(string filePath)
-    {
-        Encoding encoding = Encoding.UTF8;
-        FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+    private string srcPath = "";
+    private string desPath = "";
 
-        StreamReader sr = new StreamReader(fs, encoding);
+    private string luaPath = "/Lua/csv";
+    private string csvPath = "/Csv";
+
+    FileState[] files;
+
+    void OnEnable()
+    {
+        srcPath = Directory.GetParent(Application.dataPath) + csvPath;
+        desPath = Application.dataPath + luaPath;
+        RefreshCSVList();
+    }
+
+    void OnGUI()
+    {
+        GUILayout.Label(srcPath);
+        GUILayout.Label(desPath);
+
+        if (GUILayout.Button("刷新文件列表"))
+        {
+            RefreshCSVList();
+        }
+
+        if (files == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < files.Length; ++i)
+        {
+            files[i].isSel = EditorGUILayout.ToggleLeft(files[i].path, files[i].isSel);
+        }
+
+        if (GUILayout.Button("生成Lua文件"))
+        {
+            for (int i = 0; i < files.Length; ++i)
+            {
+                if (files[i].isSel)
+                {
+                    EditorUtility.DisplayProgressBar("生成lua文件", files[i].path, 0);
+                    ReadCSV(files[i].path, desPath);
+                    EditorUtility.DisplayProgressBar("生成lua文件", files[i].path, 1);
+                }
+            }
+        }
+        EditorUtility.ClearProgressBar();
+    }
+
+    void RefreshCSVList()
+    {
+        string[] fs = Directory.GetFiles(srcPath, "*.csv");
+        if (fs != null)
+        {
+            files = new FileState[fs.Length];
+        }
+
+        if (files != null)
+        {
+            for (int i = 0; i < files.Length; ++i)
+            {
+                files[i] = new FileState();
+                files[i].path = fs[i];
+            }
+        }
+    }
+
+    void ReadCSV(string srcPath, string desPath)
+    {
+        FileStream rfs = new FileStream(srcPath, FileMode.Open, FileAccess.Read);
+        Encoding srcEncoding = FileEncoding.GetType(rfs);
+        rfs.Close();
+
+        StreamReader sr = new StreamReader(srcPath, srcEncoding);
 
         StringBuilder sbHeader = new StringBuilder();
         StringBuilder sbAll = new StringBuilder();
@@ -86,14 +149,12 @@ return _M";
         StringBuilder sbIDS = new StringBuilder();
         StringBuilder sbLine = new StringBuilder();
 
-        string sLine = "";
-        string[] sFields = null;
-
+        string sLine = null;
         string[] sTitle = null;
         string[] sVariable = null;
         string[] sType = null;
         string[] sDescription = null;
-
+        string[] sFields = null;
         int columnCount = 0;
 
         sLine = sr.ReadLine();
@@ -111,21 +172,36 @@ return _M";
         string sf = "\t{0} = {1}, -- {2}\n";
         for (int i = 0; i < sVariable.Length; ++i)
         {
-            sbHeader.AppendFormat(sf, sVariable[i], i + 1, sTitle[i]);
+            if (!string.IsNullOrEmpty(sVariable[i]))
+            {
+                sbHeader.AppendFormat(sf, sVariable[i], i + 1, sTitle[i]);
+                ++columnCount;
+            }
         }
 
-        sLine = sr.ReadLine();
-        while (sLine != null)
+        while (true)
         {
-            byte[] bLine = encoding.GetBytes(sLine);
-            bLine = Encoding.Convert(encoding, Encoding.UTF8, bLine);
-            sLine = Encoding.UTF8.GetString(bLine);
+            sLine = sr.ReadLine();
+            if (null == sLine)
+                break; ;
+
+            if (!Encoding.UTF8.Equals(srcEncoding))
+            {
+                byte[] bLine = srcEncoding.GetBytes(sLine);
+                bLine = Encoding.Convert(srcEncoding, Encoding.UTF8, bLine);
+                sLine = Encoding.UTF8.GetString(bLine);
+            }
 
             sFields = sLine.Split(',');
+            if (string.IsNullOrEmpty(sFields[0]))
+            {
+                continue;
+            }
+
             sbLine.Append("\t[");
             sbLine.Append(sFields[0]);
             sbLine.Append("] = {");
-            for (int i = 0; i < sFields.Length; ++i)
+            for (int i = 0; i < columnCount; ++i)
             {
                 if (string.IsNullOrEmpty(sFields[i]))
                 {
@@ -165,25 +241,24 @@ return _M";
 
             sbIDS.Append(sFields[0]);
             sbIDS.Append(", ");
-
-            sLine = sr.ReadLine();
         }
 
-        fs.Close();
+        sr.Close();
 
-        string outPath = Path.ChangeExtension(filePath, "lua");
-        string fileName = Path.GetFileNameWithoutExtension(filePath);
-        FileStream wfs;
-        wfs = new FileStream(outPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        string fileName = Path.GetFileNameWithoutExtension(srcPath);
+        string fileNameEx = string.Format("{0}.{1}", fileName, "lua");
+        string outPath = Path.Combine(desPath, fileNameEx);
+
+        FileStream wfs = new FileStream(outPath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 
         string all = sbAll.AppendFormat(sFormat, sbHeader.ToString(), sb.ToString(), sbIDS.ToString(), fileName).ToString();
-        byte[] allB = System.Text.Encoding.UTF8.GetBytes(all);
-        //allB = System.Text.Encoding.Convert(Encoding.ASCII, Encoding.UTF8, allB);
+
+        byte[] desBytes = System.Text.Encoding.UTF8.GetBytes(all);
 
         wfs.Position = 0;
         wfs.SetLength(0);
 
-        wfs.Write(allB, 0, allB.Length);
+        wfs.Write(desBytes, 0, desBytes.Length);
         wfs.Flush();
         sb.Clear();
         sbIDS.Clear();
