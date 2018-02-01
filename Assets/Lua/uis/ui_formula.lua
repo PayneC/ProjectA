@@ -122,7 +122,6 @@ local function NewFormula(go, _ui)
 			local itemID = reward[3]
 			local count = reward[4]
 			
-			debug.LogFormat(0, 'itemID %d', itemID)
 			common.SetItemIcon(self.spr_reward_ImageEx, itemID)
 		end
 	end

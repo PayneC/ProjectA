@@ -2,6 +2,7 @@ local cf_weapon = require('csv/cf_weapon')
 
 local m_task = require('models/m_task')
 local m_item = require('models/m_item')
+local m_formula = require('models/m_formula')
 
 local time_mgr = require('base/time_mgr')
 
@@ -10,11 +11,13 @@ local common = require('misc/common')
 local _M = {}
 
 local function RandomTask(task, cd)
-	local weapons = cf_weapon.GetAllIndex()
-	local index = math.random(#weapons)
+	local count = m_formula.GetFormulaCount()
+	local index = math.random(count)
+	
+	local formula = m_formula.GetFormulaByIndex(index)
 	
 	task.NPCID = 0
-	task.itemID = weapons[index] or 0
+	task.itemID = formula.itemID or 0
 	task.CD = cd
 	task.timePoint = time_mgr.GetTime()
 	m_task.SetTaskDirty(task.UID)

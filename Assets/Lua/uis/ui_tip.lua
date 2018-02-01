@@ -11,7 +11,7 @@ local common = require('misc/common')
 local Vector3 = UnityEngine.Vector3
 
 local maxHigh = 600
-local speed = 120
+local speed = 240
 local timeSpace = 1
 
 local _M = class(uibase)

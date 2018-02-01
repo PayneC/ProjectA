@@ -110,7 +110,8 @@ function _M.CollectStuff(UID)
 		add = 0
 	end
 	
-	m_item.AddStuffCount(build.itemID, add)
+	common.AddItemCount(build.itemID, add)
+	--m_item.AddStuffCount(build.itemID, add)
 	m_build.SetBuildData(build, false, false, build.count - add)
 end
 

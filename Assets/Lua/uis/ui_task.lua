@@ -98,7 +98,7 @@ local function NewBuild(_ui)
 			
 			local count = common.GetItemCount(self.itemID)
 			if count > 0 then
-				self.btn_uplv_ButtonEx.Interactable = true
+				self.btn_uplv_ButtonEx.interactable = true
 				self.txt_num_TextEx.text = string.format('%d/%d', count, 1)
 			else
 				self.btn_uplv_ButtonEx.interactable = false
@@ -198,7 +198,7 @@ end
 
 function _M:ShowBuilds()
 	local tasks = m_task.GetAllTask()
-	debug.LogFormat(0, debug.TableToString(tasks))
+	
 	local count = #tasks
 	local hasNum = #self.tasks
 	
