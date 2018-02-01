@@ -3,15 +3,17 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
+/[Cc]SV/
+/[Aa]ssetBundles/
 
-/Assets/AssetStoreTools*
-/Assets/Plugins/GitHub.meta
 /Assets/Plugins/GitHub/
+/Assets/Plugins/GitHub.meta
 /Assets/StreamingAssets/
 /Assets/StreamingAssets.meta
-/AssetBundles/
 /Assets/ResourcesAB/Lua/
-/[Cc]SV/
+/Assets/ResourcesAB/Lua.meta
+
+/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -44,5 +46,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-ProjectA.csproj
+
 ProjectA.csproj
