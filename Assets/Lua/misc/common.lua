@@ -287,7 +287,7 @@ function _M.GetItemCash(itemID, count)
 		elseif type2 == constant.Item_Stuff then			
 			cash = 0
 		elseif type2 == constant.Item_Weapon then
-			cash = cf_weapon.GetData(itemID, cf_weapon.priceZS)
+			cash = cf_weapon.GetData(itemID, cf_weapon.cash)
 		end
 	end
 	

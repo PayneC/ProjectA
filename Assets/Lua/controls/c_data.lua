@@ -47,10 +47,6 @@ local function NewData()
 		c_workbench.NewWorkbench()
 	end
 	
-	for i = 1, cf_init.taskCount, 1 do
-		c_task.NewTask()
-	end
-	
 	for i = 1, #cf_init.formulas, 1 do
 		m_formula.AddFormula(cf_init.formulas[i])
 	end
@@ -61,6 +57,10 @@ local function NewData()
 	m_player.SetLv(1)
 	m_player.SetExpMax(exp)
 	
+	for i = 1, cf_init.taskCount, 1 do
+		c_task.NewTask()
+	end
+
 	prefs.SetTable('user', '1247286911111')
 	WriteData()
 end

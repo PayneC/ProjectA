@@ -92,7 +92,7 @@ local function NewBuild(go)
 		tp = 0,
 		needTime = 0,
 		count = 0,
-		itemCapacity = 0,
+		produceLimit = 0,
 	}
 	
 	_item.UIGridElement = goUtil.GetComponent(_item.gameObject, typeof(UIGridElement), nil)
@@ -146,11 +146,11 @@ local function NewBuild(go)
 			self.needTime = build.needTime
 			
 			self.count = build.count
-			self.itemCapacity = build.itemCapacity
+			self.produceLimit = build.produceLimit
 			
 			local lv = cf_build.GetData(self.DID, cf_build.LV)
 			local p = 1
-			if self.count < self.itemCapacity then
+			if self.count < self.produceLimit then
 				p = build.p
 			end
 			
@@ -159,7 +159,7 @@ local function NewBuild(go)
 			common.SetItemIcon(self.spr_item_ImageEx, self.itemID)
 			
 			self.txt_lv_TextEx.text = string.format('等级 %d', lv)
-			self.txt_num_TextEx.text = string.format('%d/%d', self.count, self.itemCapacity)
+			self.txt_num_TextEx.text = string.format('%d/%d', self.count, self.produceLimit)
 			self.spr_item_p_ImageEx.fillAmount = p
 		else
 			goUtil.SetActive(self.gameObject, false)
@@ -167,7 +167,7 @@ local function NewBuild(go)
 	end
 	
 	function _item:Update(ct)
-		if self.count < self.itemCapacity then
+		if self.count < self.produceLimit then
 			local p = 1
 			if self.needTime > 0 then
 				p =(self.needTime + self.tp - ct) / self.needTime

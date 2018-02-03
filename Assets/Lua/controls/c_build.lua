@@ -120,9 +120,9 @@ function _M.Calculate(build, ct, force)
 		return
 	end
 	
-	if force or(build.count < build.itemCapacity and ct >= build.timePoint + build.needTime) then
+	if force or(build.count < build.produceLimit and ct >= build.timePoint + build.needTime) then
 		local add, p = math.modf((ct - build.timePoint) / build.needTime)
-		local cap = build.itemCapacity - build.count
+		local cap = build.produceLimit - build.count
 		
 		local tp = ct
 		if add >= cap then

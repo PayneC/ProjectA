@@ -160,6 +160,12 @@ function _M:OnEnable(parameter)
 	
 	self:ShowStuffs()
 	
+	if self:CheckSufficient() then
+		self.btn_make_ButtonEx.interactable = true
+	else
+		self.btn_make_ButtonEx.interactable = false
+	end
+
 	self.OnItemChangeHandler = events.AddListener(eventType.ItemChange, self.OnItemChange, self)
 	self.OnFormulaChangeHandler = events.AddListener(eventType.FormulaChange, self.OnFormulaChange, self)
 end
@@ -187,12 +193,10 @@ function _M:OnItemChange(DID)
 		self.stuffs[i]:OnItemChange(DID)
 	end
 	
-	local formula = m_formula.FindFormula(self.formulaID)
-	local stuffs = formula and formula.overrideStuff or cf_formula.GetData(self.formulaID, cf_formula.stuff)
-	if common.CheckCosts(stuffs) then
-		goUtil.SetActiveByComponent(self.btn_make_ButtonEx, true)
+	if self:CheckSufficient() then
+		self.btn_make_ButtonEx.interactable = true
 	else
-		goUtil.SetActiveByComponent(self.btn_make_ButtonEx, false)
+		self.btn_make_ButtonEx.interactable = false
 	end
 end
 
@@ -208,9 +212,7 @@ end
 
 
 function _M:OnMake()
-	local formula = m_formula.FindFormula(self.formulaID)
-	local stuffs = formula and formula.overrideStuff or cf_formula.GetData(self.formulaID, cf_formula.stuff)
-	if common.CheckCosts(stuffs) then
+	if self:CheckSufficient() then
 		c_workbench.MakeFormula(self.workbenchID, self.formulaID)
 		self.workbenchID = m_workbench.GetEmptyBench()
 		if not self.workbenchID then
@@ -240,6 +242,12 @@ function _M:ShowStuffs()
 			stuff:SetData(self.formulaID)
 		end
 	end
+end
+
+function _M:CheckSufficient()
+	local formula = m_formula.FindFormula(self.formulaID)
+	local stuffs = formula and formula.overrideStuff or cf_formula.GetData(self.formulaID, cf_formula.stuff)
+	return common.CheckCosts(stuffs)
 end
 
 return _M 
