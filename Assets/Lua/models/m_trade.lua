@@ -31,8 +31,8 @@ function _M.InitDataTemp()
 		table.insert(_sells, item)
 		item.UID = i
 		item.DID = id
-		item.coin = cf_weapon.GetData(id, cf_weapon.price)
-		item.cash = cf_weapon.GetData(id, cf_weapon.priceZS)
+		item.coin = cf_weapon.GetData(id, cf_weapon.coin)
+		item.cash = cf_weapon.GetData(id, cf_weapon.cash)
 	end
 end
 

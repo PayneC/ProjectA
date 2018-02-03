@@ -15,12 +15,13 @@ local function RandomTask(task, cd)
 	local index = math.random(count)
 	
 	local formula = m_formula.GetFormulaByIndex(index)
-	
-	task.NPCID = 0
-	task.itemID = formula.itemID or 0
-	task.CD = cd
-	task.timePoint = time_mgr.GetTime()
-	m_task.SetTaskDirty(task.UID)
+	if formula then
+		task.NPCID = 0
+		task.itemID = formula.itemID or 0
+		task.CD = cd
+		task.timePoint = time_mgr.GetTime()
+		m_task.SetTaskDirty(task.UID)
+	end
 end
 
 function _M.NewTask()

@@ -20,7 +20,7 @@ local function NewBuild()
 		UID = 0,
 		DID = 0,
 		itemID = 0,
-		itemCapacity = 0,
+		produceLimit = 0,
 		needTime = 0,
 		timePoint = 0,
 		count = 0,
@@ -34,7 +34,7 @@ function _M.SetBuildData(build, DID, time, count)
 		build.DID = DID
 		
 		build.itemID = cf_build.GetData(build.DID, cf_build.itemID)
-		build.itemCapacity = cf_build.GetData(build.DID, cf_build.itemCapacity)
+		build.produceLimit = cf_build.GetData(build.DID, cf_build.produceLimit)
 		
 		local speed = cf_build.GetData(build.DID, cf_build.speed)
 		if speed > 0 then
