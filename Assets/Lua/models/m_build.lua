@@ -12,6 +12,7 @@ local time_mgr = require('base/time_mgr')
 
 local _isModify = false
 local _builds = {}
+local _itemCorrelationBuilds = {}
 
 local _M = {}
 
@@ -109,6 +110,23 @@ function _M.WriteData()
 	if _isModify then
 		prefs.SetTable('_builds', _builds)
 		_isModify = false
+	end
+end
+
+function _M.ParseData()
+	_M.ParseItemCorrelationBuild()
+end
+
+function _M.GetItemCorrelationBuild(itemID)
+	return _itemCorrelationBuilds[itemID]
+end
+
+function _M.ParseItemCorrelationBuild()
+	for i = 1, #_builds, 1 do
+		local build = _builds[i]
+		if build then
+			_itemCorrelationBuilds[build.itemID] = build
+		end
 	end
 end
 

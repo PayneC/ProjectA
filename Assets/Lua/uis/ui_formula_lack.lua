@@ -4,10 +4,12 @@ local cf_ui = require('configs/cf_ui')
 local cf_formula = require('csv/cf_formula')
 
 local c_workbench = require('controls/c_workbench')
+local c_build = require('controls/c_build')
 
 local m_formula = require('models/m_formula')
 local m_trade = require('models/m_trade')
 local m_workbench = require('models/m_workbench')
+local m_build = require('models/m_build')
 
 local time_mgr = require('base/time_mgr')
 local uimgr = require('base/ui_mgr')
@@ -22,29 +24,31 @@ local Vector3 = UnityEngine.Vector3
 
 local _M = class(uibase)
 
-local function NewStuff(go)
+local function NewStuff(go, _ui)
 	local _stuff = {
 		gameObject = go,
 		UIGridElement = false,
 		spr_icon_ImageEx = false,
 		txt_num_TextEx = false,
-		btn_coin_ButtonEx = false,
-		btn_cash_ButtonEx = false,
-		txt_coin_TextEx = false,
-		txt_cash_TextEx = false,
+		btn_func_ButtonEx = false,
+		txt_func_TextEx = false,
+		spr_func_ImageEx = false,
 		
 		formulaID = 0,
 		stuffID = 0,
 		num = 0,
+		func = 0, -- 0， 1-收取， 2-制作， 3-交易， 4-钻石
+		value = 0,
+		value2 = 0,
+		ui = _ui,
 	}
 	
 	_stuff.UIGridElement = goUtil.GetComponent(_stuff.gameObject, typeof(UIGridElement), nil)
 	_stuff.spr_icon_ImageEx = goUtil.GetComponent(_stuff.gameObject, typeof(ImageEx), 'spr_icon')
 	_stuff.txt_num_TextEx = goUtil.GetComponent(_stuff.gameObject, typeof(TextEx), 'txt_num')
-	_stuff.btn_coin_ButtonEx = goUtil.GetComponent(_stuff.gameObject, typeof(ButtonEx), 'btn_coin')
-	_stuff.btn_cash_ButtonEx = goUtil.GetComponent(_stuff.gameObject, typeof(ButtonEx), 'btn_cash')
-	_stuff.txt_coin_TextEx = goUtil.GetComponent(_stuff.gameObject, typeof(TextEx), 'txt_coin')
-	_stuff.txt_cash_TextEx = goUtil.GetComponent(_stuff.gameObject, typeof(TextEx), 'txt_cash')
+	_stuff.btn_func_ButtonEx = goUtil.GetComponent(_stuff.gameObject, typeof(ButtonEx), 'btn_func')
+	_stuff.txt_func_TextEx = goUtil.GetComponent(_stuff.gameObject, typeof(TextEx), 'txt_func')
+	_stuff.spr_func_ImageEx = goUtil.GetComponent(_stuff.gameObject, typeof(ImageEx), 'spr_func')
 	
 	function _stuff:SetData(formulaID)
 		self.formulaID = formulaID
@@ -73,25 +77,80 @@ local function NewStuff(go)
 	end
 	
 	function _stuff:RefreshNum()
+		func = 0
 		local has = common.GetItemCount(self.DID)
 		if has >= self.num then
-			self.txt_num_TextEx.text = string.format('%d/%d', self.num, has)		
+			self.txt_num_TextEx.text = string.format('%d/%d', has, self.num)
 		else
-			self.txt_num_TextEx.text = string.format('<color=red>%d</color>/%d', self.num, has)	
+			self.txt_num_TextEx.text = string.format('<color=red>%d</color>/%d', has, self.num)
 			
-			local coin, cash = common.GetItemPrice(self.DID)
-			if not coin then
-				goUtil.SetActiveByComponent(self.btn_coin_ButtonEx, false)
-				goUtil.SetActiveByComponent(self.txt_coin_TextEx, false)
+			local t1, t2 = common.GetItemType(self.DID)
+			if t2 == constant.Item_Stuff then
+				local build = m_build.GetItemCorrelationBuild(self.DID)
+				local count = build and build.count or 0
+				if count > 0 then
+					func = 1
+					value = build.UID
+				else
+					local formula = m_formula.GetItemCorrelationFormula(self.DID)
+					local stuffs
+					if formula then
+						stuffs = formula.overrideStuff or cf_formula.GetData(formula.DID, cf_formula.stuff)
+					end
+					if formula and common.CheckCosts(stuffs) then
+						func = 2
+						value = formula.DID
+					else
+						local coin, cash = common.GetItemPrice(self.DID)
+						if cash then
+							func = 4
+							value2 = self.num - has
+							value = cash * value2
+						else
+							func = 0
+						end
+					end
+				end
+			elseif t2 == constant.Item_Weapon then
+				local formula = m_formula.GetItemCorrelationFormula(self.DID)
+				local stuffs
+				if formula then
+					stuffs = formula.overrideStuff or cf_formula.GetData(formula.DID, cf_formula.stuff)
+				end
+				if formula and common.CheckCosts(stuffs) then
+					func = 2
+					value = formula.DID
+				else
+					func = 3
+				end
 			else
-				goUtil.SetActiveByComponent(self.btn_cash_ButtonEx, true)
-				goUtil.SetActiveByComponent(self.txt_coin_TextEx, true)
-				self.txt_coin_TextEx.text = string.format('%s', coin)
+				func = 0
 			end
-			
-			self.txt_cash_TextEx.text = string.format('%s', cash or 0)
 			--Todo
 		end
+		
+		if func == 0 then
+			goUtil.SetActiveByComponent(self.btn_func_ButtonEx, false)
+			goUtil.SetActiveByComponent(self.txt_func_TextEx, false)
+		else
+			goUtil.SetActiveByComponent(self.btn_func_ButtonEx, true)
+			goUtil.SetActiveByComponent(self.txt_func_TextEx, true)
+			if func == 1 then
+				self.txt_func_TextEx.text = '收取'
+			elseif func == 2 then
+				self.txt_func_TextEx.text = '制作'
+			elseif func == 3 then
+				self.txt_func_TextEx.text = '交易'
+			elseif func == 4 then
+				self.txt_func_TextEx.text = string.format('  %s', value)
+			end
+		end
+		
+		if func == 4 then
+			goUtil.SetActiveByComponent(self.spr_func_ImageEx, true)
+		else	
+			goUtil.SetActiveByComponent(self.spr_func_ImageEx, false)
+		end	
 	end
 	
 	function _stuff:GetIndex()
@@ -99,26 +158,35 @@ local function NewStuff(go)
 	end
 	
 	function _stuff:OnItemChange(DID)
-		if DID == self.DID then
-			self:RefreshNum()
-		end
+		self:RefreshNum()
 	end
 	
 	function _stuff:OnIndexChange()
 		self:RefreshStuff()
 	end
 	
-	function _stuff:OnBtnCoin()
-		--common.CashBuy(self.DID, 1)
-	end
-	
-	function _stuff:OnBtnCash()
-		common.CashBuy(self.DID, 1)
+	function _stuff:OnBtnFunc()
+		if func == 0 then
+			
+		elseif func == 1 then
+			c_build.CollectStuff(value)
+		elseif func == 2 then
+			c_workbench.MakeFormula(self.ui.workbenchID, value)
+			self.ui.workbenchID = m_workbench.GetEmptyBench()
+			if not self.ui.workbenchID then
+				uimgr.CloseUI(cf_ui.formula_lack)
+				uimgr.CloseUI(cf_ui.formula)
+			end
+		elseif func == 3 then
+			local sell = m_trade.GetItemCorrelationSell(self.DID)
+			uimgr.OpenSubUI(cf_ui.trade_item, sell.UID)
+		elseif func == 4 then
+			common.CashBuy(self.DID, value2)
+		end
 	end
 	
 	_stuff.UIGridElement:AddIndexChangeListener(UnityEngine.Events.UnityAction(_stuff.OnIndexChange, _stuff))
-	_stuff.btn_coin_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_stuff.OnBtnCoin, _stuff))
-	_stuff.btn_cash_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_stuff.OnBtnCash, _stuff))
+	_stuff.btn_func_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(_stuff.OnBtnFunc, _stuff))
 	
 	return _stuff
 end
@@ -165,16 +233,18 @@ function _M:OnEnable(parameter)
 	else
 		self.btn_make_ButtonEx.interactable = false
 	end
-
+	
+	self.OnStuffChangeHandler = events.AddListener(eventType.StuffChange, self.OnItemChange, self)
 	self.OnItemChangeHandler = events.AddListener(eventType.ItemChange, self.OnItemChange, self)
 	self.OnFormulaChangeHandler = events.AddListener(eventType.FormulaChange, self.OnFormulaChange, self)
 end
 
 function _M:Update(dt)
-	
+	c_build.CalculateAll()
 end
 
 function _M:OnDisable()
+	events.RemoveListener(eventType.StuffChange, self.OnStuffChangeHandler)
 	events.RemoveListener(eventType.ItemChange, self.OnItemChangeHandler)
 	events.RemoveListener(eventType.FormulaChange, self.OnFormulaChangeHandler)
 end
@@ -184,7 +254,7 @@ function _M:OnDestroy()
 end
 
 function _M:OnAddNewElement(go)
-	local stuff = NewStuff(go)
+	local stuff = NewStuff(go, self)
 	table.insert(self.stuffs, stuff)
 end
 

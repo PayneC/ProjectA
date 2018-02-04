@@ -10,6 +10,7 @@ local _isModify = false
 
 local _sells = {}
 local _buys = {}
+local _itemCorrelationSell = {}
 
 local _M = {}
 
@@ -54,6 +55,23 @@ end
 
 function _M.WriteData()
 	
+end
+
+function _M.ParseData()
+	_M.ParseItemCorrelationSell()
+end
+
+function _M.GetItemCorrelationSell(itemID)
+	return _itemCorrelationSell[itemID]
+end
+
+function _M.ParseItemCorrelationSell()
+	for i = 1, #_sells, 1 do
+		local sell = _sells[i]
+		if sell then
+			_itemCorrelationSell[sell.itemID] = sell
+		end
+	end
 end
 
 return _M 

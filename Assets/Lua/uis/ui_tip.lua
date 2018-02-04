@@ -97,7 +97,7 @@ function _M:Update(dt)
 			goUtil.SetActive(tip.gameObject, true)
 			tip:SetData(entity)
 			
-			self.time = 1
+			self.time = 0.5
 		end
 	end
 end

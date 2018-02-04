@@ -238,6 +238,10 @@ function _M:ShowBuilds()
 	local count = m_build.GetBuildCount()
 	self.scr_builds_UIGrid:SetElementCount(count)
 	self.scr_builds_UIGrid:ApplySetting()
+
+	for i = 1, #self.builds, 1 do
+		self.builds[i]:SetData()
+	end
 end
 
 function _M:ShowItems()

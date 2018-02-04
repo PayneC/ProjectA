@@ -11,6 +11,7 @@ local time_mgr = require('base/time_mgr')
 
 local _isModify = false
 local _formulas = {}
+local _itemCorrelationFormula = {}
 
 local _M = {}
 
@@ -91,6 +92,23 @@ function _M.WriteData()
 	if _isModify then
 		prefs.SetTable('_formulas', _formulas)
 		_isModify = false
+	end
+end
+
+function _M.ParseData()
+	_M.ParseItemCorrelationFormula()
+end
+
+function _M.GetItemCorrelationFormula(itemID)
+	return _itemCorrelationFormula[itemID]
+end
+
+function _M.ParseItemCorrelationFormula()
+	for i = 1, #_formulas, 1 do
+		local formula = _formulas[i]
+		if formula then
+			_itemCorrelationFormula[formula.itemID] = formula
+		end
 	end
 end
 

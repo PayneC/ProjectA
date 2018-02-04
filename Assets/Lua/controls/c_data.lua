@@ -65,12 +65,24 @@ local function NewData()
 	WriteData()
 end
 
+local function ParseData()
+	local model
+	for i = 0, _modelCount, 1 do
+		model = _models[i]
+		if model and model.ParseData then
+			model.ParseData()
+		end
+	end
+end
+
 function _M.LoadData()
 	if prefs.GetTable('user') then
 		ReadData()
 	else
 		NewData()
 	end
+
+	ParseData()
 	
 	local m_trade = require('models/m_trade')
 	m_trade.InitDataTemp()
