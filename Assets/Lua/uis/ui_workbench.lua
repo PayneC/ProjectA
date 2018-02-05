@@ -29,12 +29,14 @@ local function NewWorkbench(_ui)
 	local spr_icon_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_icon')
 	local txt_state_TextEx = goUtil.GetComponent(gameObject, typeof(TextEx), 'txt_state')
 	local btn_work = goUtil.GetComponent(gameObject, typeof(ButtonEx), 'btn_work')
+	local spr_work_p_ImageEx = goUtil.GetComponent(gameObject, typeof(ImageEx), 'spr_work_p')
 	
 	local _item = {
 		gameObject = gameObject,
 		spr_icon_ImageEx = spr_icon_ImageEx,
 		txt_state_TextEx = txt_state_TextEx,
 		btn_work = btn_work,
+		spr_work_p_ImageEx = spr_work_p_ImageEx,
 		
 		UID = 0,
 		formulaID = 0,
@@ -63,6 +65,7 @@ local function NewWorkbench(_ui)
 		else
 			goUtil.SetActiveByComponent(self.spr_icon_ImageEx, false)
 			self.txt_state_TextEx.text = '添加'
+			self.spr_work_p_ImageEx.fillAmount = 0
 		end
 		self.startTime = workbench.startTime
 	end
@@ -88,8 +91,11 @@ local function NewWorkbench(_ui)
 			--debug.LogFormat(0, '%f = %f - %f + %f', st, self.timeCost, ct, self.startTime)
 			if st > 0 then
 				self.txt_state_TextEx.text = string.format('%d秒', st)	
+				local p = 1 -(st / self.timeCost)
+				self.spr_work_p_ImageEx.fillAmount = p
 			else
 				self.txt_state_TextEx.text = '收取'	
+				self.spr_work_p_ImageEx.fillAmount = 1
 			end
 		end
 	end
@@ -103,13 +109,22 @@ end
 
 function _M:ctor()
 	self.workbenchs = {}
+	self.rt_build_add = false
+	self.btn_work_ButtonEx = false
 end
 
 function _M:OnLoaded()
-	events.AddListener(eventType.WorkbenchChange, self.OnWorkbenchChange, self)
-	
 	self.rt_build = goUtil.FindChild(self.gameObject, 'rt_build')
 	self.scr_builds_content = goUtil.FindChild(self.gameObject, 'scr_builds/Viewport/Content')
+	self.rt_build_add = goUtil.FindChild(self.gameObject, 'rt_build_add')
+	self.btn_work_ButtonEx = goUtil.GetComponent(self.gameObject, typeof(ButtonEx), 'rt_build_add/btn_work')
+	
+	goUtil.SetParent(self.rt_build_add, self.scr_builds_content)
+	
+	self.btn_work_ButtonEx.onClick:AddListener(UnityEngine.Events.UnityAction(self.OnAddWorkbench, self))
+	
+	events.AddListener(eventType.WorkbenchChange, self.OnWorkbenchChange, self)
+	events.AddListener(eventType.WorkbenchChangeAdd, self.OnWorkbenchChange, self)
 end
 
 function _M:OnEnable()
@@ -156,10 +171,17 @@ function _M:ShowWorkbenchs()
 		local item = self.workbenchs[i]
 		item:SetData(workbenchs[i].UID, false)
 	end
+	
+	goUtil.SetActive(self.rt_build_add, true)
+	goUtil.SetSiblingIndex(self.rt_build_add, count + 1)
 end
 
 function _M:OnWorkbenchChange()
 	self:ShowWorkbenchs()
+end
+
+function _M:OnAddWorkbench()
+	uimgr.OpenSubUI(cf_ui.workbench_add)
 end
 
 return _M 

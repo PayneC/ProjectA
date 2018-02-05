@@ -49,4 +49,8 @@ function _M.GetAllTask()
 	return _tasks
 end
 
+function _M.GetTaskCount()
+	return _tasks and #_tasks or 0
+end
+
 return _M 

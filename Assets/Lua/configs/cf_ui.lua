@@ -16,6 +16,7 @@ local _M = {
 	formula_lack = {uid = 15, script = 'uis/ui_formula_lack', assetsName = 'UIFormulaLack', depth = 60},
 	build_info = {uid = 16, script = 'uis/ui_build_info', assetsName = 'UIBuildInfo', depth = 60},
 	tip = {uid = 17, script = 'uis/ui_tip', assetsName = 'UITip', depth = 100},
+	workbench_add = {uid = 18, script = 'uis/ui_workbench_add', assetsName = 'UIWorkbenchAdd', depth = 80},
 }
 
 return _M

@@ -7,6 +7,7 @@ local cf_lv = require('csv/cf_lv')
 local m_item = require('models/m_item')
 local m_player = require('models/m_player')
 local m_tip = require('models/m_tip')
+local m_task = require('models/m_task')
 
 local constant = require('misc/constant')
 
@@ -253,6 +254,12 @@ function _M.LvUp()
 		if reward then
 			_M.AddItemCount(reward[1], reward[2])
 		end
+	end
+	
+	local count = m_task.GetTaskCount()
+	local newCount = cf_lv.GetData(m_player.GetLv(), cf_lv.guestCount)
+	for i = count + 1, newCount, 1 do
+		m_task.AddTask(i)
 	end
 end
 

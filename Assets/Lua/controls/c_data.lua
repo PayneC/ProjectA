@@ -1,5 +1,5 @@
 local prefs = require('base/prefs')
-
+local common = require('misc/common')
 local _M = {}
 
 local _models = {
@@ -57,10 +57,15 @@ local function NewData()
 	m_player.SetLv(1)
 	m_player.SetExpMax(exp)
 	
-	for i = 1, cf_init.taskCount, 1 do
+	local taskCount = cf_lv.GetData(1, cf_lv.guestCount)
+	for i = 1, taskCount, 1 do
 		c_task.NewTask()
 	end
-
+	
+	for i = 1, #cf_init.items, 1 do
+		common.AddItemCount(cf_init.items[i] [1], cf_init.items[i] [2])
+	end
+	
 	prefs.SetTable('user', '1247286911111')
 	WriteData()
 end
@@ -81,7 +86,7 @@ function _M.LoadData()
 	else
 		NewData()
 	end
-
+	
 	ParseData()
 	
 	local m_trade = require('models/m_trade')

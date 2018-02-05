@@ -1,4 +1,4 @@
-local cf_lv = require('configs/cf_lv')
+local cf_lv = require('configs/cf_level')
 local cf_ui = require('configs/cf_ui')
 
 local lvmgr = require('base/lv_mgr')

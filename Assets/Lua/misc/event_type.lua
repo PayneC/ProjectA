@@ -11,6 +11,7 @@ local _M = {
 	LVChange = 10,			--等级更改
 	FormulaAdd = 11,		--增加配方
 	FormulaChange = 12,		--配方更改
+	WorkbenchChangeAdd = 13,	--工作台增加
 }
 
 return _M 

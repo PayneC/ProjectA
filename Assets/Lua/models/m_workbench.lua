@@ -29,7 +29,7 @@ function _M.AddWorkbench(UID)
 	table.insert(_workbenchs, workbench)
 	
 	_isModify = true
-	events.Brocast(eventType.WorkbenchChange)
+	events.Brocast(eventType.WorkbenchChangeAdd)
 	return workbench
 end
 
@@ -67,6 +67,10 @@ end
 
 function _M.GetAllWorkbench()
 	return _workbenchs
+end
+
+function _M.GetWorkbenchCount()
+	return _workbenchs and #_workbenchs or 0
 end
 
 return _M 

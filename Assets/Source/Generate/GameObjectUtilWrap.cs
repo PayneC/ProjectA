@@ -37,6 +37,8 @@ public class GameObjectUtilWrap
 		L.RegFunction("WorldToLocal", WorldToLocal);
 		L.RegFunction("LocalToWorldNormal", LocalToWorldNormal);
 		L.RegFunction("WorldToLocalNormal", WorldToLocalNormal);
+		L.RegFunction("SetSiblingIndex", SetSiblingIndex);
+		L.RegFunction("GetSiblingIndex", GetSiblingIndex);
 		L.EndStaticLibs();
 	}
 
@@ -550,6 +552,40 @@ public class GameObjectUtilWrap
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 			UnityEngine.Vector3 o = GameObjectUtil.WorldToLocalNormal(arg0, arg1);
 			ToLua.Push(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetSiblingIndex(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.GameObject));
+			int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+			GameObjectUtil.SetSiblingIndex(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetSiblingIndex(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.GameObject));
+			int o = GameObjectUtil.GetSiblingIndex(arg0);
+			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
 		catch (Exception e)

@@ -1,17 +1,20 @@
 local cf_formula = require('csv/cf_formula')
+local cf_workbench = require('csv/cf_workbench')
 
 local m_workbench = require('models/m_workbench')
 local m_item = require('models/m_item')
 local m_formula = require('models/m_formula')
+local m_player = require('models/m_player')
 
 local time_mgr = require('base/time_mgr')
 
 local common = require('misc/common')
+local constant = require('misc/constant')
 
 local _M = {}
 
 function _M.NewWorkbench()
-	local UID = #m_workbench.GetAllWorkbench() + 1
+	local UID = m_workbench.GetWorkbenchCount() + 1
 	m_workbench.AddWorkbench(UID)
 end
 
@@ -86,6 +89,33 @@ function _M.FinishFormula(workbenchID)
 			end	
 		end
 		
+	end
+end
+
+function _M.BuyWorkbench(isCash)
+	debug.LogFormat(0, 'BuyWorkbench')
+	local DID = m_workbench.GetWorkbenchCount() + 1
+	local playerLV = m_player.GetLv()
+	local needLV = cf_workbench.GetData(DID, cf_workbench.lv)
+	debug.LogFormat(0, 'BuyWorkbench needLV %d', needLV)
+	if needLV then
+		if not isCash then
+			if needLV <= playerLV then
+				local cost = cf_workbench.GetData(DID, cf_workbench.cost)
+				local hasCoin = common.GetItemCount(constant.Item_Coin)
+				if hasCoin >= cost then
+					common.CutItemCount(constant.Item_Coin, cost)
+					_M.NewWorkbench()
+				end
+			end
+		else
+			local cost = cf_workbench.GetData(DID, cf_workbench.cost) * 0.1
+			local hasCoin = common.GetItemCount(constant.Item_Cash)
+			if hasCoin >= cost then
+				common.CutItemCount(constant.Item_Cash, cost)
+				_M.NewWorkbench()
+			end
+		end
 	end
 end
 

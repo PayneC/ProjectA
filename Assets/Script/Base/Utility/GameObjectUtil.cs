@@ -47,15 +47,15 @@ static public class GameObjectUtil
         }
     }
 
-   //static public void SetLuaRef(GameObject _go, XLua.LuaTable _table)
-   //{
-   //    LuaRef _luaRef = _go.GetComponent<LuaRef>();
-   //    if(_luaRef == null)
-   //    {
-   //        _luaRef = _go.AddComponent<LuaRef>();
-   //    }
-   //    _luaRef.table = _table;
-   //}
+    //static public void SetLuaRef(GameObject _go, XLua.LuaTable _table)
+    //{
+    //    LuaRef _luaRef = _go.GetComponent<LuaRef>();
+    //    if(_luaRef == null)
+    //    {
+    //        _luaRef = _go.AddComponent<LuaRef>();
+    //    }
+    //    _luaRef.table = _table;
+    //}
 
     static public Component AddComponent(GameObject _go, System.Type type, string _path)
     {
@@ -108,7 +108,7 @@ static public class GameObjectUtil
         if (_child != null)
         {
             Component _component = _child.GetComponent(type);
-            if(_component == null)
+            if (_component == null)
             {
                 return null;
             }
@@ -122,7 +122,7 @@ static public class GameObjectUtil
 
     static public void SetActive(GameObject _go, bool _active)
     {
-        if(_go != null)
+        if (_go != null)
         {
             _go.SetActive(_active);
         }
@@ -130,7 +130,7 @@ static public class GameObjectUtil
 
     static public bool GetActive(GameObject _go)
     {
-        if(_go != null)
+        if (_go != null)
         {
             return _go.activeSelf;
         }
@@ -362,7 +362,7 @@ static public class GameObjectUtil
 
     static public Vector3 LocalToWorld(GameObject _go, Vector3 vec3)
     {
-        if(null != _go)
+        if (null != _go)
         {
             return _go.transform.localToWorldMatrix * vec3;
         }
@@ -406,5 +406,22 @@ static public class GameObjectUtil
         {
             return vec3.normalized;
         }
+    }
+
+    static public void SetSiblingIndex(GameObject _go, int index)
+    {
+        if (null != _go)
+        {
+            _go.transform.SetSiblingIndex(index);
+        }
+    }
+
+    static public int GetSiblingIndex(GameObject _go)
+    {
+        if (null != _go)
+        {
+            return _go.transform.GetSiblingIndex();
+        }
+        return 0;
     }
 }

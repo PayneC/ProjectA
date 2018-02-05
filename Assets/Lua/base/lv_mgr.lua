@@ -1,7 +1,7 @@
 -- Description:
 -- 主关卡只能同时存在一个
 -- 切换关卡时会自动打开Loading界面需要在新关卡进入后合适时机手动关闭
-local cf_lv = require('configs/cf_lv')
+local cf_lv = require('configs/cf_level')
 
 local goUtil = GameObjectUtil --require('base/goutil')
 
