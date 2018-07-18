@@ -41,7 +41,7 @@ public class UnityEngine_DebugWrap
 			if (count == 0)
 			{
 				UnityEngine.Debug obj = new UnityEngine.Debug();
-				ToLua.PushSealed(L, obj);
+				ToLua.PushObject(L, obj);
 				return 1;
 			}
 			else

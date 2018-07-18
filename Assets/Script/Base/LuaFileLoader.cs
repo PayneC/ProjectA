@@ -59,7 +59,7 @@ public class LuaFileLoader : LuaFileUtils
 
         if (zipFile != null)
         {
-#if UNITY_5 || UNITY_2017
+#if UNITY_5 || UNITY_2017 || UNITY_2018
             TextAsset luaCode = zipFile.LoadAsset<TextAsset>(fileName);
 #else
             TextAsset luaCode = zipFile.Load(fileName, typeof(TextAsset)) as TextAsset;
