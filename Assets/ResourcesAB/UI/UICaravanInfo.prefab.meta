@@ -1,10 +1,8 @@
 fileFormatVersion: 2
 guid: c1b0698be97efe541bb8630b32f7b567
-timeCreated: 1518078056
-licenseType: Free
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 100100000
   userData: 
-  assetBundleName: 
+  assetBundleName: ui/uicaravaninfo
   assetBundleVariant: 
