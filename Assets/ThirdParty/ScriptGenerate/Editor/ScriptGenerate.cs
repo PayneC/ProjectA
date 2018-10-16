@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Text;
+using System.IO;
 
 public class ScriptGenerateSetting : ScriptableObject
 {
@@ -13,34 +14,40 @@ public class ScriptGenerateSetting : ScriptableObject
 
 public class ScriptEntry
 {
-    public bool selected;
-    public Type types;
-
-    public void OnGUI()
-    {
-        EditorGUILayout.BeginHorizontal("IN Title");
-        selected = EditorGUILayout.ToggleLeft(types.Name, selected);
-        EditorGUILayout.EndHorizontal();
-    }
+    public bool isSelected;
+    public string type;
 }
 
 public class ScriptTrunk
 {
-    public bool selected;
+    public int depth;
+    public bool isRoot;
+    public bool isSelected;
     public string name;
+    public string path;
     public List<ScriptEntry> scriptEntries = new List<ScriptEntry>();
-
+    public List<ScriptTrunk> scriptTrunks = new List<ScriptTrunk>();
 
     public void OnGUI()
     {
-        EditorGUILayout.BeginHorizontal("toolbarbutton");
-        selected = EditorGUILayout.Foldout(selected, name, true);
+        EditorGUILayout.BeginHorizontal("SelectionRect");
+        GUILayout.Label("", GUILayout.Width(depth * 20));
+        isSelected = EditorGUILayout.Foldout(isSelected, name, true);
         EditorGUILayout.EndHorizontal();
-        if (selected)
+
+        if (isSelected)
         {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("", GUILayout.Width(depth * 20));
             for (int i = 0; i < scriptEntries.Count; ++i)
+            {                
+                scriptEntries[i].isSelected = EditorGUILayout.ToggleLeft(scriptEntries[i].type, scriptEntries[i].isSelected, GUILayout.Width(80));             
+            }
+            EditorGUILayout.EndHorizontal();
+
+            for (int i = 0; i < scriptTrunks.Count; ++i)
             {
-                scriptEntries[i].OnGUI();
+                scriptTrunks[i].OnGUI();
             }
         }        
     }
@@ -57,8 +64,13 @@ public class ScriptGenerate : EditorWindow
     private ScriptGenerateSetting scriptGenerateSetting;
 
     private GameObject selectedObject;
-    private List<ScriptTrunk> scriptTrunks = new List<ScriptTrunk>();
+    
+    private ScriptTrunk scriptTrunkRoot = new ScriptTrunk();
+    private string scriptCode = string.Empty;
+
     private Vector2 scriptTrunksPos = Vector2.zero;
+    private Vector2 templateCodePos = Vector2.zero;
+    private Vector2 scriptCodePos = Vector2.zero;
 
     private void OnGUI()
     {
@@ -72,12 +84,21 @@ public class ScriptGenerate : EditorWindow
                 scriptGenerateSetting.uiPrefabPath = "Assets/EditorSetting/";
                 AssetDatabase.CreateAsset(scriptGenerateSetting, "Assets/EditorSetting/scriptGenerateSetting.asset");
             }            
-        }
+        }        
 
         if(null != scriptGenerateSetting)
         {
+            templateCodePos = EditorGUILayout.BeginScrollView(templateCodePos, GUILayout.Width(600), GUILayout.Height(300));
             scriptGenerateSetting.uiScriptTemplate = EditorGUILayout.TextArea(scriptGenerateSetting.uiScriptTemplate);
+            EditorGUILayout.EndScrollView();
         }
+
+        if(!string.IsNullOrEmpty(scriptCode))
+        {
+            scriptCodePos = EditorGUILayout.BeginScrollView(scriptCodePos, GUILayout.Width(600), GUILayout.Height(300));
+            EditorGUILayout.TextArea(scriptCode);
+            EditorGUILayout.EndScrollView();
+        }        
 
         selectedObject = (GameObject)EditorGUILayout.ObjectField(selectedObject, typeof(GameObject), false);
 
@@ -86,108 +107,177 @@ public class ScriptGenerate : EditorWindow
             AnalysisGameobject(selectedObject);
         }
 
+        if (GUILayout.Button("生成代码"))
+        {
+            GenScript();
+        }
+
         OnGUIShowScriptTrunk();
     }
 
     private void OnGUIShowScriptTrunk()
     {
-        if(scriptTrunks == null || scriptTrunks.Count <= 0)
+        if(scriptTrunkRoot == null)
         {
             return;
         }
 
-        scriptTrunksPos = EditorGUILayout.BeginScrollView(scriptTrunksPos, GUILayout.Width(200), GUILayout.Height(600));
-        for(int i = 0; i < scriptTrunks.Count; ++i)
-        {
-            scriptTrunks[i].OnGUI();
-        }
+        scriptTrunksPos = EditorGUILayout.BeginScrollView(scriptTrunksPos, GUILayout.Width(600), GUILayout.Height(600));
+        scriptTrunkRoot.OnGUI();
         EditorGUILayout.EndScrollView();
     }
 
     private void AnalysisGameobject(GameObject go)
     {
-        scriptTrunks.Clear();
-        _AnalysisGameobject(selectedObject, true);
+        if (go == null)
+            return;
+                
+        scriptTrunkRoot = new ScriptTrunk();
+        scriptTrunkRoot.name = go.name;
+        scriptTrunkRoot.path = string.Empty;
+        scriptTrunkRoot.isRoot = true;
+        scriptTrunkRoot.depth = 0;
+
+        ScriptEntry scriptEntry = new ScriptEntry();        
+        scriptTrunkRoot.scriptEntries.Add(scriptEntry);
+        scriptEntry.type = "GameObject";
+
+        Component[] components = go.GetComponents<Component>();
+        for (int i = 0; i < components.Length; ++i)
+        {
+            scriptEntry = new ScriptEntry();
+            scriptTrunkRoot.scriptEntries.Add(scriptEntry);
+            scriptEntry.type = components[i].GetType().Name;            
+        }
+
+        _AnalysisGameobject(selectedObject, scriptTrunkRoot);
     }
 
-    private void _AnalysisGameobject(GameObject go, bool isRoot)
+    private void _AnalysisGameobject(GameObject go, ScriptTrunk parent)
     {
         if (go == null)
             return;
+        
+        ScriptTrunk scriptTrunk = new ScriptTrunk();
+        parent.scriptTrunks.Add(scriptTrunk);
+        scriptTrunk.name = go.name;        
+        scriptTrunk.path = parent.isRoot ? go.name : string.Format("{0}/{1}", parent.path, go.name);
+        scriptTrunk.depth = parent.depth + 1;
+
+        ScriptEntry scriptEntry = new ScriptEntry();
+        scriptTrunk.scriptEntries.Add(scriptEntry);
+        scriptEntry.type = "GameObject";
 
         Component[] components = go.GetComponents<Component>();
-        ScriptTrunk scriptTrunk = new ScriptTrunk();
-        scriptTrunks.Add(scriptTrunk);
-
-        scriptTrunk.name = isRoot ? string.Empty : go.name;
-        for(int i = 0; i < components.Length; ++i)
+        for (int i = 0; i < components.Length; ++i)
         {
-            ScriptEntry scriptEntry = new ScriptEntry();
-            scriptEntry.types = components[i].GetType();
+            scriptEntry = new ScriptEntry();
             scriptTrunk.scriptEntries.Add(scriptEntry);
+            scriptEntry.type = components[i].GetType().Name;            
         }
 
         for(int i = 0; i < go.transform.childCount; ++i)
         {
-            _AnalysisGameobject(go.transform.GetChild(i).gameObject, false);
+            _AnalysisGameobject(go.transform.GetChild(i).gameObject, scriptTrunk);
         }
     }    
 
     private void GenScript()
     {
-        int index = 0;
+        /*
         StringBuilder cstemp = new StringBuilder();
-        while (index < cslines.Count)
+        StringReader stringReader = new StringReader(scriptGenerateSetting.uiScriptTemplate);
+        string line;
+        while ((line = stringReader.ReadLine()) != null)
         {
             //有宏定义#Control
-            if (cslines[index].Contains("#Control"))
-            {
+            if (line.Contains("#Control"))
+            {                
+                StringBuilder sb = new StringBuilder();
+                while ((line = stringReader.ReadLine()) != null && !line.Contains("#endControl"))
+                {
+                    sb.Append(line);
+                }
 
-                int end = index + 1;
-                StringBuilder sb = new StringBuilder();
-                while (!cslines[end].Contains("#endControl"))
+                for (int i = 0; i < scriptTrunk.Count; i++)
                 {
-                    sb.Append(cslines[end]);
-                    end++;
-                }
-                for (int i = 0; i < controls.Count; i++)
-                {
-                    string TypeStr = controls[i][0];
-                    string ControlName = controls[i][1];
-                    string s = sb.ToString().Replace("${ControlName}", ControlName);
-                    s = s.Replace("${type}", TypeStr);
-                    cstemp.Append(s + "\n");
-                }
-                //结束后下一行
-                index = end + 1;
+                    if(!scriptTrunks[i].isSelected)
+                    {
+                        continue;
+                    }
+                    List<ScriptEntry> scriptEntries = scriptTrunks[i].scriptEntries;                    
+                    for (int j = 0; j < scriptEntries.Count; ++j)
+                    {
+                        if (!scriptEntries[j].isSelected)
+                        {
+                            continue;
+                        }
+
+                        string TypeStr = scriptEntries[j].type;
+                        string ControlName;
+                        if (!TypeStr.Equals("GameObject"))
+                        {
+                            ControlName = string.Format("{0}_{1}", scriptTrunks[i].name, TypeStr);
+                        }
+                        else
+                        {
+                            ControlName = scriptTrunks[i].name;
+                        }
+
+                        string s = sb.ToString().Replace("${ControlName}", ControlName);
+                        s = s.Replace("${type}", TypeStr);
+                        cstemp.Append(s + "\n");
+                    }                                        
+                }                
             }
-            else if (cslines[index].Contains("#ParseCode"))
-            {
-                int end = index + 1;
+            else if (line.Contains("#ParseCode"))
+            {                
                 StringBuilder sb = new StringBuilder();
-                while (!cslines[end].Contains("#endParseCode"))
+                while ((line = stringReader.ReadLine()) != null && !line.Contains("#endParseCode"))
                 {
-                    sb.Append(cslines[end]);
-                    end++;
+                    sb.Append(line);                    
                 }
-                for (int i = 0; i < controls.Count; i++)
+
+                for (int i = 0; i < scriptTrunks.Count; i++)
                 {
-                    string TypeStr = controls[i][0];
-                    string ControlName = controls[i][1];
-                    string ControlPath = controls[i][2];
-                    string s = sb.ToString().Replace("${ControlName}", ControlName);
-                    s = s.Replace("${type}", TypeStr);
-                    s = s.Replace("${ControlPath}", ControlPath + "_" + ControlName);
-                    cstemp.Append(s + "\n");
+                    if (!scriptTrunks[i].isSelected)
+                    {
+                        continue;
+                    }
+                    List<ScriptEntry> scriptEntries = scriptTrunks[i].scriptEntries;
+                    for (int j = 0; j < scriptEntries.Count; ++j)
+                    {
+                        if (!scriptEntries[j].isSelected)
+                        {
+                            continue;
+                        }
+
+                        string TypeStr = scriptEntries[j].type;
+                        string ControlName;
+                        if (!TypeStr.Equals("GameObject"))
+                        {
+                            ControlName = string.Format("{0}_{1}", scriptTrunks[i].name, TypeStr);
+                        }
+                        else
+                        {
+                            ControlName = scriptTrunks[i].name;
+                        }
+                        string ControlPath = scriptTrunks[i].path;
+
+                        string s = sb.ToString().Replace("${ControlName}", ControlName);
+                        s = s.Replace("${type}", TypeStr);
+                        s = s.Replace("${ControlPath}", ControlPath);
+                        cstemp.Append(s + "\n");
+                    }
                 }
-                //结束后下一行
-                index = end + 1;
             }
             else
             {
-                cstemp.Append(cslines[index] + "\n");
-                index++;
+                cstemp.Append(line + "\n");                
             }
+
+            scriptCode = cstemp.ToString();
         }
+        */
     }
 }
